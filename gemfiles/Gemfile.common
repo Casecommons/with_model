@@ -1,0 +1,8 @@
+source :rubygems
+
+# gemspec :path => File.join(File.dirname(__FILE__), '..')
+
+group :test do
+  gem "autotest"
+  gem "sqlite3-ruby"
+end

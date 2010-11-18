@@ -1,12 +1,20 @@
-# Usage
+require "active_record"
 require "with_model"
 
-RSpec.configure do |config|
-  config.extend WithModel
+if defined?(RSpec)
+  RSpec.configure do |config|
+    config.extend WithModel
+  end
+else
+  Spec::Runner.configure do |config|
+    config.extend WithModel
+  end
 end
 
+ActiveRecord::Base.establish_connection(:adapter  => 'sqlite3', :database => ":memory:")
+connection = ActiveRecord::Base.connection
+connection.execute("SELECT 1")
 
-# What you get
 describe "an ActiveRecord model" do
   with_model :blog_post do
     table do |t|
