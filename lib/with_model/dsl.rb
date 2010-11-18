@@ -16,7 +16,7 @@ module WithModel
       example_group.before do
         send("#{name}=", Class.new(ActiveRecord::Base) do
           set_table_name table_name
-          self.instance_eval(&dsl.model_initialization)
+          self.class_eval(&dsl.model_initialization)
         end)
       end
     end
