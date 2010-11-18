@@ -7,17 +7,28 @@ module WithModel
 
       @example_group = example_group
       @table_name = table_name = "with_model_#{name}_#{$$}"
-      @model_initialization = lambda {}
+      @model_initialization = lambda { |*|}
+
+      const_name = name.to_s.classify.to_sym
+
+      original_const_defined = Object.const_defined?(const_name)
+      original_const_value = Object.const_get(const_name) if original_const_defined
 
       example_group.class_eval do
         attr_accessor name
       end
 
       example_group.before do
-        send("#{name}=", Class.new(ActiveRecord::Base) do
+        model = send("#{name}=", Class.new(ActiveRecord::Base) do
           set_table_name table_name
           self.class_eval(&dsl.model_initialization)
         end)
+        silence_warnings { Object.const_set(const_name, model) }
+      end
+
+      example_group.after do
+        Object.send(:remove_const, const_name)
+        Object.const_set(const_name, original_const_value) if original_const_defined
       end
     end
 
