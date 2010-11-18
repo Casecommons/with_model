@@ -1,0 +1,3 @@
+module WithModel
+  # Your code goes here...
+end
