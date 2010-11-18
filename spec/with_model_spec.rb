@@ -55,7 +55,6 @@ describe "a temporary ActiveRecord model created with with_model" do
   end
 
   it "should have methods defined in its model block" do
-    puts @blog_post.new(:title => 'New blog post').class.instance_methods(false)
     @blog_post.new(:title => 'New blog post').fancy_title.should == "Title: New blog post"
   end
 end
