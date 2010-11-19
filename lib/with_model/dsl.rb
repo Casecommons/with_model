@@ -7,7 +7,7 @@ module WithModel
 
       @example_group = example_group
       @table_name = table_name = "with_model_#{name}_#{$$}"
-      @model_initialization = lambda { |*|}
+      @model_initialization = lambda {|*|}
 
       const_name = name.to_s.classify.to_sym
 
@@ -19,11 +19,13 @@ module WithModel
       end
 
       example_group.before do
-        model = send("#{name}=", Class.new(ActiveRecord::Base) do
+        model = Class.new(ActiveRecord::Base)
+        silence_warnings { Object.const_set(const_name, model) }
+        Object.const_get(const_name).class_eval do
           set_table_name table_name
           self.class_eval(&dsl.model_initialization)
-        end)
-        silence_warnings { Object.const_set(const_name, model) }
+        end
+        send("#{name}=", model)
       end
 
       example_group.after do
