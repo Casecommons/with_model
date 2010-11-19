@@ -1,1 +1,1 @@
-See spec/with_model_spec.rb for usage.
+See spec/spec_helper.rb and spec/with_model_spec.rb for usage.
