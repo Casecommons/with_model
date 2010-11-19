@@ -9,7 +9,7 @@ module WithModel
       @table_name = table_name = "with_model_#{name}_#{$$}"
       @model_initialization = lambda {|*|}
 
-      const_name = name.to_s.classify.to_sym
+      const_name = name.to_s.camelize.to_sym
 
       original_const_defined = Object.const_defined?(const_name)
       original_const_value = Object.const_get(const_name) if original_const_defined
