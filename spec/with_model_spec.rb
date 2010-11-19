@@ -45,6 +45,12 @@ describe "a temporary ActiveRecord model created with with_model" do
     it "should define a constant" do
       BlogPost.should == blog_post
     end
+
+    describe ".with_model?" do
+      it "should return true" do
+        BlogPost.with_model?.should be_true
+      end
+    end
   end
 
   context "after an example which uses with_model without shadowing an existing constant" do
