@@ -23,6 +23,11 @@ module WithModel
         silence_warnings { Object.const_set(const_name, model) }
         Object.const_get(const_name).class_eval do
           set_table_name table_name
+          class << self
+            def with_model?
+              true
+            end
+          end
           self.class_eval(&dsl.model_initialization)
         end
         send("#{name}=", model)
