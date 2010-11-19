@@ -39,11 +39,11 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     it "should have methods defined in its model block" do
-      @blog_post.new(:title => 'New blog post').fancy_title.should == "Title: New blog post"
+      blog_post.new(:title => 'New blog post').fancy_title.should == "Title: New blog post"
     end
 
     it "should define a constant" do
-      BlogPost.should == @blog_post
+      BlogPost.should == blog_post
     end
   end
 
@@ -77,6 +77,16 @@ describe "a temporary ActiveRecord model created with with_model" do
     it "should return the constant to its original value" do
       shadowing_example_ran.should be_true
       MyConst.should == 1
+    end
+  end
+
+  describe "with a plural name" do
+    with_model :blog_posts do
+      table {}
+    end
+
+    it "should not singularize the constant name" do
+      BlogPosts.should == blog_posts
     end
   end
 end
