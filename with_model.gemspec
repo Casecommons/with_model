@@ -6,9 +6,9 @@ Gem::Specification.new do |s|
   s.name        = "with_model"
   s.version     = WithModel::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Peter Jaros", "Grant Hutchins"]
-  s.email       = ["pjaros@pivotallabs.com", "grant@pivotallabs.com"]
-  s.homepage    = "https://github.com/casebook/with_model"
+  s.authors     = ["Case Commons, LLC"]
+  s.email       = ["casecommons-dev@googlegroups.com"]
+  s.homepage    = "https://github.com/Casecommons/with_model"
   s.summary     = %q{Dynamically build a model within an Rspec context}
   s.description = s.summary
 
