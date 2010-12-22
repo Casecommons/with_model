@@ -1,3 +1,5 @@
+require 'with_model/base'
+
 module WithModel
   class Dsl
     attr_reader :model_initialization
@@ -18,22 +20,19 @@ module WithModel
         attr_accessor name
       end
 
+      model = Class.new(WithModel::Base)
+
       example_group.before do
-        model = Class.new(ActiveRecord::Base)
         silence_warnings { Object.const_set(const_name, model) }
         Object.const_get(const_name).class_eval do
           set_table_name table_name
-          class << self
-            def with_model?
-              true
-            end
-          end
           self.class_eval(&dsl.model_initialization)
         end
         send("#{name}=", model)
       end
 
       example_group.after do
+        model._with_model_deconstructor
         Object.send(:remove_const, const_name)
         Object.const_set(const_name, original_const_value) if original_const_defined
       end

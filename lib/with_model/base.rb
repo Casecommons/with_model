@@ -1,0 +1,27 @@
+require 'mixico'
+
+module WithModel
+  class Base < ActiveRecord::Base
+    class << self
+      def with_model?
+        true
+      end
+
+      def include(*args)
+        @modules_to_unmix ||= []
+        args.each do |mod|
+          unless @modules_to_unmix.include?(mod)
+            @modules_to_unmix << mod
+          end
+        end
+        super
+      end
+
+      def _with_model_deconstructor
+        @modules_to_unmix.each do |mod|
+          disable_mixin mod
+        end if defined?(@modules_to_unmix)
+      end
+    end
+  end
+end
