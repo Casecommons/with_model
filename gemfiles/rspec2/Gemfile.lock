@@ -16,6 +16,7 @@ GEM
     builder (2.1.2)
     diff-lcs (1.1.2)
     i18n (0.4.2)
+    mixico (0.1.4)
     rspec (2.1.0)
       rspec-core (~> 2.1.0)
       rspec-expectations (~> 2.1.0)
@@ -33,5 +34,6 @@ PLATFORMS
 DEPENDENCIES
   activerecord (~> 3.0.0)
   autotest
+  mixico
   rspec (~> 2.0)
   sqlite3-ruby

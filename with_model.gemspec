@@ -18,4 +18,5 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency 'activerecord', '>=2.3.5', '<4.0.0'
+  s.add_dependency 'mixico'
 end

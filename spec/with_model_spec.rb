@@ -95,4 +95,33 @@ describe "a temporary ActiveRecord model created with with_model" do
       BlogPosts.should == blog_posts
     end
   end
+
+  module AMixin
+    def foo
+    end
+  end
+
+  context "with a mixin" do
+    with_model :with_a_mixin do
+      table {}
+      model do
+        include AMixin
+      end
+    end
+
+    before { ::ModelWithMixin = WithAMixin }
+
+    it "should have the mixin" do
+      lambda { ::ModelWithMixin.new.foo }.should_not raise_error
+      ::ModelWithMixin.include?(AMixin).should be_true
+    end
+  end
+
+  context "after a context that uses a mixin" do
+    it "should not have the mixin" do
+      lambda { ::ModelWithMixin.new.foo }.should raise_error(NoMethodError)
+      ::ModelWithMixin.include?(AMixin).should be_false
+    end
+  end
+
 end
