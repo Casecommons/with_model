@@ -16,3 +16,6 @@ end
 # WithModel requires ActiveRecord::Base.connection to be established.
 # If ActiveRecord already has a connection, as in a Rails app, this is unnecessary.
 ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => ":memory:")
+
+# For readme_spec.rb
+module SomeModule; end

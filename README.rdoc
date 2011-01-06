@@ -1,0 +1,42 @@
+= with_model
+
+* http://github.com/casecommons/with_model/
+
+== DESCRIPTION
+
++with_model+ dynamically builds an ActiveRecord model (with table) within an RSpec context. Outside of the context, the model is no longer present.
+
+== INSTALL
+
+ gem install with_model
+
+=== RSpec 2
+
+In spec_helper.rb:
+
+  RSpec.configure do |config|
+    config.extend WithModel
+  end
+
+=== Rspec 1
+
+In spec_helper.rb:
+
+  Spec::Runner.configure do |config|
+    config.extend WithModel
+  end
+
+== USAGE
+
+In an RSpec example group, call +with_model+ and inside its block pass it a +table+ block and a +model+ block.
+
+:include:./spec/readme_spec.rb
+
+== REQUIREMENTS
+
+* RSpec
+* ActiveRecord 2 or 3
+
+== LICENSE:
+
+MIT
