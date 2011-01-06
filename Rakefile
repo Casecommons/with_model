@@ -33,3 +33,5 @@ namespace "autotest" do
     end
   end
 end
+
+task :default => :spec
