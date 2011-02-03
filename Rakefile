@@ -34,4 +34,11 @@ namespace "autotest" do
   end
 end
 
+namespace "doc" do
+  desc "Generate README and preview in browser"
+  task "readme" do
+    sh "rdoc -c utf8 README.rdoc && open doc/files/README_rdoc.html"
+  end
+end
+
 task :default => :spec
