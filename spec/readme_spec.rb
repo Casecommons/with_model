@@ -3,7 +3,6 @@
   describe "A blog post" do
 
     with_model :blog_post do
-
       # The table block works just like a migration.
       table do |t|
         t.string :title

@@ -1,4 +1,7 @@
-require 'mixico'
+begin
+  require 'mixico'
+rescue LoadError
+end
 
 module WithModel
   class Base < ActiveRecord::Base
@@ -7,20 +10,22 @@ module WithModel
         true
       end
 
-      def include(*args)
-        @modules_to_unmix ||= []
-        args.each do |mod|
-          unless @modules_to_unmix.include?(mod)
-            @modules_to_unmix << mod
+      if defined?(Mixico)
+        def include(*args)
+          @modules_to_unmix ||= []
+          args.each do |mod|
+            unless @modules_to_unmix.include?(mod)
+              @modules_to_unmix << mod
+            end
           end
+          super
         end
-        super
-      end
 
-      def _with_model_deconstructor
-        @modules_to_unmix.each do |mod|
-          disable_mixin mod
-        end if defined?(@modules_to_unmix)
+        def _with_model_deconstructor
+          @modules_to_unmix.each do |mod|
+            disable_mixin mod
+          end if defined?(@modules_to_unmix)
+        end
       end
     end
   end

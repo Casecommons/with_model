@@ -32,7 +32,7 @@ module WithModel
       end
 
       example_group.after do
-        model._with_model_deconstructor
+        model._with_model_deconstructor if defined?(Mixico)
         Object.send(:remove_const, const_name)
         Object.const_set(const_name, original_const_value) if original_const_defined
       end
