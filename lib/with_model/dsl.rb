@@ -38,8 +38,8 @@ module WithModel
       end
     end
 
-    def table(&block)
-      @example_group.with_table(@table_name, &block)
+    def table(options = {}, &block)
+      @example_group.with_table(@table_name, options, &block)
     end
 
     def model(&block)

@@ -126,4 +126,17 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
   end
 
+  context "with table options" do
+    with_model :with_options do
+      table :id => false do |t|
+        t.string 'foo'
+        t.timestamps
+      end
+    end
+
+    it "should respect the additional options" do
+      WithOptions.columns.map(&:name).should_not include("id")
+    end
+  end
+
 end
