@@ -80,7 +80,7 @@
     end
   end
 
-  context "with table options" do
+  describe "with table options" do
     with_model :with_options do
       table :id => false do |t|
         t.string 'foo'
