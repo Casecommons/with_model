@@ -112,6 +112,19 @@ In an RSpec example group, call +with_model+ and inside its block pass it a +tab
     end
   end
 
+  context "with table options" do
+    with_model :with_options do
+      table :id => false do |t|
+        t.string 'foo'
+        t.timestamps
+      end
+    end
+
+    it "should respect the additional options" do
+      WithOptions.columns.map(&:name).should_not include("id")
+    end
+  end
+
 === Mixico
 
 If you have the +mixico+ gem installed, WithModel will automatically unmix any modules that were mixed into your model class. Without +mixico+, each module will hold a reference to the class for the remainder of your test suite.
