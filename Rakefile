@@ -2,6 +2,7 @@ require 'bundler'
 Bundler::GemHelper.install_tasks
 
 environments = %w[rspec1 rspec2]
+major, minor, revision = RUBY_VERSION.split(".").map{|str| str.to_i }
 
 in_environment = lambda do |environment, command|
   sh %Q{export BUNDLE_GEMFILE="gemfiles/#{environment}/Gemfile"; bundle --quiet && bundle exec #{command}}
@@ -21,7 +22,7 @@ autotest_styles = {
 
 desc "Run all specs against Rspec 1 and 2"
 task "spec" do
-  in_environment.call('rspec1', 'spec spec')
+  in_environment.call('rspec1', 'spec spec') if major == 1 && minor < 9
   in_environment.call('rspec2', 'rspec spec')
 end
 
