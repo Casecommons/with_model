@@ -1,3 +1,8 @@
+### 0.1.5
+
+WithModel::Base is now marked as an abstract_class, which makes polymorphic
+belongs_to work properly.
+
 ### 0.1.4
 
 Add ability to pass arguments to create_table.
