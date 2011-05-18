@@ -58,6 +58,10 @@ describe "a temporary ActiveRecord model created with with_model" do
         BlogPost.with_model?.should be_true
       end
     end
+
+    it "should have a base_class of itself" do
+      BlogPost.base_class.should == BlogPost
+    end
   end
 
   context "after an example which uses with_model without shadowing an existing constant" do
