@@ -19,3 +19,25 @@ ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => ":me
 
 # For readme_spec.rb
 module SomeModule; end
+
+if defined?(ActiveModel)
+  shared_examples_for "ActiveModel" do
+    require 'test/unit/assertions'
+    require 'active_model/lint'
+    include Test::Unit::Assertions
+    include ActiveModel::Lint::Tests
+
+    # to_s is to support ruby-1.9
+    ActiveModel::Lint::Tests.public_instance_methods.map{|m| m.to_s}.grep(/^test/).each do |m|
+      example m.gsub('_',' ') do
+        begin
+          send m
+        rescue
+          puts $!.message
+        end
+      end
+    end
+
+    before { @model = subject }
+  end
+end

@@ -38,6 +38,13 @@ describe "a temporary ActiveRecord model created with with_model" do
       }.should raise_error(ActiveRecord::RecordNotFound)
     end
 
+    if defined?(ActiveModel)
+      describe "the class" do
+        subject { BlogPost.new }
+        it_should_behave_like "ActiveModel"
+      end
+    end
+
     it "should have methods defined in its model block" do
       blog_post.new(:title => 'New blog post').fancy_title.should == "Title: New blog post"
     end
