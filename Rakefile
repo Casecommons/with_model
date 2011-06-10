@@ -5,7 +5,7 @@ environments = %w[rspec1 rspec2]
 major, minor, revision = RUBY_VERSION.split(".").map{|str| str.to_i }
 
 in_environment = lambda do |environment, command|
-  sh %Q{export BUNDLE_GEMFILE="gemfiles/#{environment}/Gemfile"; bundle --quiet && bundle exec #{command}}
+  sh %Q{export BUNDLE_GEMFILE="gemfiles/#{environment}/Gemfile"; bundle update && bundle exec #{command}}
 end
 
 in_all_environments = lambda do |command|

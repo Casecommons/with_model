@@ -3,6 +3,7 @@ source :rubygems
 # gemspec :path => File.join(File.dirname(__FILE__), '..')
 
 gem "mixico"
+gem "rake"
 
 group :test do
   gem "autotest"
