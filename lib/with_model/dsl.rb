@@ -16,10 +16,6 @@ module WithModel
       original_const_defined = Object.const_defined?(const_name)
       original_const_value = Object.const_get(const_name) if original_const_defined
 
-      example_group.class_eval do
-        attr_accessor name
-      end
-
       model = Class.new(WithModel::Base)
 
       example_group.before do
@@ -28,7 +24,6 @@ module WithModel
           set_table_name table_name
           self.class_eval(&dsl.model_initialization)
         end
-        send("#{name}=", model)
       end
 
       example_group.after do

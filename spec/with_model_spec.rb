@@ -23,7 +23,7 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     it "should act like a normal ActiveRecord model" do
-      record = blog_post.create!(:title => 'New blog post', :content => "Hello, world!")
+      record = BlogPost.create!(:title => 'New blog post', :content => "Hello, world!")
 
       record.reload
 
@@ -46,11 +46,11 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     it "should have methods defined in its model block" do
-      blog_post.new(:title => 'New blog post').fancy_title.should == "Title: New blog post"
+      BlogPost.new(:title => 'New blog post').fancy_title.should == "Title: New blog post"
     end
 
     it "should define a constant" do
-      BlogPost.should == blog_post
+      BlogPost.should be_a(Class)
     end
 
     describe ".with_model?" do
@@ -77,8 +77,7 @@ describe "a temporary ActiveRecord model created with with_model" do
 
   describe "that shadows an existing constant" do
     with_model :my_const do
-      table do
-      end
+      table {}
     end
 
     after do
@@ -86,7 +85,7 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     it "should shadow that constant" do
-      MyConst.should == my_const
+      MyConst.should be_a(Class)
     end
   end
 
@@ -103,7 +102,8 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     it "should not singularize the constant name" do
-      BlogPosts.should == blog_posts
+      BlogPosts.should be
+      lambda { BlogPost }.should raise_error(NameError)
     end
   end
 
