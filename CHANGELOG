@@ -1,3 +1,8 @@
+### 0.2
+
+Remove the buggy attr_accessor method for accessing with_model classes. Now
+there is only the constant available in the example group.
+
 ### 0.1.5
 
 WithModel::Base is now marked as an abstract_class, which makes polymorphic
