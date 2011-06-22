@@ -42,14 +42,6 @@
       BlogPost.should be
     end
 
-    it "can be accessed as a local variable" do
-      blog_post.should be
-    end
-
-    it "can be accessed as an instance variable" do
-      @blog_post.should be
-    end
-
     it "has the module" do
       BlogPost.include?(SomeModule).should be_true
     end
