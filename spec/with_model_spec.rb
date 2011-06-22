@@ -150,4 +150,38 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
   end
 
+  context "without a model block" do
+    with_model :blog_post do
+      table do |t|
+        t.string 'title'
+        t.text 'content'
+        t.timestamps
+      end
+    end
+
+    it "should act like a normal ActiveRecord model" do
+      record = BlogPost.create!(:title => 'New blog post', :content => "Hello, world!")
+
+      record.reload
+
+      record.title.should == 'New blog post'
+      record.content.should == 'Hello, world!'
+      record.updated_at.should be_present
+
+      record.destroy
+
+      lambda {
+        record.reload
+      }.should raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    if defined?(ActiveModel)
+      describe "the class" do
+        subject { BlogPost.new }
+        it_should_behave_like "ActiveModel"
+      end
+    end
+
+  end
+
 end
