@@ -1,4 +1,5 @@
 require 'with_model/base'
+require 'active_support/inflector'
 
 module WithModel
   class Dsl
@@ -8,7 +9,7 @@ module WithModel
       dsl = self
 
       @example_group = example_group
-      @table_name = table_name = "with_model_#{name}_#{$$}"
+      @table_name = table_name = "with_model_#{name.to_s.tableize}_#{$$}"
       @model_initialization = lambda {|*|}
 
       const_name = name.to_s.camelize.to_sym
