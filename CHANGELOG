@@ -1,3 +1,8 @@
+### 0.2.1
+
+Fix a bug when the with_model name contains capital letters. Now you can
+safely make calls like `with_model :BlogPost`
+
 ### 0.2
 
 Remove the buggy attr_accessor method for accessing with_model classes. Now
