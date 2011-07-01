@@ -107,6 +107,17 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
   end
 
+  describe "with a name containing capital letters" do
+    with_model :BlogPost do
+      table {}
+    end
+
+    it "should tableize the table name" do
+      BlogPost.table_name.should match(/_blog_posts_/)
+      BlogPost.table_name.should == BlogPost.table_name.downcase
+    end
+  end
+
   module AMixin
     def foo
     end
