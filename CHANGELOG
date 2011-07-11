@@ -1,3 +1,7 @@
+### 0.2.2
+
+The table block is now optional.
+
 ### 0.2.1
 
 Fix a bug when the with_model name contains capital letters. Now you can
