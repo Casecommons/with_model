@@ -11,6 +11,8 @@ module WithModel
       @example_group = example_group
       @table_name = table_name = "with_model_#{name.to_s.tableize}_#{$$}"
       @model_initialization = lambda {|*|}
+      @table_block = lambda {|*|}
+      @table_options = {}
 
       const_name = name.to_s.camelize.to_sym
 
@@ -34,8 +36,13 @@ module WithModel
       end
     end
 
+    def execute
+      @example_group.with_table(@table_name, @table_options, &@table_block)
+    end
+
     def table(options = {}, &block)
-      @example_group.with_table(@table_name, options, &block)
+      @table_options = options
+      @table_block = block
     end
 
     def model(&block)

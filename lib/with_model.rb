@@ -2,7 +2,7 @@ require "with_model/dsl"
 
 module WithModel
   def with_model(name, &block)
-    Dsl.new(name, self).instance_eval(&block)
+    Dsl.new(name, self).tap { |dsl| dsl.instance_eval(&block) }.execute
   end
 
   def with_table(name, options = {}, &block)
