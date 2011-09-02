@@ -1,3 +1,9 @@
+### 0.2.4
+
+Active Record 3.1 compatible.
+Fix bug where column information was being cached incorrectly by Active
+Record.
+
 ### 0.2.3
 
 Create a new class each run to prevent test pollution. (J. Andrew Marshall)
