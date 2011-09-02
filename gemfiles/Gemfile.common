@@ -5,5 +5,5 @@ gem "rake"
 
 group :test do
   gem "autotest"
-  gem "sqlite3-ruby"
+  gem "sqlite3"
 end
