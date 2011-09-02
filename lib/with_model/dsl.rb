@@ -32,6 +32,8 @@ module WithModel
 
       model = nil
 
+      @example_group.with_table(table_name, @table_options, &@table_block)
+
       @example_group.before do
         model = Class.new(WithModel::Base)
         silence_warnings { Object.const_set(const_name, model) }
@@ -39,6 +41,7 @@ module WithModel
           set_table_name table_name
           self.class_eval(&model_initialization)
         end
+        model.reset_column_information
       end
 
       @example_group.after do
@@ -46,8 +49,6 @@ module WithModel
         Object.send(:remove_const, const_name)
         Object.const_set(const_name, original_const_value) if original_const_defined
       end
-
-      @example_group.with_table(table_name, @table_options, &@table_block)
     end
   end
 end

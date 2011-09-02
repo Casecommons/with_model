@@ -239,6 +239,7 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     it "should act like a normal ActiveRecord model" do
+      BlogPost.columns.map(&:name).should == ["id"]
       record = BlogPost.create!
       record.reload
       record.destroy
