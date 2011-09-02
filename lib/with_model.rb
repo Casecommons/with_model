@@ -13,7 +13,7 @@ module WithModel
     end
 
     after do
-      connection.drop_table(name) rescue nil
+      connection.drop_table(name)
     end
   end
 end
