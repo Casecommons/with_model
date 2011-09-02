@@ -30,9 +30,10 @@ module WithModel
       original_const_defined = Object.const_defined?(const_name)
       original_const_value = Object.const_get(const_name) if original_const_defined
 
-      model = Class.new(WithModel::Base)
+      model = nil
 
       @example_group.before do
+        model = Class.new(WithModel::Base)
         silence_warnings { Object.const_set(const_name, model) }
         Object.const_get(const_name).class_eval do
           set_table_name table_name

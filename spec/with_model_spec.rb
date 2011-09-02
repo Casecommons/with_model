@@ -139,6 +139,36 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
   end
 
+  context "with a mixin that has a class_eval" do
+    subject { WithAClassEval.new }
+
+    module AMixinWithClassEval
+      def self.included(klass)
+        klass.class_eval do
+          after_save { |object| object.my_method }
+        end
+      end
+    end
+
+    with_model :with_a_class_eval do
+      table {}
+      model do
+        include AMixinWithClassEval
+        def my_method; end
+      end
+    end
+
+    it "should only have one after_save callback" do
+      subject.should_receive(:my_method).once
+      subject.save
+    end
+
+    it "should still only have one after_save callback in future tests" do
+      subject.should_receive(:my_method).once
+      subject.save
+    end
+  end
+
   if defined?(Mixico)
     context "after a context that uses a mixin" do
       it "should not have the mixin" do
