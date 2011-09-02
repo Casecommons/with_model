@@ -1,3 +1,8 @@
+### 0.2.3
+
+Create a new class each run to prevent test pollution. (J. Andrew Marshall)
+Use :UpperCase in examples.
+
 ### 0.2.2
 
 The table block is now optional.
