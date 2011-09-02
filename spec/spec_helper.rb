@@ -41,3 +41,8 @@ if defined?(ActiveModel)
     before { @model = subject }
   end
 end
+
+if ENV["LOGGER"]
+  require "logger"
+  ActiveRecord::Base.logger = Logger.new(STDOUT)
+end
