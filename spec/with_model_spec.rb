@@ -4,7 +4,7 @@ describe "a temporary ActiveRecord model created with with_model" do
   non_shadowing_example_ran = false
 
   describe "which doesn't shadow an existing class" do
-    with_model :blog_post do
+    with_model :BlogPost do
       table do |t|
         t.string 'title'
         t.text 'content'
@@ -76,7 +76,7 @@ describe "a temporary ActiveRecord model created with with_model" do
   shadowing_example_ran = false
 
   describe "that shadows an existing constant" do
-    with_model :my_const do
+    with_model :MyConst do
       table {}
     end
 
@@ -97,7 +97,7 @@ describe "a temporary ActiveRecord model created with with_model" do
   end
 
   describe "with a plural name" do
-    with_model :blog_posts do
+    with_model :BlogPosts do
       table {}
     end
 
@@ -118,13 +118,28 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
   end
 
+  describe "with a name with underscores" do
+    with_model :blog_post do
+      table {}
+    end
+
+    it "should constantize the name" do
+      BlogPost.should be
+    end
+
+    it "should tableize the table name" do
+      BlogPost.table_name.should match(/_blog_posts_/)
+      BlogPost.table_name.should == BlogPost.table_name.downcase
+    end
+  end
+
   module AMixin
     def foo
     end
   end
 
   context "with a mixin" do
-    with_model :with_a_mixin do
+    with_model :WithAMixin do
       table {}
       model do
         include AMixin
@@ -150,7 +165,7 @@ describe "a temporary ActiveRecord model created with with_model" do
       end
     end
 
-    with_model :with_a_class_eval do
+    with_model :WithAClassEval do
       table {}
       model do
         include AMixinWithClassEval
@@ -179,7 +194,7 @@ describe "a temporary ActiveRecord model created with with_model" do
   end
 
   context "with table options" do
-    with_model :with_options do
+    with_model :WithOptions do
       table :id => false do |t|
         t.string 'foo'
         t.timestamps
@@ -192,7 +207,7 @@ describe "a temporary ActiveRecord model created with with_model" do
   end
 
   context "without a model block" do
-    with_model :blog_post do
+    with_model :BlogPost do
       table do |t|
         t.string 'title'
         t.text 'content'
@@ -226,7 +241,7 @@ describe "a temporary ActiveRecord model created with with_model" do
   end
 
   context "without a table block" do
-    with_model :blog_post do
+    with_model :BlogPost do
     end
 
     it "should act like a normal ActiveRecord model" do

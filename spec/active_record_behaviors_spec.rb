@@ -26,7 +26,7 @@ describe "ActiveRecord behaviors" do
         RegularModel.connection.drop_table(@model.table_name) rescue nil
       end
 
-      with_model :blog_post do
+      with_model :BlogPost do
         table do |t|
           t.string 'title'
           t.text 'content'
@@ -67,7 +67,7 @@ describe "ActiveRecord behaviors" do
         end
       end
 
-      with_model :tea_cup do
+      with_model :TeaCup do
         table do |t|
           t.belongs_to :pet, :polymorphic => true
         end
@@ -78,7 +78,7 @@ describe "ActiveRecord behaviors" do
 
       with_table :animals
 
-      with_model :stuffed_animal do
+      with_model :StuffedAnimal do
         table
         model do
           has_many :tea_cups, :as => :pet

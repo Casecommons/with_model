@@ -2,7 +2,7 @@
 
   describe "A blog post" do
 
-    with_model :blog_post do
+    with_model :BlogPost do
       # The table block works just like a migration.
       table do |t|
         t.string :title
@@ -26,7 +26,7 @@
     end
 
     # with_model classes can have associations.
-    with_model :comment do
+    with_model :Comment do
       table do |t|
         t.string :text
         t.belongs_to :blog_post
@@ -73,7 +73,7 @@
   end
 
   describe "with table options" do
-    with_model :with_options do
+    with_model :WithOptions do
       table :id => false do |t|
         t.string 'foo'
         t.timestamps
