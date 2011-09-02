@@ -77,7 +77,6 @@ describe "a temporary ActiveRecord model created with with_model" do
 
   describe "that shadows an existing constant" do
     with_model :MyConst do
-      table {}
     end
 
     after do
@@ -98,7 +97,6 @@ describe "a temporary ActiveRecord model created with with_model" do
 
   describe "with a plural name" do
     with_model :BlogPosts do
-      table {}
     end
 
     it "should not singularize the constant name" do
@@ -109,7 +107,6 @@ describe "a temporary ActiveRecord model created with with_model" do
 
   describe "with a name containing capital letters" do
     with_model :BlogPost do
-      table {}
     end
 
     it "should tableize the table name" do
@@ -120,7 +117,6 @@ describe "a temporary ActiveRecord model created with with_model" do
 
   describe "with a name with underscores" do
     with_model :blog_post do
-      table {}
     end
 
     it "should constantize the name" do
@@ -140,7 +136,6 @@ describe "a temporary ActiveRecord model created with with_model" do
 
   context "with a mixin" do
     with_model :WithAMixin do
-      table {}
       model do
         include AMixin
       end
@@ -166,7 +161,6 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     with_model :WithAClassEval do
-      table {}
       model do
         include AMixinWithClassEval
         def my_method; end
