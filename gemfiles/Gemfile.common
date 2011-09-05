@@ -1,6 +1,6 @@
 source :rubygems
 
-gem "mixico"
+gem "mixico", :platforms => :mri
 gem "rake"
 
 group :test do
