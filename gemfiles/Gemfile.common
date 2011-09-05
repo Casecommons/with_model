@@ -4,6 +4,6 @@ gem "mixico", :platforms => :mri
 gem "rake"
 
 group :test do
-  gem "autotest"
+  gem "ZenTest" unless ENV["TRAVIS"]
   gem "sqlite3"
 end
