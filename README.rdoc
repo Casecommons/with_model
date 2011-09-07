@@ -2,6 +2,8 @@
 
 * http://github.com/casecommons/with_model/
 
+{<img src="http://travis-ci.org/Casecommons/with_model.png" />}[http://travis-ci.org/Casecommons/with_model]
+
 == DESCRIPTION
 
 +with_model+ dynamically builds an ActiveRecord model (with table) within an RSpec context. Outside of the context, the model is no longer present.
