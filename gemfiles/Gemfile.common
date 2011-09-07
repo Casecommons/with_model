@@ -2,13 +2,6 @@ source :rubygems
 
 gem "rake"
 gem "ZenTest" unless ENV["TRAVIS"]
-
-platforms :mri do
-  gem "mixico"
-  gem "sqlite3"
-end
-
-platforms :jruby do
-  gem 'activerecord-jdbcsqlite3-adapter'
-end
-
+gem "mixico", :platforms => :mri
+gem "sqlite3", :platforms => :ruby
+gem "activerecord-jdbcsqlite3-adapter", :platforms => :jruby
