@@ -101,4 +101,30 @@ describe "ActiveRecord behaviors" do
       end
     end
   end
+
+  context "with an association" do
+    with_model :Province do
+      table do |t|
+        t.belongs_to :country
+      end
+      model do
+        belongs_to :country
+      end
+    end
+
+    with_model :Country do
+    end
+
+    context "in earlier examples" do
+      it "should work as normal" do
+        Province.create!(:country => Country.create!)
+      end
+    end
+
+    context "in later examples" do
+      it "should not hold a reference to earlier example groups' classes" do
+        Province.reflect_on_association(:country).klass.should == Country
+      end
+    end
+  end
 end
