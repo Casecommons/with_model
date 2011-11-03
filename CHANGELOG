@@ -1,3 +1,8 @@
+### 0.2.5
+
+Clear Active Record 3.x associations class cache between specs to clean up test
+pollution.
+
 ### 0.2.4
 
 Active Record 3.1 compatible.
