@@ -48,7 +48,9 @@ module WithModel
         model._with_model_deconstructor if model.respond_to?(:_with_model_deconstructor)
         Object.send(:remove_const, const_name)
         Object.const_set(const_name, original_const_value) if original_const_defined
-        ActiveSupport::Dependencies::Reference.clear!
+        if defined?(ActiveSupport::Dependencies::Reference)
+          ActiveSupport::Dependencies::Reference.clear!
+        end
       end
     end
   end
