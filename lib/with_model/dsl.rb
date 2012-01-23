@@ -38,7 +38,7 @@ module WithModel
         model = Class.new(WithModel::Base)
         silence_warnings { Object.const_set(const_name, model) }
         Object.const_get(const_name).class_eval do
-          set_table_name table_name
+          self.table_name = table_name
           self.class_eval(&model_initialization)
         end
         model.reset_column_information
