@@ -24,11 +24,8 @@ module WithModel
 
     def execute
       model_initialization = @model_initialization
-      const_name = @name.to_s.camelize.to_sym
+      const_name = @name.to_s.camelize
       table_name = "with_model_#{@name.to_s.tableize}_#{$$}"
-
-      original_const_defined = Object.const_defined?(const_name)
-      original_const_value = Object.const_get(const_name) if original_const_defined
 
       model = nil
 
@@ -36,7 +33,7 @@ module WithModel
 
       @example_group.before do
         model = Class.new(WithModel::Base)
-        silence_warnings { Object.const_set(const_name, model) }
+        stub_const(const_name, model)
         Object.const_get(const_name).class_eval do
           self.table_name = table_name
           self.class_eval(&model_initialization)
@@ -46,8 +43,6 @@ module WithModel
 
       @example_group.after do
         model._with_model_deconstructor if model.respond_to?(:_with_model_deconstructor)
-        Object.send(:remove_const, const_name)
-        Object.const_set(const_name, original_const_value) if original_const_defined
         if defined?(ActiveSupport::Dependencies::Reference)
           ActiveSupport::Dependencies::Reference.clear!
         end
