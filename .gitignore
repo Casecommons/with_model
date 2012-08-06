@@ -4,5 +4,5 @@ pkg/*
 .bundle
 .rvmrc
 doc
-gemfiles/**/Gemfile.lock
+Gemfile.lock
 *.rbc
