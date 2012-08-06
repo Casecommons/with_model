@@ -1,8 +1,6 @@
 require 'bundler'
 Bundler::GemHelper.install_tasks
 
-major, minor, revision = RUBY_VERSION.split(".").map{|str| str.to_i }
-
 task :default => :spec
 
 def bundle_exec(command)
