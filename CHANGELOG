@@ -1,3 +1,8 @@
+### 0.2.6
+
+Active Record 3.2 compatible. (Steven Harman / Brent Wheeldon)
+
+
 ### 0.2.5
 
 Clear Active Record 3.x associations class cache between specs to clean up test
