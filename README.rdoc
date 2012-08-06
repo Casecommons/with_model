@@ -12,19 +12,9 @@
 
  gem install with_model
 
-=== RSpec 2
-
 In spec_helper.rb:
 
   RSpec.configure do |config|
-    config.extend WithModel
-  end
-
-=== Rspec 1
-
-In spec_helper.rb:
-
-  Spec::Runner.configure do |config|
     config.extend WithModel
   end
 
@@ -127,8 +117,8 @@ Usually unmixing isn't necessary, but it can be helpful if you use something lik
 
 == REQUIREMENTS
 
-* RSpec
-* ActiveRecord 2 or 3
+* RSpec 2.11 or higher (for earlier RSpec versions, use 0.2.x)
+* ActiveRecord 3 (for ActiveRecord 2, use 0.2.x)
 
 == LICENSE:
 

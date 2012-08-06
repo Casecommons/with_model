@@ -1,16 +1,8 @@
 require "active_record"
 require "with_model"
 
-if defined?(RSpec)
-  # For RSpec 2 users.
-  RSpec.configure do |config|
-    config.extend WithModel
-  end
-else
-  # For RSpec 1 users.
-  Spec::Runner.configure do |config|
-    config.extend WithModel
-  end
+RSpec.configure do |config|
+  config.extend WithModel
 end
 
 jruby = RUBY_PLATFORM =~ /\bjava\b/

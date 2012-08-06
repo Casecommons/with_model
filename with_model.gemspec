@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Case Commons, LLC", "Grant Hutchins"]
   s.email       = ["casecommons-dev@googlegroups.com", "gems@nertzy.com"]
   s.homepage    = "https://github.com/Casecommons/with_model"
-  s.summary     = %q{Dynamically build a model within an Rspec context}
+  s.summary     = %q{Dynamically build a model within an RSpec context}
   s.description = s.summary
 
   s.files         = `git ls-files`.split("\n")
