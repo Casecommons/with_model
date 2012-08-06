@@ -1,7 +1,12 @@
+### 0.3
+
+Use RSpec 2.11's built-in constant stubbing.
+Remove RSpec 1.x and Active Record 2.x support.
+Remove Mixico support.
+
 ### 0.2.6
 
 Active Record 3.2 compatible. (Steven Harman / Brent Wheeldon)
-
 
 ### 0.2.5
 
