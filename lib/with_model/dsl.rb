@@ -33,7 +33,7 @@ module WithModel
       @example_group.before do
         model = Class.new(WithModel::Base)
         stub_const(const_name, model)
-        Object.const_get(const_name).class_eval do
+        model.class_eval do
           self.table_name = table_name
           self.class_eval(&model_initialization)
         end
