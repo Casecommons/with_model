@@ -1,4 +1,3 @@
-require 'with_model/base'
 require 'active_support/inflector'
 
 module WithModel
