@@ -109,12 +109,6 @@ In an RSpec example group, call +with_model+ and inside its block pass it a +tab
     end
   end
 
-=== Mixico
-
-If you have the +mixico+ gem installed, WithModel will automatically unmix any modules that were mixed into your model class. Without +mixico+, each module will hold a reference to the class for the remainder of your test suite.
-
-Usually unmixing isn't necessary, but it can be helpful if you use something like Module#included_in_classes (from Active Support 2.3) in a later test to ask a module which classes it has been mixed into.
-
 == REQUIREMENTS
 
 * RSpec 2.11 or higher (for earlier RSpec versions, use 0.2.x)

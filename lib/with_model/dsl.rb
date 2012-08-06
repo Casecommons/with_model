@@ -41,7 +41,6 @@ module WithModel
       end
 
       @example_group.after do
-        model._with_model_deconstructor if model.respond_to?(:_with_model_deconstructor)
         if defined?(ActiveSupport::Dependencies::Reference)
           ActiveSupport::Dependencies::Reference.clear!
         end
