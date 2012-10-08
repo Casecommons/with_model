@@ -8,15 +8,14 @@ module WithModel
   end
 
   def with_table(name, options = {}, &block)
-    connection = ActiveRecord::Base.connection
-
     before do
+      connection = ActiveRecord::Base.connection
       connection.drop_table(name) if connection.table_exists?(name)
       connection.create_table(name, options, &block)
     end
 
     after do
-      connection.drop_table(name)
+      ActiveRecord::Base.connection.drop_table(name)
     end
   end
 end
