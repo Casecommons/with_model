@@ -1,3 +1,7 @@
+### 0.3.1
+
+Don't cache connection between tests. (Ryan Ong & Richard Nuno)
+
 ### 0.3
 
 Use RSpec 2.11's built-in constant stubbing.
