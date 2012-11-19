@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/Casecommons/with_model"
   s.summary     = %q{Dynamically build a model within an RSpec context}
   s.description = s.summary
+  s.licenses    = ["MIT"]
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
