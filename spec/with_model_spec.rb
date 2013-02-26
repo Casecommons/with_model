@@ -291,4 +291,20 @@ describe "a temporary ActiveRecord model created with with_model" do
       end
     end
   end
+
+  context "with ActiveSupport::DescendantsTracker" do
+    with_model :BlogPost
+
+    it "includes the correct model class in descendants on the first test run" do
+      ActiveRecord::Base.descendants.detect do |c|
+        c.table_name == BlogPost.table_name
+      end.should == BlogPost
+    end
+
+    it "includes the correct model class in descendants on the second test run" do
+      ActiveRecord::Base.descendants.detect do |c|
+        c.table_name == BlogPost.table_name
+      end.should == BlogPost
+    end
+  end
 end
