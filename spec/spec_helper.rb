@@ -1,6 +1,12 @@
 require "active_record"
 require "with_model"
 
+begin
+  require 'coveralls'
+  Coveralls.wear!
+rescue LoadError
+end
+
 RSpec.configure do |config|
   config.extend WithModel
 end
