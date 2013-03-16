@@ -41,6 +41,9 @@ module WithModel
       end
 
       @example_group.after do
+        if model.superclass.respond_to?(:direct_descendants)
+          model.superclass.direct_descendants.delete(model)
+        end
         if defined?(ActiveSupport::Dependencies::Reference)
           ActiveSupport::Dependencies::Reference.clear!
         end
