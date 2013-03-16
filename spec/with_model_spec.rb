@@ -76,8 +76,7 @@ describe "a temporary ActiveRecord model created with with_model" do
   shadowing_example_ran = false
 
   describe "that shadows an existing constant" do
-    with_model :MyConst do
-    end
+    with_model :MyConst
 
     after do
       shadowing_example_ran = true
@@ -96,8 +95,7 @@ describe "a temporary ActiveRecord model created with with_model" do
   end
 
   describe "with a plural name" do
-    with_model :BlogPosts do
-    end
+    with_model :BlogPosts
 
     it "should not singularize the constant name" do
       BlogPosts.should be
@@ -106,8 +104,7 @@ describe "a temporary ActiveRecord model created with with_model" do
   end
 
   describe "with a name containing capital letters" do
-    with_model :BlogPost do
-    end
+    with_model :BlogPost
 
     it "should tableize the table name" do
       BlogPost.table_name.should match(/_blog_posts_/)
@@ -116,8 +113,7 @@ describe "a temporary ActiveRecord model created with with_model" do
   end
 
   describe "with a name with underscores" do
-    with_model :blog_post do
-    end
+    with_model :blog_post
 
     it "should constantize the name" do
       BlogPost.should be
@@ -197,6 +193,46 @@ describe "a temporary ActiveRecord model created with with_model" do
 
     it "should respect the additional options" do
       WithOptions.columns.map(&:name).should_not include("id")
+    end
+  end
+
+  context "without a block" do
+    with_model :BlogPost
+
+    it "should act like a normal ActiveRecord model" do
+      record = BlogPost.create!
+      record.reload
+      record.destroy
+      lambda {
+        record.reload
+      }.should raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    if defined?(ActiveModel)
+      describe "the class" do
+        subject { BlogPost.new }
+        it_should_behave_like "ActiveModel"
+      end
+    end
+  end
+
+  context "with an empty block" do
+    with_model(:BlogPost) {}
+
+    it "should act like a normal ActiveRecord model" do
+      record = BlogPost.create!
+      record.reload
+      record.destroy
+      lambda {
+        record.reload
+      }.should raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    if defined?(ActiveModel)
+      describe "the class" do
+        subject { BlogPost.new }
+        it_should_behave_like "ActiveModel"
+      end
     end
   end
 

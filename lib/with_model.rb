@@ -4,7 +4,9 @@ module WithModel
   autoload :VERSION, "with_model/version"
 
   def with_model(name, &block)
-    Dsl.new(name, self).tap { |dsl| dsl.instance_eval(&block) }.execute
+    dsl = Dsl.new(name, self)
+    dsl.instance_eval(&block) if block
+    dsl.execute
   end
 
   def with_table(name, options = {}, &block)
