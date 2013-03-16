@@ -7,3 +7,4 @@ gem "sqlite3", :platforms => :ruby
 gem "activerecord-jdbcsqlite3-adapter", :platforms => :jruby
 gem "rdoc"
 gem 'coveralls', :require => false, :platform => :mri_20
+gem 'activerecord', ENV["ACTIVE_RECORD_VERSION"] if ENV["ACTIVE_RECORD_VERSION"]
