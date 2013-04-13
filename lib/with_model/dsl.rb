@@ -48,12 +48,7 @@ module WithModel
           model.superclass.direct_descendants.delete(model)
         end
         if @original_const
-          namespace = eval("'#{@original_const}'").sub(/\A::/, '').split("::")[0...-1].join("::")
-          if namespace.empty?
-            Object.send(:const_set, const_name, @original_const)
-          else
-            eval(namespace).send(:const_set, const_name, @original_const)
-          end
+          Object.send(:const_set, const_name, @original_const)
         else
           Object.send(:remove_const, const_name) 
         end
