@@ -19,5 +19,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency 'activerecord', '>=2.3.5', '<4.0.0'
-  s.add_dependency 'rspec', "~>2.11"
+  s.add_development_dependency 'rspec', "~>2.11"
+  s.add_development_dependency 'debugger'
 end
