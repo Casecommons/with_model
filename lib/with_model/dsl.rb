@@ -32,7 +32,10 @@ module WithModel
 
       @example_group.before do
         model = Class.new(WithModel::Base)
-        stub_const(const_name, model)
+
+        @original_const = eval(const_name) rescue nil
+        Object.send(:const_set, const_name, model)
+
         model.class_eval do
           self.table_name = table_name
           self.class_eval(&model_initialization)
@@ -44,10 +47,18 @@ module WithModel
         if model.superclass.respond_to?(:direct_descendants)
           model.superclass.direct_descendants.delete(model)
         end
+        if @original_const
+          Object.send(:const_set, const_name, @original_const)
+        else
+          Object.send(:remove_const, const_name) 
+        end
+
         if defined?(ActiveSupport::Dependencies::Reference)
           ActiveSupport::Dependencies::Reference.clear!
         end
       end
     end
+
   end
 end
+
