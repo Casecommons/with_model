@@ -33,8 +33,14 @@ module WithModel
       @example_group.before do
         model = Class.new(WithModel::Base)
 
-        @original_const = eval(const_name) rescue nil
-        Object.send(:const_set, const_name, model)
+        @original_const = const_name.sub(/\A::/, '').split('::').reduce(Object) do |parent, const| 
+          parent.send(:const_get, const) 
+        end
+        
+        parent = const_name.sub(/\A::/, '').split('::')[0..-2].reduce(Object) do |parent, const| 
+          parent.send(:const_get, const) 
+        end
+        parent.send(:const_set, const_name.split('::')[-1], model)
 
         model.class_eval do
           self.table_name = table_name
@@ -47,8 +53,12 @@ module WithModel
         if model.superclass.respond_to?(:direct_descendants)
           model.superclass.direct_descendants.delete(model)
         end
+
         if @original_const
-          Object.send(:const_set, const_name, @original_const)
+          parent = const_name.sub(/\A::/, '').split('::')[0..-2].reduce(Object) do |parent, const| 
+            parent.send(:const_get, const) 
+          end
+          parent.send(:const_set, const_name.split('::')[-1], @original_const)
         else
           Object.send(:remove_const, const_name) 
         end
