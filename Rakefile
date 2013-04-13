@@ -4,7 +4,7 @@ Bundler::GemHelper.install_tasks
 task :default => :spec
 
 def bundle_exec(command)
-  sh %Q{bundle update && bundle exec #{command}}
+  sh %Q{bundle exec #{command}}
 end
 
 desc "Run all specs"
