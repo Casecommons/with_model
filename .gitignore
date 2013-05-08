@@ -1,8 +1,9 @@
-.idea
 pkg/*
-*.gem
-.bundle
-.rvmrc
 doc
+coverage
 Gemfile.lock
+.rvmrc
+.idea
+.bundle
 *.rbc
+*.gem
