@@ -18,5 +18,7 @@ env:
 
 matrix:
   allow_failures:
-    - ACTIVE_RECORD_BRANCH="master"
-    - ACTIVE_RECORD_BRANCH="4-0-stable"
+    - env: ACTIVE_RECORD_BRANCH="master"
+    - env: ACTIVE_RECORD_BRANCH="4-0-stable"
+    - rvm: jruby-19mode
+      env: ACTIVE_RECORD_VERSION="~> 4.0.0"
