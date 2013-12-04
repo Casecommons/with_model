@@ -1,28 +1,27 @@
-# -*- encoding: utf-8 -*-
+# encoding: utf-8
 $:.push File.expand_path('../lib', __FILE__)
 require 'with_model/version'
 
-Gem::Specification.new do |s|
-  s.name        = 'with_model'
-  s.version     = WithModel::VERSION
-  s.platform    = Gem::Platform::RUBY
-  s.authors     = ['Case Commons, LLC', 'Grant Hutchins']
-  s.email       = ['casecommons-dev@googlegroups.com', 'gems@nertzy.com']
-  s.homepage    = 'https://github.com/Casecommons/with_model'
-  s.summary     = %q(Dynamically build a model within an RSpec context)
-  s.description = s.summary
-  s.licenses    = ['MIT']
+Gem::Specification.new do |spec|
+  spec.name        = 'with_model'
+  spec.version     = WithModel::VERSION
+  spec.authors     = ['Case Commons, LLC', 'Grant Hutchins']
+  spec.email       = ['casecommons-dev@googlegroups.com', 'gems@nertzy.com']
+  spec.homepage    = 'https://github.com/Casecommons/with_model'
+  spec.summary     = %q(Dynamically build a model within an RSpec context)
+  spec.description = spec.summary
+  spec.license     = 'MIT'
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
-  s.require_paths = ['lib']
+  spec.files         = `git ls-files`.split($/)
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.require_paths = ['lib']
 
-  s.add_dependency 'activerecord', '>= 2.3.5'
-  s.add_dependency 'rspec', '~> 2.11'
+  spec.required_ruby_version = '>= 1.9.2'
 
-  s.required_ruby_version = '>= 1.9.2'
+  spec.add_dependency 'activerecord', '>= 2.3.5'
+  spec.add_dependency 'rspec', '~> 2.11'
 
-  s.add_development_dependency 'bundler', '~> 1.3'
-  s.add_development_dependency 'rake'
+  spec.add_development_dependency 'bundler', '~> 1.3'
+  spec.add_development_dependency 'rake'
 end
