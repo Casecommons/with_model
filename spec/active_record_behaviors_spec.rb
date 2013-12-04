@@ -33,13 +33,13 @@ describe "ActiveRecord behaviors" do
 
       describe "the named scope" do
         it "should work like a regular named scope" do
-          included = RegularModel.create!(:title => 'foo', :content => "Include me!")
-          excluded = RegularModel.create!(:title => 'bar', :content => "Include me!")
+          included = RegularModel.create!(:title => 'foo', :content => 'Include me!')
+          excluded = RegularModel.create!(:title => 'bar', :content => 'Include me!')
 
           RegularModel.title_is_foo.should == [included]
 
-          included = BlogPost.create!(:title => 'foo', :content => "Include me!")
-          excluded = BlogPost.create!(:title => 'bar', :content => "Include me!")
+          included = BlogPost.create!(:title => 'foo', :content => 'Include me!')
+          excluded = BlogPost.create!(:title => 'bar', :content => 'Include me!')
 
           BlogPost.title_is_foo.should == [included]
         end
@@ -76,11 +76,11 @@ describe "ActiveRecord behaviors" do
           stuffed_animal = StuffedAnimal.create!
 
           tea_cup_for_animal = TeaCup.create!(:pet => animal)
-          tea_cup_for_animal.pet_type.should == "Animal"
+          tea_cup_for_animal.pet_type.should == 'Animal'
           animal.tea_cups.should include(tea_cup_for_animal)
 
           tea_cup_for_stuffed_animal = TeaCup.create!(:pet => stuffed_animal)
-          tea_cup_for_stuffed_animal.pet_type.should == "StuffedAnimal"
+          tea_cup_for_stuffed_animal.pet_type.should == 'StuffedAnimal'
           stuffed_animal.tea_cups.should include(tea_cup_for_stuffed_animal)
         end
       end

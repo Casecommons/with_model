@@ -12,10 +12,10 @@ task "spec" do
   bundle_exec("rspec spec")
 end
 
-namespace "doc" do
-  desc "Generate README and preview in browser"
-  task "readme" do
-    sh "rdoc -c utf8 README.rdoc && open doc/README_rdoc.html"
+namespace 'doc' do
+  desc 'Generate README and preview'
+  task 'readme' do
+    sh 'rdoc -c utf8 README.rdoc && open doc/README_rdoc.html'
   end
 end
 

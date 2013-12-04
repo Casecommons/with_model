@@ -23,7 +23,7 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     it "should act like a normal ActiveRecord model" do
-      record = BlogPost.create!(:title => 'New blog post', :content => "Hello, world!")
+      record = BlogPost.create!(:title => 'New blog post', :content => 'Hello, world!')
 
       record.reload
 
@@ -46,7 +46,7 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     it "should have methods defined in its model block" do
-      BlogPost.new(:title => 'New blog post').fancy_title.should == "Title: New blog post"
+      BlogPost.new(:title => 'New blog post').fancy_title.should == 'Title: New blog post'
     end
 
     it "should define a constant" do
@@ -192,7 +192,7 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     it "should respect the additional options" do
-      WithOptions.columns.map(&:name).should_not include("id")
+      WithOptions.columns.map(&:name).should_not include('id')
     end
   end
 
@@ -246,7 +246,7 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     it "should act like a normal ActiveRecord model" do
-      record = BlogPost.create!(:title => 'New blog post', :content => "Hello, world!")
+      record = BlogPost.create!(:title => 'New blog post', :content => 'Hello, world!')
 
       record.reload
 
@@ -275,7 +275,7 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     it "should act like a normal ActiveRecord model" do
-      BlogPost.columns.map(&:name).should == ["id"]
+      BlogPost.columns.map(&:name).should == ['id']
       record = BlogPost.create!
       record.reload
       record.destroy
