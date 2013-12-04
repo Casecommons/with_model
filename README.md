@@ -120,4 +120,5 @@ end
 
 ## License
 
-MIT
+Copyright © 2010-2013 Case Commons, LLC.
+Licensed under the MIT license, available in the “LICENSE” file.
