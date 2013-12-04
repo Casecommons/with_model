@@ -1,15 +1,8 @@
 require 'bundler/gem_tasks'
+require 'rspec/core/rake_task'
 
-task :default => :spec
-
-def bundle_exec(command)
-  sh %Q{bundle update && bundle exec #{command}}
-end
-
-desc "Run all specs"
-task "spec" do
-  bundle_exec("rspec spec")
-end
+desc 'Run specs'
+RSpec::Core::RakeTask.new
 
 namespace "doc" do
   desc "Generate README and preview in browser"
