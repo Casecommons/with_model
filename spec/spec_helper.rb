@@ -11,8 +11,8 @@ RSpec.configure do |config|
   config.extend WithModel
 end
 
-jruby = RUBY_PLATFORM =~ /\bjava\b/
-adapter = jruby ? 'jdbcsqlite3' : 'sqlite3'
+is_jruby = RUBY_PLATFORM =~ /\bjava\b/
+adapter = is_jruby ? 'jdbcsqlite3' : 'sqlite3'
 
 # WithModel requires ActiveRecord::Base.connection to be established.
 # If ActiveRecord already has a connection, as in a Rails app, this is unnecessary.
@@ -28,11 +28,14 @@ if defined?(ActiveModel)
     include Test::Unit::Assertions
     include ActiveModel::Lint::Tests
 
-    # to_s is to support ruby-1.9
-    ActiveModel::Lint::Tests.public_instance_methods.map{|m| m.to_s}.grep(/^test/).each do |m|
-      example m.gsub('_',' ') do
+    active_model_methods = ActiveModel::Lint::Tests.public_instance_methods
+    active_model_lint_tests = active_model_methods.map(&:to_s).grep(/^test/)
+
+    active_model_lint_tests.each do |method_name|
+      friendly_name = method_name.gsub('_', ' ')
+      example friendly_name do
         begin
-          send m
+          send method_name.to_sym
         rescue
           puts $!.message
         end
