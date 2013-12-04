@@ -1,3 +1,6 @@
+require 'bundler'
+Bundler.setup
+
 require 'active_record'
 require 'with_model'
 
