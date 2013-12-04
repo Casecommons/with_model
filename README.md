@@ -5,11 +5,9 @@
 [![Code Climate](https://codeclimate.com/github/Casecommons/with_model.png)](https://codeclimate.com/github/Casecommons/with_model)
 [![Coverage Status](https://coveralls.io/repos/Casecommons/with_model/badge.png?branch=master)](https://coveralls.io/r/Casecommons/with_model)
 
-## DESCRIPTION
-
 `with_model` dynamically builds an ActiveRecord model (with table) within an RSpec context. Outside of the context, the model is no longer present.
 
-## INSTALL
+## Installation
 
 Install as usual:
 
@@ -23,7 +21,7 @@ RSpec.configure do |config|
 end
 ```
 
-## USAGE
+## Usage
 
 In an RSpec example group, call `with_model` and inside its block pass it a `table` block and a `model` block.
 
@@ -115,11 +113,11 @@ describe "with table options" do
 end
 ```
 
-## REQUIREMENTS
+## Requirements
 
 - RSpec 2.11 or higher (for earlier RSpec versions, use 0.2.x)
 - ActiveRecord 3 (for ActiveRecord 2, use 0.2.x)
 
-## LICENSE
+## License
 
 MIT
