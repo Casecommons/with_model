@@ -34,7 +34,7 @@ if defined?(ActiveModel)
       friendly_name = method_name.gsub('_', ' ')
       example friendly_name do
         begin
-          send method_name.to_sym
+          public_send method_name.to_sym
         rescue
           puts $!.message
         end
