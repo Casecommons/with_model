@@ -285,8 +285,7 @@ describe "a temporary ActiveRecord model created with with_model" do
   end
 
   context "without a table block" do
-    with_model :BlogPost do
-    end
+    with_model :BlogPost
 
     it "should act like a normal ActiveRecord model" do
       BlogPost.columns.map(&:name).should == ['id']

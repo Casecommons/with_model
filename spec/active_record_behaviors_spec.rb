@@ -100,8 +100,7 @@ describe "ActiveRecord behaviors" do
       end
     end
 
-    with_model :Country do
-    end
+    with_model :Country
 
     context "in earlier examples" do
       it "should work as normal" do
