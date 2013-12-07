@@ -21,9 +21,6 @@ adapter = is_jruby ? 'jdbcsqlite3' : 'sqlite3'
 # If ActiveRecord already has a connection, as in a Rails app, this is unnecessary.
 ActiveRecord::Base.establish_connection(:adapter => adapter, :database => ':memory:')
 
-# For readme_spec.rb
-module SomeModule; end
-
 if defined?(ActiveModel)
   shared_examples_for "ActiveModel" do
     require 'test/unit/assertions'
