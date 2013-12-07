@@ -190,15 +190,6 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
   end
 
-  if defined?(Mixico)
-    context "after a context that uses a mixin" do
-      it "should not have the mixin" do
-        lambda { ::ModelWithMixin.new.foo }.should raise_error(NoMethodError)
-        ::ModelWithMixin.include?(AMixin).should be_false
-      end
-    end
-  end
-
   context "with table options" do
     with_model :WithOptions do
       table :id => false do |t|
