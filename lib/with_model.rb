@@ -1,8 +1,7 @@
-module WithModel
-  autoload :Base, "with_model/base"
-  autoload :Dsl, "with_model/dsl"
-  autoload :VERSION, "with_model/version"
+require 'with_model/dsl'
+require 'with_model/version'
 
+module WithModel
   def with_model(name, &block)
     dsl = Dsl.new(name, self)
     dsl.instance_eval(&block) if block

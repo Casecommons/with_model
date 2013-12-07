@@ -1,4 +1,5 @@
 require 'active_support/inflector'
+require 'with_model/base'
 
 module WithModel
   class Dsl
