@@ -284,7 +284,7 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
   end
 
-  context "without a table block" do
+  context "without a table or model block" do
     with_model :BlogPost
 
     it "should act like a normal ActiveRecord model" do
