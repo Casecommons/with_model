@@ -4,7 +4,7 @@ require 'with_model/version'
 module WithModel
   def with_model(name, &block)
     dsl = Dsl.new(name, self)
-    dsl.instance_eval(&block) if block
+    dsl.instance_exec(&block) if block
     dsl.execute
   end
 
