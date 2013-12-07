@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name        = 'with_model'
   spec.version     = WithModel::VERSION
   spec.authors     = ['Case Commons, LLC', 'Grant Hutchins']
-  spec.email       = ['casecommons-dev@googlegroups.com', 'gems@nertzy.com']
+  spec.email       = ['casecommons-dev@googlegroups.com', 'gems@nertzy.com', 'andrew@johnandrewmarshall.com']
   spec.homepage    = 'https://github.com/Casecommons/with_model'
   spec.summary     = %q(Dynamically build a model within an RSpec context)
   spec.description = spec.summary
