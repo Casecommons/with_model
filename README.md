@@ -4,6 +4,7 @@
 [![Dependency Status](https://gemnasium.com/Casecommons/with_model.png)](https://gemnasium.com/Casecommons/with_model)
 [![Code Climate](https://codeclimate.com/github/Casecommons/with_model.png)](https://codeclimate.com/github/Casecommons/with_model)
 [![Coverage Status](https://coveralls.io/repos/Casecommons/with_model/badge.png?branch=master)](https://coveralls.io/r/Casecommons/with_model)
+[![Gem Version](https://badge.fury.io/rb/with_model.png)](https://rubygems.org/gems/with_model)
 
 `with_model` dynamically builds an ActiveRecord model (with table) within an RSpec context. Outside of the context, the model is no longer present.
 
