@@ -20,29 +20,6 @@ adapter = is_jruby ? 'jdbcsqlite3' : 'sqlite3'
 require 'active_record'
 ActiveRecord::Base.establish_connection(:adapter => adapter, :database => ':memory:')
 
-shared_examples_for "ActiveModel" do
-  require 'test/unit/assertions'
-  require 'active_model/lint'
-  include Test::Unit::Assertions
-  include ActiveModel::Lint::Tests
-
-  active_model_methods = ActiveModel::Lint::Tests.public_instance_methods
-  active_model_lint_tests = active_model_methods.map(&:to_s).grep(/^test/)
-
-  active_model_lint_tests.each do |method_name|
-    friendly_name = method_name.gsub('_', ' ')
-    example friendly_name do
-      begin
-        public_send method_name.to_sym
-      rescue
-        puts $!.message
-      end
-    end
-  end
-
-  before { @model = subject }
-end
-
 if ENV['LOGGER']
   require 'logger'
   ActiveRecord::Base.logger = Logger.new($stdout)
