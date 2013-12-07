@@ -25,7 +25,7 @@ module WithModel
     def execute
       model_initialization = @model_initialization
       const_name = @name.to_s.camelize
-      table_name = "with_model_#{@name.to_s.tableize}_#{$$}"
+      table_name = "with_model_#{@name.to_s.tableize}_#{$$}".freeze
 
       model = nil
 
