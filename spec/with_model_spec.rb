@@ -1,9 +1,8 @@
 require 'spec_helper'
 
 shared_examples_for "ActiveModel" do
-  require 'test/unit/assertions'
   require 'active_model/lint'
-  include Test::Unit::Assertions
+  include SpecHelper::RailsTestCompatability
   include ActiveModel::Lint::Tests
 
   active_model_methods = ActiveModel::Lint::Tests.public_instance_methods
