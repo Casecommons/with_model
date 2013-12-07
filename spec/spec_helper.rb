@@ -1,15 +1,13 @@
 require 'bundler'
 Bundler.setup
 
-require 'active_record'
-require 'with_model'
-
 begin
   require 'coveralls'
   Coveralls.wear!
 rescue LoadError
 end
 
+require 'with_model'
 RSpec.configure do |config|
   config.extend WithModel
 end
@@ -19,6 +17,7 @@ adapter = is_jruby ? 'jdbcsqlite3' : 'sqlite3'
 
 # WithModel requires ActiveRecord::Base.connection to be established.
 # If ActiveRecord already has a connection, as in a Rails app, this is unnecessary.
+require 'active_record'
 ActiveRecord::Base.establish_connection(:adapter => adapter, :database => ':memory:')
 
 if defined?(ActiveModel)
