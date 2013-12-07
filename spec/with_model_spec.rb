@@ -12,11 +12,7 @@ shared_examples_for "ActiveModel" do
   active_model_lint_tests.each do |method_name|
     friendly_name = method_name.gsub('_', ' ')
     example friendly_name do
-      begin
-        public_send method_name.to_sym
-      rescue
-        puts $!.message
-      end
+      public_send method_name.to_sym
     end
   end
 
