@@ -4,9 +4,11 @@ describe "ActiveRecord behaviors" do
   describe "a temporary ActiveRecord model created with with_model" do
     context "that has a named scope" do
       before do
-        class RegularModel < ActiveRecord::Base
+        regular_model = Class.new ActiveRecord::Base do
           scope :title_is_foo, lambda { where(:title => 'foo') }
         end
+        stub_const 'RegularModel', regular_model
+
         RegularModel.connection.drop_table(RegularModel.table_name) rescue nil
         RegularModel.connection.create_table(RegularModel.table_name) do |t|
           t.string 'title'
@@ -48,9 +50,10 @@ describe "ActiveRecord behaviors" do
 
     context "that has a polymorphic belongs_to" do
       before do
-        class Animal < ActiveRecord::Base
+        animal = Class.new ActiveRecord::Base do
           has_many :tea_cups, :as => :pet
         end
+        stub_const 'Animal', animal
       end
 
       with_model :TeaCup do
