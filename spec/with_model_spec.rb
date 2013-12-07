@@ -38,11 +38,9 @@ describe "a temporary ActiveRecord model created with with_model" do
       }.should raise_error(ActiveRecord::RecordNotFound)
     end
 
-    if defined?(ActiveModel)
-      describe "the class" do
-        subject { BlogPost.new }
-        it_should_behave_like "ActiveModel"
-      end
+    describe "the class" do
+      subject { BlogPost.new }
+      it_should_behave_like "ActiveModel"
     end
 
     it "should have methods defined in its model block" do
@@ -208,11 +206,9 @@ describe "a temporary ActiveRecord model created with with_model" do
       }.should raise_error(ActiveRecord::RecordNotFound)
     end
 
-    if defined?(ActiveModel)
-      describe "the class" do
-        subject { BlogPost.new }
-        it_should_behave_like "ActiveModel"
-      end
+    describe "the class" do
+      subject { BlogPost.new }
+      it_should_behave_like "ActiveModel"
     end
   end
 
@@ -228,11 +224,9 @@ describe "a temporary ActiveRecord model created with with_model" do
       }.should raise_error(ActiveRecord::RecordNotFound)
     end
 
-    if defined?(ActiveModel)
-      describe "the class" do
-        subject { BlogPost.new }
-        it_should_behave_like "ActiveModel"
-      end
+    describe "the class" do
+      subject { BlogPost.new }
+      it_should_behave_like "ActiveModel"
     end
   end
 
@@ -261,13 +255,10 @@ describe "a temporary ActiveRecord model created with with_model" do
       }.should raise_error(ActiveRecord::RecordNotFound)
     end
 
-    if defined?(ActiveModel)
-      describe "the class" do
-        subject { BlogPost.new }
-        it_should_behave_like "ActiveModel"
-      end
+    describe "the class" do
+      subject { BlogPost.new }
+      it_should_behave_like "ActiveModel"
     end
-
   end
 
   context "without a table block" do
@@ -284,11 +275,9 @@ describe "a temporary ActiveRecord model created with with_model" do
       }.should raise_error(ActiveRecord::RecordNotFound)
     end
 
-    if defined?(ActiveModel)
-      describe "the class" do
-        subject { BlogPost.new }
-        it_should_behave_like "ActiveModel"
-      end
+    describe "the class" do
+      subject { BlogPost.new }
+      it_should_behave_like "ActiveModel"
     end
   end
 
