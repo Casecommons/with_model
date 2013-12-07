@@ -1,6 +1,6 @@
 # [with_model](https://github.com/casecommons/with_model/)
 
-[![Build Status](https://secure.travis-ci.org/Casecommons/with_model.png)](https://travis-ci.org/Casecommons/with_model)
+[![Build Status](https://secure.travis-ci.org/Casecommons/with_model.png?branch=master)](https://travis-ci.org/Casecommons/with_model)
 [![Dependency Status](https://gemnasium.com/Casecommons/with_model.png)](https://gemnasium.com/Casecommons/with_model)
 [![Code Climate](https://codeclimate.com/github/Casecommons/with_model.png)](https://codeclimate.com/github/Casecommons/with_model)
 [![Coverage Status](https://coveralls.io/repos/Casecommons/with_model/badge.png?branch=master)](https://coveralls.io/r/Casecommons/with_model)
