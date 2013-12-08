@@ -95,7 +95,7 @@ describe "A blog post" do
 end
 
 describe "another example group" do
-  it "should not have the constant anymore" do
+  it "does not have the constant anymore" do
     defined?(BlogPost).should be_false
   end
 end
@@ -108,7 +108,7 @@ describe "with table options" do
     end
   end
 
-  it "should respect the additional options" do
+  it "respects the additional options" do
     WithOptions.columns.map(&:name).should_not include("id")
   end
 end

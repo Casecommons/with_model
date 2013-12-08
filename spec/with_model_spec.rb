@@ -40,7 +40,7 @@ describe "a temporary ActiveRecord model created with with_model" do
       non_shadowing_example_ran = true
     end
 
-    it "should act like a normal ActiveRecord model" do
+    it "acts like a normal ActiveRecord model" do
       record = BlogPost.create!(:title => 'New blog post', :content => 'Hello, world!')
 
       record.reload
@@ -61,27 +61,27 @@ describe "a temporary ActiveRecord model created with with_model" do
       it_should_behave_like "ActiveModel"
     end
 
-    it "should have methods defined in its model block" do
+    it "has the methods defined in its model block" do
       BlogPost.new(:title => 'New blog post').fancy_title.should == 'Title: New blog post'
     end
 
-    it "should define a constant" do
+    it "defines a constant" do
       BlogPost.should be_a(Class)
     end
 
     describe ".with_model?" do
-      it "should return true" do
+      it "returns true" do
         BlogPost.with_model?.should be_true
       end
     end
 
-    it "should have a base_class of itself" do
+    it "is its own base_class" do
       BlogPost.base_class.should == BlogPost
     end
   end
 
   context "after an example which uses with_model without shadowing an existing constant" do
-    it "should return the constant to its undefined state" do
+    it "returns the constant to its undefined state" do
       non_shadowing_example_ran.should be_true
       defined?(BlogPost).should be_false
     end
@@ -98,13 +98,13 @@ describe "a temporary ActiveRecord model created with with_model" do
       shadowing_example_ran = true
     end
 
-    it "should shadow that constant" do
+    it "shadows that constant" do
       MyConst.should be_a(Class)
     end
   end
 
   context "in later examples" do
-    it "should return the constant to its original value" do
+    it "returns the constant to its original value" do
       shadowing_example_ran.should be_true
       MyConst.should == 1
     end
@@ -113,7 +113,7 @@ describe "a temporary ActiveRecord model created with with_model" do
   describe "with a plural name" do
     with_model :BlogPosts
 
-    it "should not singularize the constant name" do
+    it "does not singularize the constant name" do
       BlogPosts.should be
       lambda { BlogPost }.should raise_error(NameError)
     end
@@ -122,7 +122,7 @@ describe "a temporary ActiveRecord model created with with_model" do
   describe "with a name containing capital letters" do
     with_model :BlogPost
 
-    it "should tableize the table name" do
+    it "tableizes the table name" do
       BlogPost.table_name.should match(/_blog_posts_/)
       BlogPost.table_name.should == BlogPost.table_name.downcase
     end
@@ -131,11 +131,11 @@ describe "a temporary ActiveRecord model created with with_model" do
   describe "with a name with underscores" do
     with_model :blog_post
 
-    it "should constantize the name" do
+    it "constantizes the name" do
       BlogPost.should be
     end
 
-    it "should tableize the table name" do
+    it "tableizes the table name" do
       BlogPost.table_name.should match(/_blog_posts_/)
       BlogPost.table_name.should == BlogPost.table_name.downcase
     end
@@ -155,7 +155,7 @@ describe "a temporary ActiveRecord model created with with_model" do
 
     before { ::ModelWithMixin = WithAMixin }
 
-    it "should have the mixin" do
+    it "has the mixin" do
       lambda { ::ModelWithMixin.new.foo }.should_not raise_error
       ::ModelWithMixin.include?(AMixin).should be_true
     end
@@ -179,12 +179,12 @@ describe "a temporary ActiveRecord model created with with_model" do
       end
     end
 
-    it "should only have one after_save callback" do
+    it "only has one after_save callback" do
       subject.should_receive(:my_method).once
       subject.save
     end
 
-    it "should still only have one after_save callback in future tests" do
+    it "still only has one after_save callback in future tests" do
       subject.should_receive(:my_method).once
       subject.save
     end
@@ -198,7 +198,7 @@ describe "a temporary ActiveRecord model created with with_model" do
       end
     end
 
-    it "should respect the additional options" do
+    it "respects the additional options" do
       WithOptions.columns.map(&:name).should_not include('id')
     end
   end
@@ -206,7 +206,7 @@ describe "a temporary ActiveRecord model created with with_model" do
   context "without a block" do
     with_model :BlogPost
 
-    it "should act like a normal ActiveRecord model" do
+    it "acts like a normal ActiveRecord model" do
       record = BlogPost.create!
       record.reload
       record.destroy
@@ -224,7 +224,7 @@ describe "a temporary ActiveRecord model created with with_model" do
   context "with an empty block" do
     with_model(:BlogPost) {}
 
-    it "should act like a normal ActiveRecord model" do
+    it "acts like a normal ActiveRecord model" do
       record = BlogPost.create!
       record.reload
       record.destroy
@@ -248,7 +248,7 @@ describe "a temporary ActiveRecord model created with with_model" do
       end
     end
 
-    it "should act like a normal ActiveRecord model" do
+    it "acts like a normal ActiveRecord model" do
       record = BlogPost.create!(:title => 'New blog post', :content => 'Hello, world!')
 
       record.reload
@@ -273,8 +273,8 @@ describe "a temporary ActiveRecord model created with with_model" do
   context "without a table or model block" do
     with_model :BlogPost
 
-    it "should act like a normal ActiveRecord model" do
-      BlogPost.columns.map(&:name).should == ['id']
+    it "acts like a normal ActiveRecord model" do
+      expect(BlogPost.columns.map(&:name)).to eq ['id']
       record = BlogPost.create!
       record.reload
       record.destroy

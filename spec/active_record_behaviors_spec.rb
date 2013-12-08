@@ -34,7 +34,7 @@ describe "ActiveRecord behaviors" do
       end
 
       describe "the named scope" do
-        it "should work like a regular named scope" do
+        it "works like a regular named scope" do
           included = RegularModel.create!(:title => 'foo', :content => 'Include me!')
           excluded = RegularModel.create!(:title => 'bar', :content => 'Include me!')
 
@@ -74,7 +74,7 @@ describe "ActiveRecord behaviors" do
       end
 
       describe "the polymorphic belongs_to" do
-        it "should work like a regular polymorphic belongs_to" do
+        it "works like a regular polymorphic belongs_to" do
           animal = Animal.create!
           stuffed_animal = StuffedAnimal.create!
 
@@ -103,13 +103,13 @@ describe "ActiveRecord behaviors" do
     with_model :Country
 
     context "in earlier examples" do
-      it "should work as normal" do
+      it "works as normal" do
         Province.create!(:country => Country.create!)
       end
     end
 
     context "in later examples" do
-      it "should not hold a reference to earlier example groups' classes" do
+      it "does not hold a reference to earlier example groups' classes" do
         Province.reflect_on_association(:country).klass.should == Country
       end
     end
