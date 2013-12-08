@@ -10,7 +10,7 @@
 
 ## Installation
 
-Install as usual:
+Install as usual: `gem install with_model` or add `gem 'with_model'` to your Gemfile. See `.travis.yml` for supported (tested) Ruby versions.
 
     gem install with_model
 
@@ -118,7 +118,7 @@ end
 
 - Ruby 1.9.3+
 - RSpec 2.11 or higher (for earlier RSpec versions, use 0.2.x)
-- ActiveRecord 3 (for ActiveRecord 2, use 0.2.x)
+- ActiveRecord 3+ (for ActiveRecord 2, use with_model 0.2.x)
 
 ## License
 
