@@ -14,16 +14,16 @@
 ### 0.3.2
 
 - Allow calling with_model without a block. (Andrew Marshall)
-- Ensure that ActiveSupport's descendants works correctly between tests. (Andrew Marshall)
+- Ensure that ActiveSupport’s descendants works correctly between tests. (Andrew Marshall)
 - Allow Active Record 4 in gemspec.
 
 ### 0.3.1
 
-- Don't cache connection between tests. (Ryan Ong & Richard Nuno)
+- Don’t cache connection between tests. (Ryan Ong & Richard Nuno)
 
 ### 0.3
 
-- Use RSpec 2.11's built-in constant stubbing.
+- Use RSpec 2.11’s built-in constant stubbing.
 - Remove RSpec 1.x and Active Record 2.x support.
 - Remove Mixico support.
 
