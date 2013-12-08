@@ -8,8 +8,8 @@ module WithModel
 
     def initialize name
       @name = name.to_sym
-      @model_block = lambda {|*|}
-      @table_block = lambda {|*|}
+      @model_block = proc {}
+      @table_block = proc {}
       @table_options = {}
     end
 
