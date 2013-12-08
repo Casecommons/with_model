@@ -28,12 +28,19 @@ module WithModel
       table_name = "with_model_#{@name.to_s.tableize}_#{$$}".freeze
 
       model = nil
+      original_const = nil
 
       @example_group.with_table(table_name, @table_options, &@table_block)
 
       @example_group.before do
         model = Class.new(WithModel::Base)
-        stub_const(const_name, model)
+
+        if Object.const_defined?(const_name)
+          original_const = Object.const_get(const_name)
+          Object.send :remove_const, const_name
+        end
+
+        Object.const_set const_name, model
         model.class_eval do
           self.table_name = table_name
           self.class_eval(&model_initialization)
@@ -42,6 +49,9 @@ module WithModel
       end
 
       @example_group.after do
+        Object.send :remove_const, const_name
+        Object.const_set const_name, original_const if original_const
+
         if model.superclass.respond_to?(:direct_descendants)
           model.superclass.direct_descendants.delete(model)
         end
