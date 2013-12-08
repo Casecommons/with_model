@@ -11,6 +11,8 @@ require 'with_model'
 RSpec.configure do |config|
   config.extend WithModel
 
+  config.warnings = true
+
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
