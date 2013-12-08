@@ -17,36 +17,46 @@ module WithModel
 
     def create
       table.create
-
-      @model = Class.new(WithModel::Base)
-      model_block = @model_block
-      table_name = send :table_name
-      @model.class_eval do
-        self.table_name = table_name
-        class_eval(&model_block)
-      end
-      @model.reset_column_information
-
+      @model = create_model
       stub_const
     end
 
     def destroy
       unstub_const
-
+      remove_from_superclass_descendants
+      reset_dependencies_cache
       table.destroy
-
-      if @model.superclass.respond_to?(:direct_descendants)
-        @model.superclass.direct_descendants.delete(@model)
-      end
-      if defined?(ActiveSupport::Dependencies::Reference)
-        ActiveSupport::Dependencies::Reference.clear!
-      end
+      @model = nil
     end
 
     private
 
     def const_name
       @name.to_s.camelize.freeze
+    end
+
+    def create_model
+      model = Class.new(WithModel::Base)
+
+      model_block = @model_block
+      table_name = send :table_name
+      model.class_eval do
+        self.table_name = table_name
+        class_eval(&model_block)
+      end
+      model.reset_column_information
+
+      model
+    end
+
+    def remove_from_superclass_descendants
+      return unless @model.superclass.respond_to?(:direct_descendants)
+      @model.superclass.direct_descendants.delete(@model)
+    end
+
+    def reset_dependencies_cache
+      return unless defined?(ActiveSupport::Dependencies::Reference)
+      ActiveSupport::Dependencies::Reference.clear!
     end
 
     def table
