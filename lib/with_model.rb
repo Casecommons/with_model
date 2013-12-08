@@ -3,9 +3,11 @@ require 'with_model/version'
 
 module WithModel
   def with_model(name, &block)
-    dsl = Dsl.new(name, self)
+    dsl = Dsl.new(name)
     dsl.instance_exec(&block) if block
-    dsl.execute
+    dsl.run_with_table self
+    before { dsl.run_before }
+    after { dsl.run_after }
   end
 
   def with_table(name, options = {}, &block)
