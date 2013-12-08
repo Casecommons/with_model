@@ -1,5 +1,6 @@
 require 'active_support/core_ext/string/inflections'
 require 'with_model/base'
+require 'with_model/constant_stubber'
 require 'with_model/table'
 
 module WithModel
@@ -16,11 +17,11 @@ module WithModel
     def create
       table.create
       @model = create_model
-      stub_const
+      stubber.stub_const @model
     end
 
     def destroy
-      unstub_const
+      stubber.unstub_const
       remove_from_superclass_descendants
       reset_dependencies_cache
       table.destroy
@@ -57,26 +58,16 @@ module WithModel
       ActiveSupport::Dependencies::Reference.clear!
     end
 
+    def stubber
+      @stubber ||= ConstantStubber.new const_name
+    end
+
     def table
       @table ||= Table.new table_name, @table_options, &@table_block
     end
 
     def table_name
       "with_model_#{@name.to_s.tableize}_#{$$}".freeze
-    end
-
-    def stub_const
-      if Object.const_defined?(const_name)
-        @original_const = Object.const_get(const_name)
-        Object.send :remove_const, const_name
-      end
-
-      Object.const_set const_name, @model
-    end
-
-    def unstub_const
-      Object.send :remove_const, const_name
-      Object.const_set const_name, @original_const if @original_const
     end
   end
 end

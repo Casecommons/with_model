@@ -116,6 +116,7 @@ end
 
 ## Requirements
 
+- Ruby 1.9.3+
 - RSpec 2.11 or higher (for earlier RSpec versions, use 0.2.x)
 - ActiveRecord 3 (for ActiveRecord 2, use 0.2.x)
 
