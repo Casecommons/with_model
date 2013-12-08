@@ -139,6 +139,16 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
   end
 
+  describe "using the constant in the model block" do
+    with_model :BlogPost do
+      model do
+        raise 'I am not myself!' unless self == BlogPost
+      end
+    end
+
+    it "is available" do end
+  end
+
   module AMixin
     def foo
     end

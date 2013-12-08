@@ -16,8 +16,9 @@ module WithModel
 
     def create
       table.create
-      @model = create_model
+      @model = Class.new(WithModel::Base)
       stubber.stub_const @model
+      setup_model
     end
 
     def destroy
@@ -34,11 +35,10 @@ module WithModel
       @name.to_s.camelize.freeze
     end
 
-    def create_model
-      model = Class.new(WithModel::Base, &@model_block)
-      model.table_name = table_name
-      model.reset_column_information
-      model
+    def setup_model
+      @model.table_name = table_name
+      @model.class_eval(&@model_block)
+      @model.reset_column_information
     end
 
     def remove_from_superclass_descendants
