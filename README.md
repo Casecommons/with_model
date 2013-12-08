@@ -67,36 +67,36 @@ describe "A blog post" do
   end
 
   it "can be accessed as a constant" do
-    BlogPost.should be
+    expect(BlogPost).to be
   end
 
   it "has the module" do
-    BlogPost.include?(SomeModule).should be_true
+    expect(BlogPost.include?(SomeModule)).to be_true
   end
 
   it "has the class method" do
-    BlogPost.some_class_method.should == 'chunky'
+    expect(BlogPost.some_class_method).to eq 'chunky'
   end
 
   it "has the instance method" do
-    BlogPost.new.some_instance_method.should == 'bacon'
+    expect(BlogPost.new.some_instance_method).to eq 'bacon'
   end
 
   it "can do all the things a regular model can" do
     record = BlogPost.new
-    record.should_not be_valid
+    expect(record).to_not be_valid
     record.title = "foo"
-    record.should be_valid
-    record.save.should be_true
-    record.reload.should == record
+    expect(record).to be_valid
+    expect(record.save).to be_true
+    expect(record.reload).to eq record
     record.comments.create!(:text => "Lorem ipsum")
-    record.comments.count.should == 1
+    expect(record.comments.count).to eq 1
   end
 end
 
 describe "another example group" do
   it "does not have the constant anymore" do
-    defined?(BlogPost).should be_false
+    expect(defined?(BlogPost)).to be_false
   end
 end
 
@@ -109,7 +109,7 @@ describe "with table options" do
   end
 
   it "respects the additional options" do
-    WithOptions.columns.map(&:name).should_not include("id")
+    expect(WithOptions.columns.map(&:name)).to_not include("id")
   end
 end
 ```

@@ -38,12 +38,12 @@ describe "ActiveRecord behaviors" do
           included = RegularModel.create!(:title => 'foo', :content => 'Include me!')
           excluded = RegularModel.create!(:title => 'bar', :content => 'Include me!')
 
-          RegularModel.title_is_foo.should == [included]
+          expect(RegularModel.title_is_foo).to eq [included]
 
           included = BlogPost.create!(:title => 'foo', :content => 'Include me!')
           excluded = BlogPost.create!(:title => 'bar', :content => 'Include me!')
 
-          BlogPost.title_is_foo.should == [included]
+          expect(BlogPost.title_is_foo).to eq [included]
         end
       end
     end
@@ -79,12 +79,12 @@ describe "ActiveRecord behaviors" do
           stuffed_animal = StuffedAnimal.create!
 
           tea_cup_for_animal = TeaCup.create!(:pet => animal)
-          tea_cup_for_animal.pet_type.should == 'Animal'
-          animal.tea_cups.should include(tea_cup_for_animal)
+          expect(tea_cup_for_animal.pet_type).to eq 'Animal'
+          expect(animal.tea_cups).to include(tea_cup_for_animal)
 
           tea_cup_for_stuffed_animal = TeaCup.create!(:pet => stuffed_animal)
-          tea_cup_for_stuffed_animal.pet_type.should == 'StuffedAnimal'
-          stuffed_animal.tea_cups.should include(tea_cup_for_stuffed_animal)
+          expect(tea_cup_for_stuffed_animal.pet_type).to eq 'StuffedAnimal'
+          expect(stuffed_animal.tea_cups).to include(tea_cup_for_stuffed_animal)
         end
       end
     end
@@ -110,7 +110,7 @@ describe "ActiveRecord behaviors" do
 
     context "in later examples" do
       it "does not hold a reference to earlier example groups' classes" do
-        Province.reflect_on_association(:country).klass.should == Country
+        expect(Province.reflect_on_association(:country).klass).to eq Country
       end
     end
   end

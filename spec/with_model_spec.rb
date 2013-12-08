@@ -45,15 +45,13 @@ describe "a temporary ActiveRecord model created with with_model" do
 
       record.reload
 
-      record.title.should == 'New blog post'
-      record.content.should == 'Hello, world!'
-      record.updated_at.should be_present
+      expect(record.title).to eq 'New blog post'
+      expect(record.content).to eq 'Hello, world!'
+      expect(record.updated_at).to be_present
 
       record.destroy
 
-      lambda {
-        record.reload
-      }.should raise_error(ActiveRecord::RecordNotFound)
+      expect { record.reload }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     describe "the class" do
@@ -62,28 +60,28 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     it "has the methods defined in its model block" do
-      BlogPost.new(:title => 'New blog post').fancy_title.should == 'Title: New blog post'
+      expect(BlogPost.new(:title => 'New blog post').fancy_title).to eq 'Title: New blog post'
     end
 
     it "defines a constant" do
-      BlogPost.should be_a(Class)
+      expect(BlogPost).to be_a(Class)
     end
 
     describe ".with_model?" do
       it "returns true" do
-        BlogPost.with_model?.should be_true
+        expect(BlogPost.with_model?).to be_true
       end
     end
 
     it "is its own base_class" do
-      BlogPost.base_class.should == BlogPost
+      expect(BlogPost.base_class).to eq BlogPost
     end
   end
 
   context "after an example which uses with_model without shadowing an existing constant" do
     it "returns the constant to its undefined state" do
-      non_shadowing_example_ran.should be_true
-      defined?(BlogPost).should be_false
+      expect(non_shadowing_example_ran).to be_true
+      expect(defined?(BlogPost)).to be_false
     end
   end
 
@@ -99,14 +97,14 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     it "shadows that constant" do
-      MyConst.should be_a(Class)
+      expect(MyConst).to be_a(Class)
     end
   end
 
   context "in later examples" do
     it "returns the constant to its original value" do
-      shadowing_example_ran.should be_true
-      MyConst.should == 1
+      expect(shadowing_example_ran).to be_true
+      expect(MyConst).to eq 1
     end
   end
 
@@ -114,8 +112,8 @@ describe "a temporary ActiveRecord model created with with_model" do
     with_model :BlogPosts
 
     it "does not singularize the constant name" do
-      BlogPosts.should be
-      lambda { BlogPost }.should raise_error(NameError)
+      expect(BlogPosts).to be
+      expect(lambda { BlogPost }).to raise_error(NameError)
     end
   end
 
@@ -123,8 +121,8 @@ describe "a temporary ActiveRecord model created with with_model" do
     with_model :BlogPost
 
     it "tableizes the table name" do
-      BlogPost.table_name.should match(/_blog_posts_/)
-      BlogPost.table_name.should == BlogPost.table_name.downcase
+      expect(BlogPost.table_name).to match(/_blog_posts_/)
+      expect(BlogPost.table_name).to eq BlogPost.table_name.downcase
     end
   end
 
@@ -132,12 +130,12 @@ describe "a temporary ActiveRecord model created with with_model" do
     with_model :blog_post
 
     it "constantizes the name" do
-      BlogPost.should be
+      expect(BlogPost).to be
     end
 
     it "tableizes the table name" do
-      BlogPost.table_name.should match(/_blog_posts_/)
-      BlogPost.table_name.should == BlogPost.table_name.downcase
+      expect(BlogPost.table_name).to match(/_blog_posts_/)
+      expect(BlogPost.table_name).to eq BlogPost.table_name.downcase
     end
   end
 
@@ -156,8 +154,8 @@ describe "a temporary ActiveRecord model created with with_model" do
     before { ::ModelWithMixin = WithAMixin }
 
     it "has the mixin" do
-      lambda { ::ModelWithMixin.new.foo }.should_not raise_error
-      ::ModelWithMixin.include?(AMixin).should be_true
+      expect(lambda { ::ModelWithMixin.new.foo }).to_not raise_error
+      expect(::ModelWithMixin.include?(AMixin)).to be_true
     end
   end
 
@@ -180,12 +178,12 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     it "only has one after_save callback" do
-      subject.should_receive(:my_method).once
+      expect(subject).to receive(:my_method).once
       subject.save
     end
 
     it "still only has one after_save callback in future tests" do
-      subject.should_receive(:my_method).once
+      expect(subject).to receive(:my_method).once
       subject.save
     end
   end
@@ -199,7 +197,7 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     it "respects the additional options" do
-      WithOptions.columns.map(&:name).should_not include('id')
+      expect(WithOptions.columns.map(&:name)).to_not include('id')
     end
   end
 
@@ -210,9 +208,7 @@ describe "a temporary ActiveRecord model created with with_model" do
       record = BlogPost.create!
       record.reload
       record.destroy
-      lambda {
-        record.reload
-      }.should raise_error(ActiveRecord::RecordNotFound)
+      expect { record.reload }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     describe "the class" do
@@ -228,9 +224,7 @@ describe "a temporary ActiveRecord model created with with_model" do
       record = BlogPost.create!
       record.reload
       record.destroy
-      lambda {
-        record.reload
-      }.should raise_error(ActiveRecord::RecordNotFound)
+      expect { record.reload }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     describe "the class" do
@@ -253,15 +247,13 @@ describe "a temporary ActiveRecord model created with with_model" do
 
       record.reload
 
-      record.title.should == 'New blog post'
-      record.content.should == 'Hello, world!'
-      record.updated_at.should be_present
+      expect(record.title).to eq 'New blog post'
+      expect(record.content).to eq 'Hello, world!'
+      expect(record.updated_at).to be_present
 
       record.destroy
 
-      lambda {
-        record.reload
-      }.should raise_error(ActiveRecord::RecordNotFound)
+      expect { record.reload }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     describe "the class" do
@@ -278,9 +270,7 @@ describe "a temporary ActiveRecord model created with with_model" do
       record = BlogPost.create!
       record.reload
       record.destroy
-      lambda {
-        record.reload
-      }.should raise_error(ActiveRecord::RecordNotFound)
+      expect { record.reload }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     describe "the class" do
@@ -293,15 +283,17 @@ describe "a temporary ActiveRecord model created with with_model" do
     with_model :BlogPost
 
     it "includes the correct model class in descendants on the first test run" do
-      ActiveRecord::Base.descendants.detect do |c|
+      descendant = ActiveRecord::Base.descendants.detect do |c|
         c.table_name == BlogPost.table_name
-      end.should == BlogPost
+      end
+      expect(descendant).to eq BlogPost
     end
 
     it "includes the correct model class in descendants on the second test run" do
-      ActiveRecord::Base.descendants.detect do |c|
+      descendant = ActiveRecord::Base.descendants.detect do |c|
         c.table_name == BlogPost.table_name
-      end.should == BlogPost
+      end
+      expect(descendant).to eq BlogPost
     end
   end
 end

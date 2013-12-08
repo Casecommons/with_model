@@ -10,6 +10,14 @@ end
 require 'with_model'
 RSpec.configure do |config|
   config.extend WithModel
+
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
+
+  config.mock_with :rspec do |c|
+    c.syntax = :expect
+  end
 end
 
 is_jruby = RUBY_PLATFORM =~ /\bjava\b/
