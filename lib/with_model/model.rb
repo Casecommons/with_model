@@ -37,12 +37,8 @@ module WithModel
     def create_model
       model = Class.new(WithModel::Base)
 
-      model_block = @model_block
-      table_name = send :table_name
-      model.class_eval do
-        self.table_name = table_name
-        class_eval(&model_block)
-      end
+      model.table_name = table_name
+      model.class_eval(&@model_block)
       model.reset_column_information
 
       model
