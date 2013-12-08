@@ -35,12 +35,9 @@ module WithModel
     end
 
     def create_model
-      model = Class.new(WithModel::Base)
-
+      model = Class.new(WithModel::Base, &@model_block)
       model.table_name = table_name
-      model.class_eval(&@model_block)
       model.reset_column_information
-
       model
     end
 
