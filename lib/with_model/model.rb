@@ -4,14 +4,12 @@ require 'with_model/table'
 
 module WithModel
   class Model
-    NOOP = lambda {|*|}
-
     attr_writer :model_block, :table_block, :table_options
 
     def initialize name
       @name = name.to_sym
-      @model_block = NOOP
-      @table_block = NOOP
+      @model_block = lambda {|*|}
+      @table_block = lambda {|*|}
       @table_options = {}
     end
 
