@@ -1,4 +1,5 @@
 require 'with_model/dsl'
+require 'with_model/table'
 require 'with_model/version'
 
 module WithModel
@@ -11,14 +12,8 @@ module WithModel
   end
 
   def with_table(name, options = {}, &block)
-    before do
-      connection = ActiveRecord::Base.connection
-      connection.drop_table(name) if connection.table_exists?(name)
-      connection.create_table(name, options, &block)
-    end
-
-    after do
-      ActiveRecord::Base.connection.drop_table(name)
-    end
+    table = Table.new name, options, &block
+    before { table.create }
+    after { table.destroy }
   end
 end
