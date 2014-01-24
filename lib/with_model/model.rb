@@ -7,8 +7,9 @@ module WithModel
   class Model
     attr_writer :model_block, :table_block, :table_options
 
-    def initialize name
+    def initialize name, options = {}
       @name = name.to_sym
+      @options = options
       @model_block = proc {}
       @table_block = proc {}
       @table_options = {}
@@ -16,9 +17,17 @@ module WithModel
 
     def create
       table.create
-      @model = Class.new(WithModel::Base)
+      @model = Class.new(base_class)
       stubber.stub_const @model
       setup_model
+    end
+
+    def base_class
+      if @options[:base]
+        @options[:base]
+      else
+        WithModel::Base
+      end
     end
 
     def destroy

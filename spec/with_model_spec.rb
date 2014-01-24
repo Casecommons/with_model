@@ -306,4 +306,35 @@ describe "a temporary ActiveRecord model created with with_model" do
       expect(descendant).to eq BlogPost
     end
   end
+
+  context "with model options" do
+    describe "with 'base' option" do
+      class BlogPostParent < ActiveRecord::Base
+        self.abstract_class = true
+      end
+
+      with_model :BlogPost, base: BlogPostParent do
+        table do |t|
+          t.string 'title'
+        end
+      end
+
+      after do
+        non_shadowing_example_ran = true
+      end
+
+      describe "the class" do
+        subject { BlogPost.new }
+        it_should_behave_like "ActiveModel"
+      end
+
+      it "inherit specified base class" do
+        expect(BlogPost < BlogPostParent).to be_true
+      end
+
+      it "is its own base_class" do
+        expect(BlogPost.base_class).to eq BlogPost
+      end
+    end
+  end
 end
