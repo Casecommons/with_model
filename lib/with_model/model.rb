@@ -10,8 +10,8 @@ module WithModel
     def initialize name, options = {}
       @name = name.to_sym
       @options = options
-      @model_block = proc {}
-      @table_block = proc {}
+      @model_block = nil
+      @table_block = nil
       @table_options = {}
     end
 
@@ -47,7 +47,7 @@ module WithModel
 
     def setup_model
       @model.table_name = table_name
-      @model.class_eval(&@model_block)
+      @model.class_eval(&@model_block) if @model_block
       @model.reset_column_information
     end
 
