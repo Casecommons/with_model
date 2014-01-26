@@ -1,6 +1,6 @@
 require 'active_support/core_ext/string/inflections'
-require 'with_model/base'
 require 'with_model/constant_stubber'
+require 'with_model/methods'
 require 'with_model/table'
 
 module WithModel
@@ -17,17 +17,18 @@ module WithModel
 
     def create
       table.create
-      @model = Class.new(base_class)
+      @model = Class.new(superclass)
+
+      class << @model
+        include WithModel::Methods
+      end
+
       stubber.stub_const @model
       setup_model
     end
 
-    def base_class
-      if @options[:base]
-        @options[:base]
-      else
-        WithModel::Base
-      end
+    def superclass
+      @options.fetch(:superclass) { ActiveRecord::Base }
     end
 
     def destroy

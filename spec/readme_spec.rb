@@ -77,10 +77,10 @@ describe "A blog post" do
     self.abstract_class = true
   end
 
-  with_model :Ford, base: Car do
+  with_model :Ford, superclass: Car do
   end
 
-  it "inherit specified base class" do
+  it "has a specified superclass" do
     expect(Ford < Car).to be_true
   end
 end

@@ -1,4 +1,4 @@
-require 'active_record/base'
+require 'active_record'
 
 module WithModel
   class Table

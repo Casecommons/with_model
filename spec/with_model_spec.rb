@@ -1,3 +1,4 @@
+require 'active_model'
 require 'spec_helper'
 
 shared_examples_for "ActiveModel" do
@@ -307,34 +308,32 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
   end
 
-  context "with model options" do
-    describe "with 'base' option" do
-      class BlogPostParent < ActiveRecord::Base
-        self.abstract_class = true
-      end
+  context "with 'superclass' option" do
+    class BlogPostParent < ActiveRecord::Base
+      self.abstract_class = true
+    end
 
-      with_model :BlogPost, base: BlogPostParent do
-        table do |t|
-          t.string 'title'
-        end
+    with_model :BlogPost, superclass: BlogPostParent do
+      table do |t|
+        t.string 'title'
       end
+    end
 
-      after do
-        non_shadowing_example_ran = true
-      end
+    describe "the class" do
+      subject { BlogPost.new }
+      it_should_behave_like "ActiveModel"
+    end
 
-      describe "the class" do
-        subject { BlogPost.new }
-        it_should_behave_like "ActiveModel"
-      end
+    it "is a subclass of the supplied superclass" do
+      expect(BlogPost < BlogPostParent).to be_true
+    end
 
-      it "inherit specified base class" do
-        expect(BlogPost < BlogPostParent).to be_true
-      end
+    it "is its own base_class" do
+      expect(BlogPost.base_class).to eq BlogPost
+    end
 
-      it "is its own base_class" do
-        expect(BlogPost.base_class).to eq BlogPost
-      end
+    it "responds to .with_model? with true" do
+      expect(BlogPost.with_model?).to be_true
     end
   end
 end
