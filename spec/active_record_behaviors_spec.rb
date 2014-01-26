@@ -4,13 +4,11 @@ describe "ActiveRecord behaviors" do
   describe "a temporary ActiveRecord model created with with_model" do
     context "that has a named scope" do
       before do
-        regular_model = Class.new ActiveRecord::Base do
+        @regular_model = Class.new ActiveRecord::Base do
           scope :title_is_foo, lambda { where(:title => 'foo') }
         end
-        stub_const 'RegularModel', regular_model
 
-        RegularModel.connection.drop_table(RegularModel.table_name) rescue nil
-        RegularModel.connection.create_table(RegularModel.table_name) do |t|
+        @regular_model.connection.create_table(@regular_model.table_name, force: true) do |t|
           t.string 'title'
           t.text 'content'
           t.timestamps
@@ -18,7 +16,7 @@ describe "ActiveRecord behaviors" do
       end
 
       after do
-        RegularModel.connection.drop_table(@model.table_name) rescue nil
+        @regular_model.connection.drop_table(@regular_model.table_name)
       end
 
       with_model :BlogPost do
@@ -35,10 +33,10 @@ describe "ActiveRecord behaviors" do
 
       describe "the named scope" do
         it "works like a regular named scope" do
-          included = RegularModel.create!(:title => 'foo', :content => 'Include me!')
-          excluded = RegularModel.create!(:title => 'bar', :content => 'Include me!')
+          included = @regular_model.create!(:title => 'foo', :content => 'Include me!')
+          excluded = @regular_model.create!(:title => 'bar', :content => 'Include me!')
 
-          expect(RegularModel.title_is_foo).to eq [included]
+          expect(@regular_model.title_is_foo).to eq [included]
 
           included = BlogPost.create!(:title => 'foo', :content => 'Include me!')
           excluded = BlogPost.create!(:title => 'bar', :content => 'Include me!')
