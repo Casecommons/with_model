@@ -6,25 +6,39 @@
 [![Gem Version](https://badge.fury.io/rb/with_model.png)](https://rubygems.org/gems/with_model)
 [![Dependency Status](https://gemnasium.com/Casecommons/with_model.png)](https://gemnasium.com/Casecommons/with_model)
 
-`with_model` dynamically builds an ActiveRecord model (with table) within an RSpec context. Outside of the context, the model is no longer present.
+`with_model` dynamically builds an ActiveRecord model (with table) before each test in a group and destroys it afterwards.
 
 ## Installation
 
-Install as usual:
+Install as usual: `gem install with_model` or add `gem 'with_model'` to your Gemfile. See `.travis.yml` for supported (tested) Ruby versions.
 
-    gem install with_model
+## RSpec
 
-Then in your `spec_helper.rb`:
+Extend `WithModel` into RSpec:
 
 ```ruby
+require 'with_model'
+
 RSpec.configure do |config|
   config.extend WithModel
 end
 ```
 
+## minitest/spec
+
+Extend `WithModel` into minitest/spec:
+
+```ruby
+require 'with_model'
+
+class Minitest::Spec
+  extend WithModel
+end
+```
+
 ## Usage
 
-In an RSpec example group, call `with_model` and inside its block pass it a `table` block and a `model` block.
+After setting up as above, call `with_model` and inside its block pass it a `table` block and a `model` block.
 
 ```ruby
 require 'spec_helper'
@@ -116,8 +130,9 @@ end
 
 ## Requirements
 
-- RSpec 2.11 or higher (for earlier RSpec versions, use 0.2.x)
-- ActiveRecord 3 (for ActiveRecord 2, use 0.2.x)
+- Ruby 1.9.3+
+- RSpec or minitest/spec
+- ActiveRecord 3+ (for ActiveRecord 2, use with_model 0.2.x)
 
 ## License
 
