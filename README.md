@@ -44,6 +44,14 @@ After setting up as above, call `with_model` and inside its block pass it a `tab
 require 'spec_helper'
 
 describe "A blog post" do
+  before :all do
+    module SomeModule; end
+  end
+
+  after :all do
+    Object.send :remove_const, :SomeModule
+  end
+
   with_model :BlogPost do
     # The table block works just like a migration.
     table do |t|
