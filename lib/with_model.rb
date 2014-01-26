@@ -4,8 +4,8 @@ require 'with_model/table'
 require 'with_model/version'
 
 module WithModel
-  def with_model(name, &block)
-    model = Model.new name
+  def with_model(name, options = {}, &block)
+    model = Model.new name, options
     dsl = Model::DSL.new model
     dsl.instance_exec(&block) if block
 

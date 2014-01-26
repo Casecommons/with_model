@@ -71,6 +71,18 @@ describe "A blog post" do
     record.comments.create!(:text => "Lorem ipsum")
     expect(record.comments.count).to eq 1
   end
+
+  # with_model classes can have inheritance.
+  class Car < ActiveRecord::Base
+    self.abstract_class = true
+  end
+
+  with_model :Ford, base: Car do
+  end
+
+  it "inherit specified base class" do
+    expect(Ford < Car).to be_true
+  end
 end
 
 describe "another example group" do
