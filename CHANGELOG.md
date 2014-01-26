@@ -1,3 +1,11 @@
+### 1.0.0
+- Start using [Semantic Versioning 2.0.0](http://semver.org/spec/v2.0.0.html)
+- Complete refactor of internals (Andrew Marshall)
+- Remove support for Active Record 2 (Andrew Marshall)
+- Remove dependency on RSpec (Andrew Marshall)
+- Add support for MiniTest (Andrew Marshall)
+- Add option for specifying superclass (Miks Miķelsons)
+
 ### 0.3.2
 
 - Allow calling with_model without a block. (Andrew Marshall)

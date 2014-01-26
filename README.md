@@ -154,7 +154,11 @@ end
 - RSpec or minitest/spec
 - ActiveRecord 3+ (for ActiveRecord 2, use with_model 0.2.x)
 
+## Versioning
+
+As of version 1.0.0, with_model uses [Semantic Versioning 2.0.0](http://semver.org/spec/v2.0.0.html). Previous versions used an ad-hoc versioning scheme. 
+
 ## License
 
-Copyright © 2010-2013 Case Commons, LLC.
+Copyright © 2010-2014 Case Commons, LLC.
 Licensed under the MIT license, available in the “LICENSE” file.
