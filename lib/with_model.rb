@@ -9,14 +9,32 @@ module WithModel
     dsl = Model::DSL.new model
     dsl.instance_exec(&block) if block
 
-    before { model.create }
-    after { model.destroy }
+    before scope(options) do
+      model.create
+    end
+
+    after scope(options) do
+      model.destroy
+    end
   end
 
   def with_table(name, options = {}, &block)
     table = Table.new name, options, &block
 
-    before { table.create }
-    after { table.destroy }
+    before scope(options) do
+      table.create
+    end
+
+    after scope(options) do
+      table.destroy
+    end
+  end
+
+  def scope options = {}
+    if options[:scope]
+      options[:scope].to_sym
+    else
+      :each
+    end
   end
 end
