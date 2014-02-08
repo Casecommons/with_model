@@ -1,3 +1,4 @@
+require 'active_record'
 require 'active_support/core_ext/string/inflections'
 require 'with_model/constant_stubber'
 require 'with_model/methods'
