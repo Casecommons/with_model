@@ -28,7 +28,7 @@ module WithModel
     end
 
     def superclass
-      @options.fetch(:superclass) { ActiveRecord::Base }
+      @options.fetch(:superclass, ActiveRecord::Base)
     end
 
     def destroy
