@@ -17,12 +17,9 @@ module WithModel
 
     def create
       table.create
-      @model = Class.new(superclass)
-
-      class << @model
-        include WithModel::Methods
+      @model = Class.new(superclass) do
+        extend WithModel::Methods
       end
-
       stubber.stub_const @model
       setup_model
     end
