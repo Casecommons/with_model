@@ -22,7 +22,6 @@ module WithModel
   def with_table(name, options = {}, &block)
     table = Table.new name, options, &block
     scope = options.fetch(:scope, :each)
-    scope = :each
 
     before scope do
       table.create
