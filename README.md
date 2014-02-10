@@ -129,14 +129,14 @@ describe "A blog post" do
 end
 
 describe "with_model can be run within RSpec :all hook" do
-  with_model :BlogPost, scope: "all" do
+  with_model :BlogPost, scope: :all do
     table do |t|
       t.string :title
     end
   end
 
   before :all do
-    BlogPost.create # without scope: "all" these will fail
+    BlogPost.create # without scope: :all these will fail
   end
 
   it "has been initialized within before(:all)" do
