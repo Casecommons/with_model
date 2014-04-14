@@ -1,3 +1,8 @@
+### 1.1.0
+- Support Ruby 2.1
+- Support Rails 4.1
+- Refactor some internals
+
 ### 1.0.0
 - Start using [Semantic Versioning 2.0.0](http://semver.org/spec/v2.0.0.html)
 - Complete refactor of internals (Andrew Marshall)
