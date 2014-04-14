@@ -3,13 +3,15 @@ language: ruby
 rvm:
   - 1.9.3
   - 2.0.0
+  - 2.1.1
   - jruby-19mode
   - rbx-2.2
 
 env:
   - ACTIVE_RECORD_BRANCH="master"
+  - ACTIVE_RECORD_BRANCH="4-1-stable"
   - ACTIVE_RECORD_BRANCH="4-0-stable"
-  - ACTIVE_RECORD_VERSION="~> 4.1.0.beta1"
+  - ACTIVE_RECORD_VERSION="~> 4.1.0"
   - ACTIVE_RECORD_VERSION="~> 4.0.0"
   - ACTIVE_RECORD_VERSION="~> 3.2.0"
   - ACTIVE_RECORD_VERSION="~> 3.1.0"
@@ -18,5 +20,5 @@ env:
 matrix:
   allow_failures:
     - env: ACTIVE_RECORD_BRANCH="master"
+    - env: ACTIVE_RECORD_BRANCH="4-1-stable"
     - env: ACTIVE_RECORD_BRANCH="4-0-stable"
-    - env: ACTIVE_RECORD_VERSION="~> 4.1.0.beta1"
