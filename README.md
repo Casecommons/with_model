@@ -1,10 +1,10 @@
 # [with_model](https://github.com/Casecommons/with_model)
 
-[![Build Status](https://secure.travis-ci.org/Casecommons/with_model.png?branch=master)](https://travis-ci.org/Casecommons/with_model)
+[![Build Status](https://secure.travis-ci.org/Casecommons/with_model.svg?branch=master)](https://travis-ci.org/Casecommons/with_model)
 [![Code Climate](https://codeclimate.com/github/Casecommons/with_model.png)](https://codeclimate.com/github/Casecommons/with_model)
 [![Coverage Status](https://coveralls.io/repos/Casecommons/with_model/badge.png?branch=master)](https://coveralls.io/r/Casecommons/with_model)
-[![Gem Version](https://badge.fury.io/rb/with_model.png)](https://rubygems.org/gems/with_model)
-[![Dependency Status](https://gemnasium.com/Casecommons/with_model.png)](https://gemnasium.com/Casecommons/with_model)
+[![Gem Version](https://badge.fury.io/rb/with_model.svg)](https://rubygems.org/gems/with_model)
+[![Dependency Status](https://gemnasium.com/Casecommons/with_model.svg)](https://gemnasium.com/Casecommons/with_model)
 
 `with_model` dynamically builds an ActiveRecord model (with table) before each test in a group and destroys it afterwards.
 
