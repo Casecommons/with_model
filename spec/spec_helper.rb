@@ -44,7 +44,7 @@ module SpecHelper
     if ::ActiveRecord::VERSION::STRING >= '4.1.0'
       require 'minitest'
       include Minitest::Assertions
-      def assertions; @assertions || 0; end
+      def assertions; @assertions ||= 0; end
       def assertions= value; @assertions = value; end
     else
       require 'test/unit/assertions'
