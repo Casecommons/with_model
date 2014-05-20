@@ -40,7 +40,7 @@ module WithModel
     private
 
     def const_name
-      @name.to_s.camelize.freeze
+      @name.to_s.camelize.to_sym
     end
 
     def setup_model
