@@ -1,8 +1,8 @@
 # [with_model](https://github.com/Casecommons/with_model)
 
 [![Build Status](https://secure.travis-ci.org/Casecommons/with_model.svg?branch=master)](https://travis-ci.org/Casecommons/with_model)
-[![Code Climate](https://codeclimate.com/github/Casecommons/with_model.png)](https://codeclimate.com/github/Casecommons/with_model)
-[![Coverage Status](https://coveralls.io/repos/Casecommons/with_model/badge.png?branch=master)](https://coveralls.io/r/Casecommons/with_model)
+[![Code Climate](https://img.shields.io/codeclimate/github/Casecommons/with_model.svg)](https://codeclimate.com/github/Casecommons/with_model)
+[![Coverage Status](https://img.shields.io/coveralls/Casecommons/with_model/master.svg)](https://coveralls.io/r/Casecommons/with_model)
 [![Gem Version](https://badge.fury.io/rb/with_model.svg)](https://rubygems.org/gems/with_model)
 [![Dependency Status](https://gemnasium.com/Casecommons/with_model.svg)](https://gemnasium.com/Casecommons/with_model)
 
