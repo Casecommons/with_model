@@ -12,7 +12,7 @@
 
 Install as usual: `gem install with_model` or add `gem 'with_model'` to your Gemfile. See `.travis.yml` for supported (tested) Ruby versions.
 
-## RSpec
+### RSpec
 
 Extend `WithModel` into RSpec:
 
@@ -24,7 +24,7 @@ RSpec.configure do |config|
 end
 ```
 
-## minitest/spec
+### minitest/spec
 
 Extend `WithModel` into minitest/spec:
 
