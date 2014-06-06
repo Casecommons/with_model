@@ -70,7 +70,7 @@ describe "a temporary ActiveRecord model created with with_model" do
 
     describe ".with_model?" do
       it "returns true" do
-        expect(BlogPost.with_model?).to be_true
+        expect(BlogPost.with_model?).to eq true
       end
     end
 
@@ -81,8 +81,8 @@ describe "a temporary ActiveRecord model created with with_model" do
 
   context "after an example which uses with_model without shadowing an existing constant" do
     it "returns the constant to its undefined state" do
-      expect(non_shadowing_example_ran).to be_true
-      expect(defined?(BlogPost)).to be_false
+      expect(non_shadowing_example_ran).to eq true
+      expect(defined?(BlogPost)).to be_falsy
     end
   end
 
@@ -104,7 +104,7 @@ describe "a temporary ActiveRecord model created with with_model" do
 
   context "in later examples" do
     it "returns the constant to its original value" do
-      expect(shadowing_example_ran).to be_true
+      expect(shadowing_example_ran).to eq true
       expect(MyConst).to eq 1
     end
   end
@@ -166,7 +166,7 @@ describe "a temporary ActiveRecord model created with with_model" do
 
     it "has the mixin" do
       expect(lambda { ::ModelWithMixin.new.foo }).to_not raise_error
-      expect(::ModelWithMixin.include?(AMixin)).to be_true
+      expect(::ModelWithMixin.include?(AMixin)).to eq true
     end
   end
 
@@ -325,7 +325,7 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     it "is a subclass of the supplied superclass" do
-      expect(BlogPost < BlogPostParent).to be_true
+      expect(BlogPost < BlogPostParent).to eq true
     end
 
     it "is its own base_class" do
@@ -333,7 +333,7 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
 
     it "responds to .with_model? with true" do
-      expect(BlogPost.with_model?).to be_true
+      expect(BlogPost.with_model?).to eq true
     end
   end
 end
