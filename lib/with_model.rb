@@ -5,10 +5,12 @@ require 'with_model/version'
 
 module WithModel
   def with_model(name, options = {}, &block)
+    options = options.dup
+    scope = options.delete(:scope) { :each }
+
     model = Model.new name, options
     dsl = Model::DSL.new model
     dsl.instance_exec(&block) if block
-    scope = options.fetch(:scope, :each)
 
     before scope do
       model.create
@@ -20,8 +22,10 @@ module WithModel
   end
 
   def with_table(name, options = {}, &block)
+    options = options.dup
+    scope = options.delete(:scope) { :each }
+
     table = Table.new name, options, &block
-    scope = options.fetch(:scope, :each)
 
     before scope do
       table.create
