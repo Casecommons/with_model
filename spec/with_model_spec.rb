@@ -308,6 +308,22 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
   end
 
+  context "with_model can be run within RSpec :all hook" do
+    with_model :BlogPost, scope: :all do
+      table do |t|
+        t.string :title
+      end
+    end
+
+    before :all do
+      BlogPost.create # without scope: :all these will fail
+    end
+
+    it "has been initialized within before(:all)" do
+      expect(BlogPost.count).to eq 1
+    end
+  end
+
   context "with 'superclass' option" do
     class BlogPostParent < ActiveRecord::Base
       self.abstract_class = true
