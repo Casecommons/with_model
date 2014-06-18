@@ -1,3 +1,7 @@
+### 1.2.0
+
+- Allow specifying scope for before/after blocks (Miks Miķelsons)
+
 ### 1.1.0
 - Support Ruby 2.1
 - Support Rails 4.1
