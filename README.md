@@ -4,7 +4,6 @@
 [![Code Climate](https://img.shields.io/codeclimate/github/Casecommons/with_model.svg)](https://codeclimate.com/github/Casecommons/with_model)
 [![Coverage Status](https://img.shields.io/coveralls/Casecommons/with_model/master.svg)](https://coveralls.io/r/Casecommons/with_model)
 [![Gem Version](https://badge.fury.io/rb/with_model.svg)](https://rubygems.org/gems/with_model)
-[![Dependency Status](https://gemnasium.com/Casecommons/with_model.svg)](https://gemnasium.com/Casecommons/with_model)
 
 `with_model` dynamically builds an ActiveRecord model (with table) before each test in a group and destroys it afterwards.
 
