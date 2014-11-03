@@ -7,6 +7,9 @@ rvm:
   - jruby-19mode
   - rbx-2
 
+install:
+  - bundle install --retry=3
+
 env:
   - ACTIVE_RECORD_BRANCH="master"
   - ACTIVE_RECORD_VERSION="~> 4.2.0.beta1"
