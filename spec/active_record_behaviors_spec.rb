@@ -11,7 +11,7 @@ describe "ActiveRecord behaviors" do
         @regular_model.connection.create_table(@regular_model.table_name, force: true) do |t|
           t.string 'title'
           t.text 'content'
-          t.timestamps
+          t.timestamps null: false
         end
       end
 
@@ -23,7 +23,7 @@ describe "ActiveRecord behaviors" do
         table do |t|
           t.string 'title'
           t.text 'content'
-          t.timestamps
+          t.timestamps null: false
         end
 
         model do

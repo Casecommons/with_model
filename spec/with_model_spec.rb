@@ -27,7 +27,7 @@ describe "a temporary ActiveRecord model created with with_model" do
       table do |t|
         t.string 'title'
         t.text 'content'
-        t.timestamps
+        t.timestamps null: false
       end
 
       model do
@@ -203,7 +203,7 @@ describe "a temporary ActiveRecord model created with with_model" do
     with_model :WithOptions do
       table :id => false do |t|
         t.string 'foo'
-        t.timestamps
+        t.timestamps null: false
       end
     end
 
@@ -249,7 +249,7 @@ describe "a temporary ActiveRecord model created with with_model" do
       table do |t|
         t.string 'title'
         t.text 'content'
-        t.timestamps
+        t.timestamps null: false
       end
     end
 

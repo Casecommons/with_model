@@ -13,7 +13,7 @@ describe "A blog post" do
     # The table block works just like a migration.
     table do |t|
       t.string :title
-      t.timestamps
+      t.timestamps null: false
     end
 
     # The model block works just like the class definition.
@@ -37,7 +37,7 @@ describe "A blog post" do
     table do |t|
       t.string :text
       t.belongs_to :blog_post
-      t.timestamps
+      t.timestamps null: false
     end
 
     model do
@@ -111,7 +111,7 @@ describe "with table options" do
   with_model :WithOptions do
     table :id => false do |t|
       t.string 'foo'
-      t.timestamps
+      t.timestamps null: false
     end
   end
 
