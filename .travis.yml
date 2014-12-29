@@ -25,14 +25,6 @@ matrix:
   allow_failures:
     - env: ACTIVE_RECORD_BRANCH="master"
   exclude:
-    - env: ACTIVE_RECORD_VERSION="~> 3.0.0"
-      rvm: "2.2"
-    - env: ACTIVE_RECORD_VERSION="~> 3.1.0"
-      rvm: "2.2"
-    - env: ACTIVE_RECORD_VERSION="~> 3.2.0"
-      rvm: "2.2"
-    - env: ACTIVE_RECORD_VERSION="~> 4.0.0"
-      rvm: "2.2"
     - env: ACTIVE_RECORD_BRANCH="master"
       rvm: "1.9"
     - env: ACTIVE_RECORD_BRANCH="master"
