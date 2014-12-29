@@ -1,3 +1,7 @@
+### 1.2.1
+
+- Support ActiveRecord 4.2 (no code change, only dependency requirement bump)
+
 ### 1.2.0
 
 - Allow specifying scope for before/after blocks (Miks Miķelsons)
@@ -77,3 +81,4 @@
 ### 0.1.2
 
 - Make Mixico optional.
+
