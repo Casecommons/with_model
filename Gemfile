@@ -6,4 +6,5 @@ gem 'activerecord', :git => 'https://github.com/rails/rails.git', :branch => ENV
 gem 'activerecord', ENV['ACTIVE_RECORD_VERSION'] if ENV['ACTIVE_RECORD_VERSION']
 gem 'activerecord-jdbcsqlite3-adapter', :platforms => :jruby
 gem 'coveralls', :require => false, :platforms => :mri_20
-gem 'sqlite3', '1.3.8', :platforms => :ruby
+gem 'sqlite3', '>= 1.3.10', :platforms => :ruby if RUBY_ENGINE == 'ruby'
+gem 'sqlite3', '1.3.8', :platforms => :ruby if RUBY_ENGINE == 'rbx'
