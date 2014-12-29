@@ -1,4 +1,5 @@
 language: ruby
+sude: false
 
 rvm:
   - "1.9"
