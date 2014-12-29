@@ -1,5 +1,5 @@
 language: ruby
-sude: false
+sudo: false
 
 rvm:
   - "1.9"
