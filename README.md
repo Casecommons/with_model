@@ -165,9 +165,9 @@ end
 
 ## Requirements
 
-- Ruby 1.9.3+
+- Ruby 1.9.3, 2.x
 - RSpec or minitest/spec
-- ActiveRecord 3.0.x–4.1.x (for ActiveRecord 2, use with_model 0.2.x)
+- ActiveRecord 3.x, 4.x (for ActiveRecord 2, use with_model 0.2.x)
 
 ## Versioning
 
