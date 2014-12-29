@@ -5,8 +5,9 @@ gemspec
 gem 'activerecord-jdbcsqlite3-adapter', :platforms => :jruby
 gem 'coveralls', :require => false, :platforms => :mri_20
 
-if ENV['ACTIVE_RECORD_BRANCH']
+if ar_branch = ENV['ACTIVE_RECORD_BRANCH']
   gem 'activerecord', :git => 'https://github.com/rails/rails.git', :branch => ENV['ACTIVE_RECORD_BRANCH']
+  gem 'arel', :git => 'https://github.com/rails/arel.git' if ar_branch == 'master'
 end
 
 if ENV['ACTIVE_RECORD_VERSION']
