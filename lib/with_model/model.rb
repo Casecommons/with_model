@@ -6,9 +6,13 @@ require 'with_model/table'
 
 module WithModel
   class Model
+    OPTIONS = [:superclass].freeze
+    private_constant :OPTIONS
+
     attr_writer :model_block, :table_block, :table_options
 
     def initialize name, options = {}
+      validate_options!(options)
       @name = name.to_sym
       @options = options
       @model_block = nil
@@ -69,6 +73,13 @@ module WithModel
 
     def table_name
       "with_model_#{@name.to_s.tableize}_#{$$}".freeze
+    end
+
+    def validate_options!(options)
+      unknown_options = options.keys - OPTIONS
+      unless unknown_options.empty?
+        raise ArgumentError, "unknown options: #{unknown_options.inspect}"
+      end
     end
   end
 end

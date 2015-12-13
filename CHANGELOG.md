@@ -1,3 +1,7 @@
+### master
+
+- Options passed to `with_model` are validated to prevent accidental misuse of API
+
 ### 1.2.1
 
 - Support ActiveRecord 4.2 (no code change, only dependency requirement bump)
