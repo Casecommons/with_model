@@ -14,23 +14,19 @@ module WithModel
     def initialize name, options = {}
       validate_options!(options)
       @name = name.to_sym
-      @options = options
       @model_block = nil
       @table_block = nil
       @table_options = {}
+      @superclass = options.fetch(:superclass, ActiveRecord::Base)
     end
 
     def create
       table.create
-      @model = Class.new(superclass) do
+      @model = Class.new(@superclass) do
         extend WithModel::Methods
       end
       stubber.stub_const @model
       setup_model
-    end
-
-    def superclass
-      @options.fetch(:superclass, ActiveRecord::Base)
     end
 
     def destroy
