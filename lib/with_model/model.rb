@@ -1,5 +1,6 @@
 require 'active_record'
 require 'active_support/core_ext/string/inflections'
+require 'English'
 require 'with_model/constant_stubber'
 require 'with_model/methods'
 require 'with_model/table'
@@ -64,7 +65,7 @@ module WithModel
     end
 
     def table_name
-      uid = "#$$_#{Thread.current.object_id}"
+      uid = "#{$PID}_#{Thread.current.object_id}"
       "with_model_#{@name.to_s.tableize}_#{uid}".freeze
     end
   end
