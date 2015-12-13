@@ -37,22 +37,20 @@
 
 ### 0.2.6
 
-- Active Record 3.2 compatible. (Steven Harman / Brent Wheeldon)
+- ActiveRecord 3.2 compatible. (Steven Harman / Brent Wheeldon)
 
 ### 0.2.5
 
-- Clear Active Record 3.x associations class cache between specs to clean up test
-- pollution.
+- Clear ActiveRecord 3.x associations class cache between specs to clean up test pollution.
 
 ### 0.2.4
 
 - Active Record 3.1 compatible.
-- Fix bug where column information was being cached incorrectly by Active
-- Record.
+- Fix bug where column information was being cached incorrectly by ActiveRecord.
 
 ### 0.2.3
 
-- Create a new class each run to prevent test pollution. (J. Andrew Marshall)
+- Create a new class each run to prevent test pollution. (Andrew Marshall)
 - Use :UpperCase in examples.
 
 ### 0.2.2
@@ -61,24 +59,20 @@
 
 ### 0.2.1
 
-- Fix a bug when the with_model name contains capital letters. Now you can
-- safely make calls like `with_model :BlogPost`
+- Fix a bug when the with_model name contains capital letters. Now you can safely make calls like `with_model :BlogPost`
 
 ### 0.2
 
-- Remove the buggy attr_accessor method for accessing with_model classes. Now
-- there is only the constant available in the example group.
+- Remove the buggy `attr_accessor` method for accessing with_model classes. Now there is only the constant available in the example group.
 
 ### 0.1.5
 
-- WithModel::Base is now marked as an abstract_class, which makes polymorphic
-- belongs_to work properly.
+- `WithModel::Base` is now marked as an `abstract_class,` which makes polymorphic `belongs_to` work properly.
 
 ### 0.1.4
 
-- Add ability to pass arguments to create_table.
+- Add ability to pass arguments to `create_table`.
 
 ### 0.1.2
 
 - Make Mixico optional.
-
