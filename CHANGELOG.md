@@ -1,6 +1,7 @@
 ### master
 
 - Options passed to `with_model` are validated to prevent accidental misuse of API
+- Improve thread-safety by making table names unique to process and thread ID, instead of just process ID
 
 ### 1.2.1
 

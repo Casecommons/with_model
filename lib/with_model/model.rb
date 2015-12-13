@@ -68,7 +68,8 @@ module WithModel
     end
 
     def table_name
-      "with_model_#{@name.to_s.tableize}_#{$$}".freeze
+      uid = "#$$_#{Thread.current.object_id}"
+      "with_model_#{@name.to_s.tableize}_#{uid}".freeze
     end
 
     def validate_options!(options)
