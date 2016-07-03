@@ -14,6 +14,7 @@ install:
 
 env:
   - ACTIVE_RECORD_BRANCH="master"
+  - ACTIVE_RECORD_VERSION="~> 5.0.0"
   - ACTIVE_RECORD_VERSION="~> 4.2.0"
   - ACTIVE_RECORD_VERSION="~> 4.1.0"
   - ACTIVE_RECORD_VERSION="~> 4.0.0"
@@ -32,4 +33,12 @@ matrix:
     - env: ACTIVE_RECORD_BRANCH="master"
       rvm: "2.1"
     - env: ACTIVE_RECORD_BRANCH="master"
+      rvm: jruby-19mode
+    - env: ACTIVE_RECORD_VERSION="~> 5.0.0"
+      rvm: "1.9"
+    - env: ACTIVE_RECORD_VERSION="~> 5.0.0"
+      rvm: "2.0"
+    - env: ACTIVE_RECORD_VERSION="~> 5.0.0"
+      rvm: "2.1"
+    - env: ACTIVE_RECORD_VERSION="~> 5.0.0"
       rvm: jruby-19mode
