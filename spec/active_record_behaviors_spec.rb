@@ -56,7 +56,7 @@ describe "ActiveRecord behaviors" do
 
       with_model :TeaCup do
         table do |t|
-          t.belongs_to :pet, :polymorphic => true
+          t.belongs_to :pet, :polymorphic => true, :index => false
         end
         model do
           belongs_to :pet, :polymorphic => true
