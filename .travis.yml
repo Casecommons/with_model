@@ -2,11 +2,11 @@ language: ruby
 sudo: false
 
 rvm:
-  - "1.9.3-p551"
-  - "2.0.0-p648"
-  - "2.1.10"
-  - "2.2.5"
   - "2.3.1"
+  - "2.2.5"
+  - "2.1.10"
+  - "2.0.0-p648"
+  - "1.9.3-p551"
   - jruby-19mode
   - rbx-2
 
@@ -15,13 +15,13 @@ install:
 
 env:
   - ACTIVE_RECORD_BRANCH="master"
-  - ACTIVE_RECORD_VERSION="~> 5.0.0"
-  - ACTIVE_RECORD_VERSION="~> 4.2.0"
-  - ACTIVE_RECORD_VERSION="~> 4.1.0"
-  - ACTIVE_RECORD_VERSION="~> 4.0.0"
-  - ACTIVE_RECORD_VERSION="~> 3.2.0"
-  - ACTIVE_RECORD_VERSION="~> 3.1.0"
   - ACTIVE_RECORD_VERSION="~> 3.0.0"
+  - ACTIVE_RECORD_VERSION="~> 3.1.0"
+  - ACTIVE_RECORD_VERSION="~> 3.2.0"
+  - ACTIVE_RECORD_VERSION="~> 4.0.0"
+  - ACTIVE_RECORD_VERSION="~> 4.1.0"
+  - ACTIVE_RECORD_VERSION="~> 4.2.0"
+  - ACTIVE_RECORD_VERSION="~> 5.0.0"
 
 matrix:
   allow_failures:
