@@ -86,26 +86,27 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
   end
 
-  ::MyConst = 1
+  describe "constant restoration" do
+    before { stub_const('MyConst', 1) }
+    shadowing_example_ran = false
 
-  shadowing_example_ran = false
+    context "with the with_model block" do
+      with_model :MyConst
 
-  describe "that shadows an existing constant" do
-    with_model :MyConst
+      after do
+        shadowing_example_ran = true
+      end
 
-    after do
-      shadowing_example_ran = true
+      it "shadows that constant" do
+        expect(MyConst).to be_a(Class)
+      end
     end
 
-    it "shadows that constant" do
-      expect(MyConst).to be_a(Class)
-    end
-  end
-
-  context "in later examples" do
-    it "returns the constant to its original value" do
-      expect(shadowing_example_ran).to eq true
-      expect(MyConst).to eq 1
+    context "without the with_model block" do
+      it "returns the constant to its original value" do
+        expect(shadowing_example_ran).to eq true
+        expect(MyConst).to eq 1
+      end
     end
   end
 
@@ -150,40 +151,41 @@ describe "a temporary ActiveRecord model created with with_model" do
     it "is available" do end
   end
 
-  module AMixin
-    def foo
-    end
-  end
-
   context "with a mixin" do
+    let(:mixin) do
+      Module.new { def foo; end }
+    end
+    before { stub_const('AMixin', mixin) }
+
     with_model :WithAMixin do
       model do
         include AMixin
       end
     end
 
-    before { ::ModelWithMixin = WithAMixin }
-
     it "has the mixin" do
-      expect(lambda { ::ModelWithMixin.new.foo }).to_not raise_error
-      expect(::ModelWithMixin.include?(AMixin)).to eq true
+      expect(lambda { ::WithAMixin.new.foo }).to_not raise_error
+      expect(::WithAMixin.include?(AMixin)).to eq true
     end
   end
 
   context "with a mixin that has a class_eval" do
-    subject { WithAClassEval.new }
-
-    module AMixinWithClassEval
-      def self.included(klass)
-        klass.class_eval do
-          after_save { |object| object.my_method }
+    let(:mixin) do
+      Module.new do
+        def self.included(klass)
+          klass.class_eval do
+            after_save { |object| object.my_method }
+          end
         end
       end
     end
+    before { stub_const('AMixin', mixin) }
+
+    subject { WithAClassEval.new }
 
     with_model :WithAClassEval do
       model do
-        include AMixinWithClassEval
+        include AMixin
         def my_method; end
       end
     end
@@ -327,6 +329,10 @@ describe "a temporary ActiveRecord model created with with_model" do
   context "with 'superclass' option" do
     class BlogPostParent < ActiveRecord::Base
       self.abstract_class = true
+    end
+
+    after(:all) do
+      Object.send(:remove_const, 'BlogPostParent')
     end
 
     with_model :BlogPost, superclass: BlogPostParent do
