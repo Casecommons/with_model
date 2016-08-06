@@ -6,18 +6,14 @@ require 'with_model/table'
 
 module WithModel
   class Model
-    OPTIONS = [:superclass].freeze
-    private_constant :OPTIONS
-
     attr_writer :model_block, :table_block, :table_options
 
-    def initialize name, options = {}
-      validate_options!(options)
+    def initialize name, superclass: ActiveRecord::Base
       @name = name.to_sym
       @model_block = nil
       @table_block = nil
       @table_options = {}
-      @superclass = options.fetch(:superclass, ActiveRecord::Base)
+      @superclass = superclass
     end
 
     def create
@@ -70,13 +66,6 @@ module WithModel
     def table_name
       uid = "#$$_#{Thread.current.object_id}"
       "with_model_#{@name.to_s.tableize}_#{uid}".freeze
-    end
-
-    def validate_options!(options)
-      unknown_options = options.keys - OPTIONS
-      unless unknown_options.empty?
-        raise ArgumentError, "unknown options: #{unknown_options.inspect}"
-      end
     end
   end
 end
