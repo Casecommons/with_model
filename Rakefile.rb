@@ -11,4 +11,8 @@ namespace "doc" do
   end
 end
 
-task :default => :spec
+task :codeclimate do
+  sh 'bin/codeclimate-test-reporter' if ENV['CODECLIMATE_REPO_TOKEN']
+end
+
+task :default => [:spec, :codeclimate]

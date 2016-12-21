@@ -25,10 +25,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'minitest'
-
+  spec.add_development_dependency 'codeclimate-test-reporter'
 
   if RUBY_PLATFORM == 'java'
-    spec.add_development_dependency 'activerecord-jdbcsqlite3-adapter' if RUBY_PLATFORM == 'java'
+    spec.add_development_dependency 'activerecord-jdbcsqlite3-adapter'
   else
     spec.add_development_dependency 'sqlite3'
   end

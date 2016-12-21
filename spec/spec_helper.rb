@@ -1,11 +1,8 @@
 require 'bundler'
 Bundler.setup
 
-begin
-  require 'coveralls'
-  Coveralls.wear!
-rescue LoadError
-end
+require 'simplecov'
+SimpleCov.start
 
 require 'with_model'
 RSpec.configure do |config|
@@ -22,7 +19,7 @@ RSpec.configure do |config|
   end
 end
 
-is_jruby = RUBY_PLATFORM =~ /\bjava\b/
+is_jruby = RUBY_PLATFORM == 'java'
 adapter = is_jruby ? 'jdbcsqlite3' : 'sqlite3'
 
 # WithModel requires ActiveRecord::Base.connection to be established.

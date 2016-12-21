@@ -35,3 +35,7 @@ matrix:
       env: ACTIVE_RECORD_BRANCH="5-0-stable"
     - rvm: jruby-9.1.6.0
       env: ACTIVE_RECORD_VERSION="~> 5.0.0"
+
+addons:
+  code_climate:
+    repo_token: fe5c8a8b1b951a54707c08b6fb2a9a5edf9e0522d28bccc648454f774c9ccab1
