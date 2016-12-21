@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name        = 'with_model'
   spec.version     = WithModel::VERSION
   spec.authors     = ['Case Commons, LLC', 'Grant Hutchins']
-  spec.email       = ['casecommons-dev@googlegroups.com', 'gems@nertzy.com', 'andrew@johnandrewmarshall.com']
+  spec.email       = %w(casecommons-dev@googlegroups.com gems@nertzy.com andrew@johnandrewmarshall.com)
   spec.homepage    = 'https://github.com/Casecommons/with_model'
   spec.summary     = %q(Dynamically build a model within an RSpec context)
   spec.description = spec.summary
@@ -24,4 +24,12 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'test-unit'
+
+
+  if RUBY_PLATFORM == 'java'
+    spec.add_development_dependency 'activerecord-jdbcsqlite3-adapter' if RUBY_PLATFORM == 'java'
+  else
+    spec.add_development_dependency 'sqlite3'
+  end
 end
