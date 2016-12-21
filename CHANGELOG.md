@@ -1,5 +1,6 @@
-### master
+### 1.2.2
 
+- Fix ActiveRecord 5 deprecation warning
 - Options passed to `with_model` are validated to prevent accidental misuse of API
 - Improve thread-safety by making table names unique to process and thread ID, instead of just process ID
 
