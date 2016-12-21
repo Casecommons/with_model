@@ -1,3 +1,8 @@
+### 2.0.0
+
+- Require Ruby 2.1 or later
+- Require Active Record 4.2 or later
+
 ### 1.2.2
 
 - Fix ActiveRecord 5 deprecation warning
