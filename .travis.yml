@@ -2,48 +2,36 @@ language: ruby
 sudo: false
 
 rvm:
-  - "2.3.1"
-  - "2.2.5"
+  - "2.3.3"
+  - "2.2.6"
   - "2.1.10"
-  - "2.0.0-p648"
-  - "1.9.3-p551"
-  - jruby-19mode
-  - rbx-2
+  - jruby-9.1.6.0
 
 install:
   - bundle install --retry=3
 
 env:
   - ACTIVE_RECORD_BRANCH="master"
-  - ACTIVE_RECORD_VERSION="~> 3.0.0"
-  - ACTIVE_RECORD_VERSION="~> 3.1.0"
-  - ACTIVE_RECORD_VERSION="~> 3.2.0"
-  - ACTIVE_RECORD_VERSION="~> 4.0.0"
-  - ACTIVE_RECORD_VERSION="~> 4.1.0"
-  - ACTIVE_RECORD_VERSION="~> 4.2.0"
+  - ACTIVE_RECORD_BRANCH="5-0-stable"
+  - ACTIVE_RECORD_BRANCH="4-2-stable"
   - ACTIVE_RECORD_VERSION="~> 5.0.0"
+  - ACTIVE_RECORD_VERSION="~> 4.2.0"
 
 matrix:
   allow_failures:
     - env: ACTIVE_RECORD_BRANCH="master"
+    - env: ACTIVE_RECORD_BRANCH="5-0-stable"
+    - env: ACTIVE_RECORD_BRANCH="4-2-stable"
   exclude:
-    - env: ACTIVE_RECORD_BRANCH="master"
-      rvm: "1.9.3-p551"
-    - env: ACTIVE_RECORD_BRANCH="master"
-      rvm: "2.0.0-p648"
-    - env: ACTIVE_RECORD_BRANCH="master"
-      rvm: "2.1.10"
-    - env: ACTIVE_RECORD_BRANCH="master"
-      rvm: jruby-19mode
-    - env: ACTIVE_RECORD_BRANCH="master"
-      rvm: rbx-2
-    - env: ACTIVE_RECORD_VERSION="~> 5.0.0"
-      rvm: "1.9.3-p551"
-    - env: ACTIVE_RECORD_VERSION="~> 5.0.0"
-      rvm: "2.0.0-p648"
-    - env: ACTIVE_RECORD_VERSION="~> 5.0.0"
-      rvm: "2.1.10"
-    - env: ACTIVE_RECORD_VERSION="~> 5.0.0"
-      rvm: jruby-19mode
-    - env: ACTIVE_RECORD_VERSION="~> 5.0.0"
-      rvm: rbx-2
+    - rvm: "2.1.10"
+      env: ACTIVE_RECORD_BRANCH="master"
+    - rvm: "2.1.10"
+      env: ACTIVE_RECORD_BRANCH="5-0-stable"
+    - rvm: "2.1.10"
+      env: ACTIVE_RECORD_VERSION="~> 5.0.0"
+    - rvm: jruby-9.1.6.0
+      env: ACTIVE_RECORD_BRANCH="master"
+    - rvm: jruby-9.1.6.0
+      env: ACTIVE_RECORD_BRANCH="5-0-stable"
+    - rvm: jruby-9.1.6.0
+      env: ACTIVE_RECORD_VERSION="~> 5.0.0"
