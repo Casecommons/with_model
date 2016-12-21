@@ -43,13 +43,7 @@ After setting up as above, call `with_model` and inside its block pass it a `tab
 require 'spec_helper'
 
 describe "A blog post" do
-  before :all do
-    module SomeModule; end
-  end
-
-  after :all do
-    Object.send :remove_const, :SomeModule
-  end
+  module MyModule; end
 
   with_model :BlogPost do
     # The table block works just like a migration.
@@ -60,7 +54,7 @@ describe "A blog post" do
 
     # The model block works just like the class definition.
     model do
-      include SomeModule
+      include MyModule
       has_many :comments
       validates_presence_of :title
 
@@ -92,7 +86,7 @@ describe "A blog post" do
   end
 
   it "has the module" do
-    expect(BlogPost.include?(SomeModule)).to eq true
+    expect(BlogPost.include?(MyModule)).to eq true
   end
 
   it "has the class method" do
