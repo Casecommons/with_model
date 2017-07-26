@@ -1,22 +1,23 @@
 module WithModel
   class ConstantStubber
-    def initialize const_name
+    def initialize const_name, namespace
+      @namespace = namespace
       @const_name = const_name.to_sym
       @original_value = nil
     end
 
     def stub_const value
-      if Object.const_defined?(@const_name)
-        @original_value = Object.const_get(@const_name)
-        Object.send :remove_const, @const_name
+      if @namespace.const_defined?(@const_name)
+        @original_value = @namespace.const_get(@const_name)
+        @namespace.send :remove_const, @const_name
       end
 
-      Object.const_set @const_name, value
+      @namespace.const_set @const_name, value
     end
 
     def unstub_const
-      Object.send :remove_const, @const_name
-      Object.const_set @const_name, @original_value if @original_value
+      @namespace.send :remove_const, @const_name
+      @namespace.const_set @const_name, @original_value if @original_value
       @original_value = nil
     end
   end

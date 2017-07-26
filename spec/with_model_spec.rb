@@ -358,4 +358,42 @@ describe "a temporary ActiveRecord model created with with_model" do
       expect(BlogPost.with_model?).to eq true
     end
   end
+
+  context "with 'namespace' option" do
+    non_shadowing_example_ran = false
+
+    module Blogs
+      class BasePost < ActiveRecord::Base
+        self.abstract_class = true
+      end
+    end
+
+    context "a temporary model created within namespace" do
+      with_model :Post, superclass: Blogs::BasePost, namespace: Blogs do
+        table do |t|
+          t.string 'title'
+        end
+      end
+
+      after do
+        non_shadowing_example_ran = true
+      end
+
+      describe "the class" do
+        subject { Blogs::Post.new }
+        it_should_behave_like "ActiveModel"
+      end
+
+      it "responds to .with_model? with true" do
+        expect(Blogs::Post.with_model?).to eq true
+      end
+    end
+
+    context "after an example which uses with_model without shadowing an existing constant" do
+      it "returns the constant to its undefined state" do
+        expect(non_shadowing_example_ran).to eq true
+        expect(defined?(Blogs::Post)).to be_falsy
+      end
+    end
+  end
 end

@@ -6,7 +6,7 @@ require 'with_model/table'
 
 module WithModel
   class Model
-    OPTIONS = [:superclass].freeze
+    OPTIONS = [:superclass, :namespace].freeze
     private_constant :OPTIONS
 
     attr_writer :model_block, :table_block, :table_options
@@ -18,6 +18,7 @@ module WithModel
       @table_block = nil
       @table_options = {}
       @superclass = options.fetch(:superclass, ActiveRecord::Base)
+      @namespace = options.fetch(:namespace, Object)
     end
 
     def create
@@ -60,7 +61,7 @@ module WithModel
     end
 
     def stubber
-      @stubber ||= ConstantStubber.new const_name
+      @stubber ||= ConstantStubber.new const_name, @namespace
     end
 
     def table
