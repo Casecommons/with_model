@@ -1,4 +1,5 @@
 # encoding: utf-8
+
 $LOAD_PATH.push File.expand_path('../lib', __FILE__)
 require 'with_model/version'
 
@@ -6,14 +7,14 @@ Gem::Specification.new do |spec|
   spec.name        = 'with_model'
   spec.version     = WithModel::VERSION
   spec.authors     = ['Case Commons, LLC', 'Grant Hutchins']
-  spec.email       = %w(casecommons-dev@googlegroups.com gems@nertzy.com andrew@johnandrewmarshall.com)
+  spec.email       = %w[casecommons-dev@googlegroups.com gems@nertzy.com andrew@johnandrewmarshall.com]
   spec.homepage    = 'https://github.com/Casecommons/with_model'
-  spec.summary     = %q(Dynamically build a model within an RSpec context)
+  spec.summary     = 'Dynamically build a model within an RSpec context'
   spec.description = spec.summary
   spec.license     = 'MIT'
 
-  spec.files         = `git ls-files`.split($/)
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
+  spec.executables   = spec.files.grep(%r(^bin/)) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 

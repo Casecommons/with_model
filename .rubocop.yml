@@ -1,0 +1,3 @@
+inherit_gem:
+  lint-config-cc:
+    - default.yml

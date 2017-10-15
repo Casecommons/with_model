@@ -9,7 +9,7 @@ module WithModel
   class Model
     attr_writer :model_block, :table_block, :table_options
 
-    def initialize name, superclass: ActiveRecord::Base
+    def initialize(name, superclass: ActiveRecord::Base)
       @name = name.to_sym
       @model_block = nil
       @table_block = nil

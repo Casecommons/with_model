@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "A blog post" do
+describe 'A blog post' do
   before do
     stub_const('MyModule', Module.new)
   end
@@ -41,30 +41,30 @@ describe "A blog post" do
     end
   end
 
-  it "can be accessed as a constant" do
+  it 'can be accessed as a constant' do
     expect(BlogPost).to be
   end
 
-  it "has the module" do
+  it 'has the module' do
     expect(BlogPost.include?(MyModule)).to eq true
   end
 
-  it "has the class method" do
+  it 'has the class method' do
     expect(BlogPost.some_class_method).to eq 'chunky'
   end
 
-  it "has the instance method" do
+  it 'has the instance method' do
     expect(BlogPost.new.some_instance_method).to eq 'bacon'
   end
 
-  it "can do all the things a regular model can" do
+  it 'can do all the things a regular model can' do
     record = BlogPost.new
     expect(record).to_not be_valid
-    record.title = "foo"
+    record.title = 'foo'
     expect(record).to be_valid
     expect(record.save).to eq true
     expect(record.reload).to eq record
-    record.comments.create!(:text => "Lorem ipsum")
+    record.comments.create!(text: 'Lorem ipsum')
     expect(record.comments.count).to eq 1
   end
 
@@ -76,12 +76,12 @@ describe "A blog post" do
   with_model :Ford, superclass: Car do
   end
 
-  it "has a specified superclass" do
+  it 'has a specified superclass' do
     expect(Ford < Car).to eq true
   end
 end
 
-describe "with_model can be run within RSpec :all hook" do
+describe 'with_model can be run within RSpec :all hook' do
   with_model :BlogPost, scope: :all do
     table do |t|
       t.string :title
@@ -92,26 +92,26 @@ describe "with_model can be run within RSpec :all hook" do
     BlogPost.create # without scope: :all these will fail
   end
 
-  it "has been initialized within before(:all)" do
+  it 'has been initialized within before(:all)' do
     expect(BlogPost.count).to eq 1
   end
 end
 
-describe "another example group" do
-  it "does not have the constant anymore" do
+describe 'another example group' do
+  it 'does not have the constant anymore' do
     expect(defined?(BlogPost)).to be_falsy
   end
 end
 
-describe "with table options" do
+describe 'with table options' do
   with_model :WithOptions do
-    table :id => false do |t|
+    table id: false do |t|
       t.string 'foo'
       t.timestamps null: false
     end
   end
 
-  it "respects the additional options" do
-    expect(WithOptions.columns.map(&:name)).to_not include("id")
+  it 'respects the additional options' do
+    expect(WithOptions.columns.map(&:name)).to_not include('id')
   end
 end

@@ -2,7 +2,7 @@ require 'active_record'
 
 module WithModel
   class Table
-    def initialize name, options = {}, &block
+    def initialize(name, options = {}, &block)
       @name = name.freeze
       @options = options.freeze
       @block = block
