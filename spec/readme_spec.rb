@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe "A blog post" do
-  module MyModule; end
+  before do
+    stub_const('MyModule', Module.new)
+  end
 
   with_model :BlogPost do
     # The table block works just like a migration.
