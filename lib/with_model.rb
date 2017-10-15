@@ -4,10 +4,7 @@ require 'with_model/table'
 require 'with_model/version'
 
 module WithModel
-  def with_model(name, options = {}, &block)
-    options = options.dup
-    scope = options.delete(:scope)
-
+  def with_model(name, scope: nil, **options, &block)
     model = Model.new name, options
     dsl = Model::DSL.new model
     dsl.instance_exec(&block) if block
@@ -21,10 +18,7 @@ module WithModel
     end
   end
 
-  def with_table(name, options = {}, &block)
-    options = options.dup
-    scope = options.delete(:scope)
-
+  def with_table(name, scope: nil, **options, &block)
     table = Table.new name, options, &block
 
     before(*scope) do
