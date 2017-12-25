@@ -19,10 +19,13 @@ RSpec.configure do |config|
   end
 end
 
+is_jruby = RUBY_PLATFORM == 'java'
+adapter = is_jruby ? 'jdbcsqlite3' : 'sqlite3'
+
 # WithModel requires ActiveRecord::Base.connection to be established.
 # If ActiveRecord already has a connection, as in a Rails app, this is unnecessary.
 require 'active_record'
-ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
+ActiveRecord::Base.establish_connection(adapter: adapter, database: ':memory:')
 
 if defined?(I18n) && I18n.respond_to?(:enforce_available_locales=)
   I18n.enforce_available_locales = true
