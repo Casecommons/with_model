@@ -3,9 +3,6 @@
 require 'bundler'
 Bundler.setup
 
-require 'simplecov'
-SimpleCov.start
-
 require 'with_model'
 RSpec.configure do |config|
   config.extend WithModel
