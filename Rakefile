@@ -12,7 +12,11 @@ namespace 'doc' do
 end
 
 task :codeclimate do
-  sh 'bin/codeclimate-test-reporter' if ENV['CODECLIMATE_REPO_TOKEN']
+  begin
+    sh 'bin/codeclimate-test-reporter' if ENV['CODECLIMATE_REPO_TOKEN']
+  rescue StandardError => ex
+    puts ex.inspect
+  end
 end
 
 task default: %i[spec codeclimate]
