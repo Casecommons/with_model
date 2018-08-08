@@ -2,9 +2,13 @@
 
 require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
+require 'rubocop/rake_task'
 
 desc 'Run specs'
 RSpec::Core::RakeTask.new
+
+desc 'Run lint'
+RuboCop::RakeTask.new
 
 namespace 'doc' do
   desc 'Generate README and preview in browser'
@@ -21,4 +25,4 @@ task :codeclimate do
   end
 end
 
-task default: %i[spec codeclimate]
+task default: %i[spec rubocop codeclimate]
