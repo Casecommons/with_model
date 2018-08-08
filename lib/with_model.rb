@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'with_model/model'
 require 'with_model/model/dsl'
 require 'with_model/table'

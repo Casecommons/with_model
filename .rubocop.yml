@@ -1,3 +1,6 @@
 inherit_gem:
   lint-config-ruby:
     - default.yml
+
+AllCops:
+  TargetRubyVersion: 2.3

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module WithModel
   class ConstantStubber
     def initialize(const_name)

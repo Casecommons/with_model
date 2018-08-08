@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_record'
 require 'active_support/core_ext/string/inflections'
 require 'English'
@@ -66,7 +68,7 @@ module WithModel
 
     def table_name
       uid = "#{$PID}_#{Thread.current.object_id}"
-      "with_model_#{@name.to_s.tableize}_#{uid}".freeze
+      "with_model_#{@name.to_s.tableize}_#{uid}"
     end
   end
 end
