@@ -44,13 +44,13 @@ describe "A blog post" do
   module MyModule; end
 
   with_model :BlogPost do
-    # The table block works just like a migration.
+    # The table block (and an options hash) is passed to ActiveRecord migration’s `create_table`.
     table do |t|
       t.string :title
       t.timestamps null: false
     end
 
-    # The model block works just like the class definition.
+    # The model block is the ActiveRecord model’s class body.
     model do
       include MyModule
       has_many :comments
