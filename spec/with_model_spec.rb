@@ -143,6 +143,16 @@ describe 'a temporary ActiveRecord model created with with_model' do
     end
   end
 
+  describe 'with a name which is namespaced' do
+    before { stub_const('Stuff', Module.new) }
+    with_model :'Stuff::BlogPost'
+
+    it 'creates the model in the namespace' do
+      expect(defined?(::BlogPost)).to be_falsey
+      expect(defined?(::Stuff::BlogPost)).to be_truthy
+    end
+  end
+
   describe 'using the constant in the model block' do
     with_model :BlogPost do
       model do

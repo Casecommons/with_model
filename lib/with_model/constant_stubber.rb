@@ -4,22 +4,42 @@ module WithModel
   class ConstantStubber
     def initialize(const_name)
       @const_name = const_name.to_sym
+      @namespace = nil
       @original_value = nil
     end
 
     def stub_const(value)
-      if Object.const_defined?(@const_name)
-        @original_value = Object.const_get(@const_name)
-        Object.__send__ :remove_const, @const_name
+      @namespace = namespace
+      if @namespace.const_defined?(basename)
+        @original_value = @namespace.const_get(basename)
+        @namespace.__send__ :remove_const, basename
       end
 
-      Object.const_set @const_name, value
+      @namespace.const_set basename, value
     end
 
     def unstub_const
-      Object.__send__ :remove_const, @const_name
-      Object.const_set @const_name, @original_value if @original_value
+      @namespace.__send__ :remove_const, basename
+      @namespace.const_set basename, @original_value if @original_value
+      @namespace = nil
       @original_value = nil
+    end
+
+    private
+
+    def namespace
+      *namespace_parts, _ = lookup_list
+      namespace_parts.reduce(Object) do |ns, ns_part|
+        ns.const_get(ns_part.to_sym)
+      end
+    end
+
+    def lookup_list
+      @const_name.to_s.split('::')
+    end
+
+    def basename
+      @basename ||= lookup_list.last
     end
   end
   private_constant :ConstantStubber
