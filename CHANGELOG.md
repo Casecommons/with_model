@@ -1,3 +1,11 @@
+### 2.1.0
+
+- Support creating constant in an existing namespace (#26)
+- Prefer keyword arguments over manually-validated hash argument
+- Improve documentation
+- Remove support for obsolete Ruby
+- Internal cleanup
+
 ### 2.0.0
 
 - Require Ruby 2.1 or later
