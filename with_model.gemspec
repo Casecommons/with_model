@@ -6,7 +6,7 @@ require 'with_model/version'
 Gem::Specification.new do |spec|
   spec.name        = 'with_model'
   spec.version     = WithModel::VERSION
-  spec.authors     = ['Case Commons, LLC', 'Grant Hutchins']
+  spec.authors     = ['Case Commons, LLC', 'Grant Hutchins', 'Andrew Marshall']
   spec.email       = %w[casecommons-dev@googlegroups.com gems@nertzy.com andrew@johnandrewmarshall.com]
   spec.homepage    = 'https://github.com/Casecommons/with_model'
   spec.summary     = 'Dynamically build a model within an RSpec context'
