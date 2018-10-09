@@ -16,7 +16,7 @@ module WithModel
     end
 
     def destroy
-      ActiveRecord::Base.connection.drop_table(@name)
+      connection.drop_table(@name)
     end
 
     private
