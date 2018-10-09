@@ -3,13 +3,21 @@
 require 'active_record'
 
 module WithModel
+  # In general, direct use of this class should be avoided. Instead use
+  # either the {WithModel high-level API} or {WithModel::Model::DSL low-level API}.
   class Table
+    # @param name The name of the table to create.
+    # @param options Passed to ActiveRecord `create_table`.
+    # @param block Passed to ActiveRecord `create_table`.
+    # @see https://api.rubyonrails.org/classes/ActiveRecord/ConnectionAdapters/SchemaStatements.html#method-i-create_table
     def initialize(name, options = {}, &block)
       @name = name.freeze
       @options = options.freeze
       @block = block
     end
 
+    # Creates the table with the initialized options. Drops the table if
+    # it already exists.
     def create
       connection.drop_table(@name) if exists?
       connection.create_table(@name, @options, &@block)

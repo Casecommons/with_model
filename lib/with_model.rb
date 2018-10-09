@@ -6,6 +6,10 @@ require 'with_model/table'
 require 'with_model/version'
 
 module WithModel
+  # @param name The constant name (as a symbol) to assign the model class to.
+  # @param scope Passed to `before`/`after` in the test context.
+  # @param options Passed to {WithModel::Model#initialize}.
+  # @param block Yielded an instance of {WithModel::Model::DSL}.
   def with_model(name, scope: nil, **options, &block)
     model = Model.new name, options
     dsl = Model::DSL.new model
@@ -20,6 +24,10 @@ module WithModel
     end
   end
 
+  # @param name The table name (as a symbol) to create.
+  # @param scope Passed to `before`/`after` in the test context.
+  # @param options Passed to {WithModel::Table#initialize}.
+  # @param block Passed to {WithModel::Table#initialize} (like {WithModel::Model::DSL#table}).
   def with_table(name, scope: nil, **options, &block)
     table = Table.new name, options, &block
 

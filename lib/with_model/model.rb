@@ -8,9 +8,14 @@ require 'with_model/methods'
 require 'with_model/table'
 
 module WithModel
+  # In general, direct use of this class should be avoided. Instead use
+  # either the {WithModel high-level API} or {WithModel::Model::DSL low-level API}.
   class Model
     attr_writer :model_block, :table_block, :table_options
 
+    # @param name The constant name (as a symbol) to assign the model class to.
+    # @param superclass The superclass for the created class. Should
+    #   have `ActiveRecord::Base` as an ancestor.
     def initialize(name, superclass: ActiveRecord::Base)
       @name = name.to_sym
       @model_block = nil

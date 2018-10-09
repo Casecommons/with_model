@@ -3,6 +3,7 @@
 module WithModel
   class Model
     class DSL
+      # @param model [WithModel::Model] The Model to mutate via this DSL.
       def initialize(model)
         @model = model
       end
