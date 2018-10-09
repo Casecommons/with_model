@@ -5,6 +5,10 @@
 
 `with_model` dynamically builds an ActiveRecord model (with table) before each test in a group and destroys it afterwards.
 
+## Development status
+
+`with_model` is actively maintained. It is quite stable, so while updates may appear infrequent, it is only because none are needed.
+
 ## Installation
 
 Install as usual: `gem install with_model` or add `gem 'with_model'` to your Gemfile. See `.travis.yml` for supported (tested) Ruby versions.
