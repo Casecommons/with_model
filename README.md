@@ -163,7 +163,7 @@ end
 
 ## Versioning
 
-As of version 1.0.0, with_model uses [Semantic Versioning 2.0.0](http://semver.org/spec/v2.0.0.html). Previous versions used an ad-hoc versioning scheme. 
+`with_model` uses [Semantic Versioning 2.0.0](http://semver.org/spec/v2.0.0.html).
 
 ## License
 
