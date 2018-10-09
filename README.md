@@ -167,5 +167,5 @@ As of version 1.0.0, with_model uses [Semantic Versioning 2.0.0](http://semver.o
 
 ## License
 
-Copyright © 2010–2017 [Case Commons, Inc](http://casecommons.org).
+Copyright © 2010–2018 [Case Commons, Inc](http://casecommons.org).
 Licensed under the MIT license, see [LICENSE](/LICENSE) file.
