@@ -162,9 +162,8 @@ end
 
 ## Requirements
 
-- Ruby 2.1+
-- RSpec or minitest/spec
-- ActiveRecord 4.2+
+See the [gemspec metadata](https://rubygems.org/gems/with_model) for dependency requirements. RSpec and minitest are indirect dependencies, and `with_model` should support any maintained version of both.
+
 
 ## Versioning
 
