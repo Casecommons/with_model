@@ -19,9 +19,11 @@ module WithModel
     end
 
     def unstub_const
-      @namespace.__send__ :remove_const, basename
-      @namespace.const_set basename, @original_value if @original_value
-      @namespace = nil
+      if @namespace
+        @namespace.__send__ :remove_const, basename
+        @namespace.const_set basename, @original_value if @original_value
+        @namespace = nil
+      end
       @original_value = nil
     end
 
