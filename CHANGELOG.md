@@ -1,3 +1,8 @@
+### 2.1.1
+
+- Don't fail erroneously when running the after hook when the before hook failed
+- Improve documentation
+
 ### 2.1.0
 
 - Support creating constant in an existing namespace (#26)
