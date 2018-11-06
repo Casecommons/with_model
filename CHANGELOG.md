@@ -1,3 +1,7 @@
+### 2.2.2
+
+- Don't clobber existing rake executable
+
 ### 2.1.1
 
 - Don't fail erroneously when running the after hook when the before hook failed
