@@ -28,14 +28,6 @@ matrix:
       env: ACTIVE_RECORD_BRANCH="master"
     - rvm: 2.4.5
       env: ACTIVE_RECORD_BRANCH="master"
-    - rvm: jruby-9.2.5.0
-      env: ACTIVE_RECORD_BRANCH="master"
-    - rvm: jruby-9.2.5.0
-      env: ACTIVE_RECORD_BRANCH="5-2-stable"
-    - rvm: jruby-9.2.5.0
-      env: ACTIVE_RECORD_VERSION="~> 5.2.0"
-    - rvm: jruby-9.2.5.0
-      env: ACTIVE_RECORD_VERSION="~> 4.2.0"
 
 addons:
   code_climate:
