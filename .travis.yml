@@ -25,6 +25,8 @@ matrix:
   exclude:
     - rvm: 2.3.7
       env: ACTIVE_RECORD_BRANCH="master"
+    - rvm: 2.4.4
+      env: ACTIVE_RECORD_BRANCH="master"
     - rvm: jruby-9.2.0.0
       env: ACTIVE_RECORD_BRANCH="master"
     - rvm: jruby-9.2.0.0
