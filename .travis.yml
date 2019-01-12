@@ -19,6 +19,7 @@ env:
   - ACTIVE_RECORD_VERSION="~> 4.2.0"
 
 matrix:
+  fast_finish: true
   allow_failures:
     - env: ACTIVE_RECORD_BRANCH="master"
   exclude:
