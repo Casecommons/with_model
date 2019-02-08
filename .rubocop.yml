@@ -4,3 +4,6 @@ inherit_gem:
 
 AllCops:
   TargetRubyVersion: 2.3
+
+Lint/MissingCopEnableDirective:
+  Enabled: false
