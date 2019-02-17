@@ -13,8 +13,8 @@ module WithModel
   class Model
     attr_writer :model_block, :table_block, :table_options
 
-    # @param name The constant name (as a symbol) to assign the model class to.
-    # @param superclass The superclass for the created class. Should
+    # @param [Symbol] name The constant name to assign the model class to.
+    # @param [Class] superclass The superclass for the created class. Should
     #   have `ActiveRecord::Base` as an ancestor.
     def initialize(name, superclass: ActiveRecord::Base)
       @name = name.to_sym

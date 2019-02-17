@@ -6,7 +6,7 @@ module WithModel
   # In general, direct use of this class should be avoided. Instead use
   # either the {WithModel high-level API} or {WithModel::Model::DSL low-level API}.
   class Table
-    # @param name The name of the table to create.
+    # @param [Symbol] name The name of the table to create.
     # @param options Passed to ActiveRecord `create_table`.
     # @param block Passed to ActiveRecord `create_table`.
     # @see https://api.rubyonrails.org/classes/ActiveRecord/ConnectionAdapters/SchemaStatements.html#method-i-create_table

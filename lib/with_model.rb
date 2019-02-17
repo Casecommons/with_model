@@ -6,7 +6,7 @@ require 'with_model/table'
 require 'with_model/version'
 
 module WithModel
-  # @param name The constant name (as a symbol) to assign the model class to.
+  # @param [Symbol] name The constant name to assign the model class to.
   # @param scope Passed to `before`/`after` in the test context.
   # @param options Passed to {WithModel::Model#initialize}.
   # @param block Yielded an instance of {WithModel::Model::DSL}.
@@ -24,7 +24,7 @@ module WithModel
     end
   end
 
-  # @param name The table name (as a symbol) to create.
+  # @param [Symbol] name The table name to create.
   # @param scope Passed to `before`/`after` in the test context.
   # @param options Passed to {WithModel::Table#initialize}.
   # @param block Passed to {WithModel::Table#initialize} (like {WithModel::Model::DSL#table}).
