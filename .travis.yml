@@ -9,6 +9,7 @@ rvm:
   - jruby-9.2.5.0
 
 install:
+  - gem install bundler
   - bundle install --retry=3
 
 env:
