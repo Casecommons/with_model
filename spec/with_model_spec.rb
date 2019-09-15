@@ -305,20 +305,26 @@ describe 'a temporary ActiveRecord model created with with_model' do
   end
 
   context 'with ActiveSupport::DescendantsTracker' do
-    with_model :BlogPost
+    with_model :BlogPost do
+      model do
+        def self.inspect
+          "BlogPost class #{object_id}"
+        end
+      end
+    end
 
-    it 'includes the correct model class in descendants on the first test run' do
-      descendant = ActiveRecord::Base.descendants.detect do |c|
+    def blog_post_classes
+      ActiveRecord::Base.descendants.select do |c|
         c.table_name == BlogPost.table_name
       end
-      expect(descendant).to eq BlogPost
+    end
+
+    it 'includes the correct model class in descendants on the first test run' do
+      expect(blog_post_classes).to eq [BlogPost]
     end
 
     it 'includes the correct model class in descendants on the second test run' do
-      descendant = ActiveRecord::Base.descendants.detect do |c|
-        c.table_name == BlogPost.table_name
-      end
-      expect(descendant).to eq BlogPost
+      expect(blog_post_classes).to eq [BlogPost]
     end
   end
 
