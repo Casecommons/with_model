@@ -35,7 +35,7 @@ module WithModel
 
     def destroy
       stubber.unstub_const
-      remove_from_superclass_descendants
+      cleanup_descendants_tracking
       reset_dependencies_cache
       table.destroy
       @model = nil
@@ -53,9 +53,12 @@ module WithModel
       @model.reset_column_information
     end
 
-    def remove_from_superclass_descendants
-      return unless @model.superclass.respond_to?(:direct_descendants)
-      @model.superclass.direct_descendants.delete(@model)
+    def cleanup_descendants_tracking
+      if defined?(ActiveSupport::DescendantsTracker)
+        ActiveSupport::DescendantsTracker.class_variable_get(:@@direct_descendants).delete(ActiveRecord::Base)
+      elsif @model.superclass.respond_to?(:direct_descendants)
+        @model.superclass.direct_descendants.delete(@model)
+      end
     end
 
     def reset_dependencies_cache
