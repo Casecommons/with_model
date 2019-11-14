@@ -170,8 +170,8 @@ See the [gemspec metadata](https://rubygems.org/gems/with_model) for dependency 
 - A user-supplied table name is used for tables generated via `with_table`/`WithModel::Table.new`. This may cause collisions at runtime if tests are run concurrently against a single database schema, unless the caller takes care to ensure the table names passed as arguments are unique across threads/processes.
 - Generated models are created in stubbed constants, which are global; no guarantee is made to the uniqueness of a constant, and this may be unsafe.
 - Generated classes are ActiveRecord subclasses:
-  - This library makes no guarantee is made as to the thread-safety of creating ActiveRecord subclasses concurrently.
-  - This library makes no guarantee is made as to the thread-safety of cleaning up ActiveRecord/ActiveSupport’s internals which are polluted upon class creation.
+  - This library makes no guarantee as to the thread-safety of creating ActiveRecord subclasses concurrently.
+  - This library makes no guarantee as to the thread-safety of cleaning up ActiveRecord/ActiveSupport’s internals which are polluted upon class creation.
 
 In general, `with_model` is not guaranteed to be thread-safe, but is, in certain usages, safe to use concurrently across multiple processes with a single database schema.
 
