@@ -1,3 +1,7 @@
+### 2.1.3
+
+- Support ActiveRecord 6.0, working around new dependency tracking API
+
 ### 2.1.2
 
 - Don't clobber existing rake executable
