@@ -3,7 +3,7 @@ inherit_gem:
     - default.yml
 
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
 
 Lint/MissingCopEnableDirective:
   Enabled: false
