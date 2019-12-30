@@ -11,7 +11,7 @@ module WithModel
   # @param options Passed to {WithModel::Model#initialize}.
   # @param block Yielded an instance of {WithModel::Model::DSL}.
   def with_model(name, scope: nil, **options, &block)
-    model = Model.new name, options
+    model = Model.new name, **options
     dsl = Model::DSL.new model
     dsl.instance_exec(&block) if block
 

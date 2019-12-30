@@ -20,7 +20,7 @@ module WithModel
     # it already exists.
     def create
       connection.drop_table(@name) if exists?
-      connection.create_table(@name, @options, &@block)
+      connection.create_table(@name, **@options, &@block)
     end
 
     def destroy
