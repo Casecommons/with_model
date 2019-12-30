@@ -1,3 +1,9 @@
+### 2.1.4
+
+- Remove deprecation warnings for Ruby 2.7
+- Require Ruby 2.4 or later
+- Require Active Record 5.2 or later
+
 ### 2.1.3
 
 - Support ActiveRecord 6.0, working around new dependency tracking API
