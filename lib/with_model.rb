@@ -7,7 +7,7 @@ require 'with_model/version'
 
 module WithModel
   # @param [Symbol] name The constant name to assign the model class to.
-  # @param scope Passed to `before`/`after` in the test context.
+  # @param scope Passed to `before`/`after` in the test context. RSpec only.
   # @param options Passed to {WithModel::Model#initialize}.
   # @param block Yielded an instance of {WithModel::Model::DSL}.
   def with_model(name, scope: nil, **options, &block)
@@ -15,28 +15,38 @@ module WithModel
     dsl = Model::DSL.new model
     dsl.instance_exec(&block) if block
 
-    before(*scope) do
-      model.create
-    end
-
-    after(*scope) do
-      model.destroy
-    end
+    setup_object(model, scope)
   end
 
   # @param [Symbol] name The table name to create.
-  # @param scope Passed to `before`/`after` in the test context.
+  # @param scope Passed to `before`/`after` in the test context. Rspec only.
   # @param options Passed to {WithModel::Table#initialize}.
   # @param block Passed to {WithModel::Table#initialize} (like {WithModel::Model::DSL#table}).
   def with_table(name, scope: nil, **options, &block)
     table = Table.new name, options, &block
 
-    before(*scope) do
-      table.create
-    end
+    setup_object(table, scope)
+  end
 
-    after(*scope) do
-      table.destroy
+  private
+
+  # @param [Object] object The new model object instance to create
+  # @param scope Passed to `before`/`after` in the test context. Rspec only.
+  def setup_object(object, scope = nil)
+    if Module.const_defined? 'RSpec'
+      before(*scope) do
+        object.create
+      end
+
+      after(*scope) do
+        object.destroy
+      end
+    elsif Module.const_defined? 'Minitest'
+      object.create
+
+      Minitest.after_run do
+        object.destroy
+      end
     end
   end
 end
