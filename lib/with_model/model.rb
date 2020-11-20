@@ -63,6 +63,7 @@ module WithModel
 
     def reset_dependencies_cache
       return unless defined?(ActiveSupport::Dependencies::Reference)
+
       ActiveSupport::Dependencies::Reference.clear!
     end
 

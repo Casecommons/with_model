@@ -1,9 +1,9 @@
-inherit_gem:
-  lint-config-ruby:
-    - default.yml
+inherit_from: .rubocop_todo.yml
 
 AllCops:
-  TargetRubyVersion: 2.4
+  NewCops: enable
 
-Lint/MissingCopEnableDirective:
-  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'with_model.gemspec'

@@ -160,7 +160,9 @@ describe 'a temporary ActiveRecord model created with with_model' do
       end
     end
 
-    it 'is available' do end
+    it 'is available' do
+      expect(BlogPost).to be
+    end
   end
 
   context 'with a mixin' do
@@ -243,7 +245,7 @@ describe 'a temporary ActiveRecord model created with with_model' do
   end
 
   context 'with an empty block' do
-    with_model(:BlogPost) {}
+    with_model(:BlogPost) {} # rubocop:disable Lint/EmptyBlock
 
     it 'acts like a normal ActiveRecord model' do
       record = BlogPost.create!

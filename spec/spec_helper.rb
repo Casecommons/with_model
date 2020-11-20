@@ -28,9 +28,7 @@ adapter = is_jruby ? 'jdbcsqlite3' : 'sqlite3'
 require 'active_record'
 ActiveRecord::Base.establish_connection(adapter: adapter, database: ':memory:')
 
-if defined?(I18n) && I18n.respond_to?(:enforce_available_locales=)
-  I18n.enforce_available_locales = true
-end
+I18n.enforce_available_locales = true if defined?(I18n) && I18n.respond_to?(:enforce_available_locales=)
 
 if ENV['LOGGER']
   require 'logger'

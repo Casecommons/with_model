@@ -75,8 +75,7 @@ describe 'A blog post' do
     self.abstract_class = true
   end
 
-  with_model :Ford, superclass: Car do
-  end
+  with_model :Ford, superclass: Car
 
   it 'has a specified superclass' do
     expect(Ford < Car).to eq true
