@@ -59,7 +59,8 @@ describe 'a temporary ActiveRecord model created with with_model' do
 
     describe 'the class' do
       subject { BlogPost.new }
-      it_should_behave_like 'ActiveModel'
+
+      it_behaves_like 'ActiveModel'
     end
 
     it 'has the methods defined in its model block' do
@@ -90,6 +91,7 @@ describe 'a temporary ActiveRecord model created with with_model' do
 
   describe 'constant restoration' do
     before { stub_const('MyConst', 1) }
+
     shadowing_example_ran = false
 
     context 'with the with_model block' do
@@ -145,6 +147,7 @@ describe 'a temporary ActiveRecord model created with with_model' do
 
   describe 'with a name which is namespaced' do
     before { stub_const('Stuff', Module.new) }
+
     with_model :'Stuff::BlogPost'
 
     it 'creates the model in the namespace' do
@@ -169,6 +172,7 @@ describe 'a temporary ActiveRecord model created with with_model' do
     let(:mixin) do
       Module.new { def foo; end }
     end
+
     before { stub_const('AMixin', mixin) }
 
     with_model :WithAMixin do
@@ -178,12 +182,14 @@ describe 'a temporary ActiveRecord model created with with_model' do
     end
 
     it 'has the mixin' do
-      expect(-> { ::WithAMixin.new.foo }).to_not raise_error
+      expect(-> { ::WithAMixin.new.foo }).not_to raise_error
       expect(::WithAMixin.include?(AMixin)).to eq true
     end
   end
 
   context 'with a mixin that has a class_eval' do
+    subject { WithAClassEval.new }
+
     let(:mixin) do
       Module.new do
         def self.included(klass)
@@ -193,9 +199,8 @@ describe 'a temporary ActiveRecord model created with with_model' do
         end
       end
     end
-    before { stub_const('AMixin', mixin) }
 
-    subject { WithAClassEval.new }
+    before { stub_const('AMixin', mixin) }
 
     with_model :WithAClassEval do
       model do
@@ -224,7 +229,7 @@ describe 'a temporary ActiveRecord model created with with_model' do
     end
 
     it 'respects the additional options' do
-      expect(WithOptions.columns.map(&:name)).to_not include('id')
+      expect(WithOptions.columns.map(&:name)).not_to include('id')
     end
   end
 
@@ -240,7 +245,8 @@ describe 'a temporary ActiveRecord model created with with_model' do
 
     describe 'the class' do
       subject { BlogPost.new }
-      it_should_behave_like 'ActiveModel'
+
+      it_behaves_like 'ActiveModel'
     end
   end
 
@@ -256,7 +262,8 @@ describe 'a temporary ActiveRecord model created with with_model' do
 
     describe 'the class' do
       subject { BlogPost.new }
-      it_should_behave_like 'ActiveModel'
+
+      it_behaves_like 'ActiveModel'
     end
   end
 
@@ -285,7 +292,8 @@ describe 'a temporary ActiveRecord model created with with_model' do
 
     describe 'the class' do
       subject { BlogPost.new }
-      it_should_behave_like 'ActiveModel'
+
+      it_behaves_like 'ActiveModel'
     end
   end
 
@@ -302,7 +310,8 @@ describe 'a temporary ActiveRecord model created with with_model' do
 
     describe 'the class' do
       subject { BlogPost.new }
-      it_should_behave_like 'ActiveModel'
+
+      it_behaves_like 'ActiveModel'
     end
   end
 
@@ -363,7 +372,8 @@ describe 'a temporary ActiveRecord model created with with_model' do
 
     describe 'the class' do
       subject { BlogPost.new }
-      it_should_behave_like 'ActiveModel'
+
+      it_behaves_like 'ActiveModel'
     end
 
     it 'is a subclass of the supplied superclass' do

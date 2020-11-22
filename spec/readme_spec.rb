@@ -61,7 +61,7 @@ describe 'A blog post' do
 
   it 'can do all the things a regular model can' do
     record = BlogPost.new
-    expect(record).to_not be_valid
+    expect(record).not_to be_valid
     record.title = 'foo'
     expect(record).to be_valid
     expect(record.save).to eq true
@@ -113,6 +113,6 @@ describe 'with table options' do
   end
 
   it 'respects the additional options' do
-    expect(WithOptions.columns.map(&:name)).to_not include('id')
+    expect(WithOptions.columns.map(&:name)).not_to include('id')
   end
 end
