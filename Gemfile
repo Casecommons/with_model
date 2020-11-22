@@ -16,15 +16,9 @@ if ar_branch
   end
 elsif ar_version
   gem 'activerecord', ar_version
-  if is_jruby && Gem::Requirement.new(ar_version).satisfied_by?(Gem::Version.new('6.0.0'))
+  if is_jruby && !Gem::Requirement.new(ar_version).satisfied_by?(Gem::Version.new('5.2.0'))
     gem 'activerecord-jdbcsqlite3-adapter', git: 'https://github.com/jruby/activerecord-jdbc-adapter.git'
   end
 end
 
-unless is_jruby
-  if ar_branch == 'master' || Gem::Requirement.new(ar_version).satisfied_by?(Gem::Version.new('6.0.0'))
-    gem 'sqlite3', '~> 1.4.1'
-  else
-    gem 'sqlite3', '~> 1.3.11'
-  end
-end
+gem 'sqlite3', '~> 1.4.1' unless is_jruby
