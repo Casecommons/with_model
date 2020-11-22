@@ -4,7 +4,7 @@
 [![Build Status](https://secure.travis-ci.org/Casecommons/with_model.svg?branch=master)](https://travis-ci.org/Casecommons/with_model)
 [![API Documentation](https://img.shields.io/badge/yard-api%20docs-lightgrey.svg)](https://www.rubydoc.info/gems/with_model)
 
-`with_model` dynamically builds an ActiveRecord model (with table) before each test in a group and destroys it afterwards.
+`with_model` dynamically builds an Active Record model (with table) before each test in a group and destroys it afterwards.
 
 ## Development status
 
@@ -49,13 +49,13 @@ describe "A blog post" do
   module MyModule; end
 
   with_model :BlogPost do
-    # The table block (and an options hash) is passed to ActiveRecord migration’s `create_table`.
+    # The table block (and an options hash) is passed to Active Record migration’s `create_table`.
     table do |t|
       t.string :title
       t.timestamps null: false
     end
 
-    # The model block is the ActiveRecord model’s class body.
+    # The model block is the Active Record model’s class body.
     model do
       include MyModule
       has_many :comments
@@ -102,7 +102,7 @@ describe "A blog post" do
 
   it "can do all the things a regular model can" do
     record = BlogPost.new
-    expect(record).to_not be_valid
+    expect(record).not_to be_valid
     record.title = "foo"
     expect(record).to be_valid
     expect(record.save).to eq true
@@ -155,7 +155,7 @@ describe "with table options" do
   end
 
   it "respects the additional options" do
-    expect(WithOptions.columns.map(&:name)).to_not include("id")
+    expect(WithOptions.columns.map(&:name)).not_to include("id")
   end
 end
 ```
@@ -169,9 +169,9 @@ See the [gemspec metadata](https://rubygems.org/gems/with_model) for dependency 
 - A unique table name is used for tables generated via `with_model`/`WithModel::Model.new`. This allows `with_model` (when limited to this API) to run concurrently (in processes or threads) with a single database schema. While there is a possibility of collision, it is very small.
 - A user-supplied table name is used for tables generated via `with_table`/`WithModel::Table.new`. This may cause collisions at runtime if tests are run concurrently against a single database schema, unless the caller takes care to ensure the table names passed as arguments are unique across threads/processes.
 - Generated models are created in stubbed constants, which are global; no guarantee is made to the uniqueness of a constant, and this may be unsafe.
-- Generated classes are ActiveRecord subclasses:
-  - This library makes no guarantee as to the thread-safety of creating ActiveRecord subclasses concurrently.
-  - This library makes no guarantee as to the thread-safety of cleaning up ActiveRecord/ActiveSupport’s internals which are polluted upon class creation.
+- Generated classes are Active Record subclasses:
+  - This library makes no guarantee as to the thread-safety of creating Active Record subclasses concurrently.
+  - This library makes no guarantee as to the thread-safety of cleaning up Active Record/Active Support’s internals which are polluted upon class creation.
 
 In general, `with_model` is not guaranteed to be thread-safe, but is, in certain usages, safe to use concurrently across multiple processes with a single database schema.
 
@@ -181,5 +181,5 @@ In general, `with_model` is not guaranteed to be thread-safe, but is, in certain
 
 ## License
 
-Copyright © 2010–2018 [Casebook PBC](https://www.casebook.net).
+Copyright © 2010–2020 [Casebook PBC](https://www.casebook.net).
 Licensed under the MIT license, see [LICENSE](/LICENSE) file.
