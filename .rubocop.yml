@@ -1,5 +1,3 @@
-inherit_from: .rubocop_todo.yml
-
 AllCops:
   NewCops: enable
 
@@ -12,4 +10,7 @@ Bundler/OrderedGems:
   Enabled: false
 
 Bundler/DuplicatedGem:
+  Enabled: false
+
+Style/Documentation:
   Enabled: false
