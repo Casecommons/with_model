@@ -1,3 +1,7 @@
+### 2.1.5
+
+- Add support for Active Record 6.1
+
 ### 2.1.4
 
 - Remove deprecation warnings for Ruby 2.7
