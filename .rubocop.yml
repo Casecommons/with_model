@@ -7,3 +7,9 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
     - 'with_model.gemspec'
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Bundler/DuplicatedGem:
+  Enabled: false

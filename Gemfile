@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Bundler/DuplicatedGem, Bundler/OrderedGems
-
 source 'https://rubygems.org'
 
 gemspec
@@ -17,7 +15,7 @@ if ar_branch
     gem 'activerecord-jdbcsqlite3-adapter', git: 'https://github.com/jruby/activerecord-jdbc-adapter.git' if is_jruby
   end
 elsif ar_version
-  gem 'activerecord', ar_version # rubocop:disable Bundler/DuplicatedGem
+  gem 'activerecord', ar_version
   if is_jruby && Gem::Requirement.new(ar_version).satisfied_by?(Gem::Version.new('6.0.0'))
     gem 'activerecord-jdbcsqlite3-adapter', git: 'https://github.com/jruby/activerecord-jdbc-adapter.git'
   end
