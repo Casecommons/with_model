@@ -36,7 +36,7 @@ if ENV['LOGGER']
 end
 
 module SpecHelper
-  module RailsTestCompatability
+  module RailsTestCompatibility
     require 'minitest'
     include Minitest::Assertions
 
