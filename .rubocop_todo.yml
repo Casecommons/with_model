@@ -6,15 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 3
-RSpec/BeforeAfterAll:
-  Exclude:
-    - 'spec/spec_helper.rb'
-    - 'spec/rails_helper.rb'
-    - 'spec/support/**/*.rb'
-    - 'spec/readme_spec.rb'
-    - 'spec/with_model_spec.rb'
-
 # Offense count: 6
 # Configuration parameters: Prefixes.
 # Prefixes: when, with, without

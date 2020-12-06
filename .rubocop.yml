@@ -22,5 +22,8 @@ Bundler/DuplicatedGem:
 RSpec/Be:
   Enabled: false
 
+RSpec/BeforeAfterAll:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
