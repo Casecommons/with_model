@@ -19,5 +19,8 @@ Bundler/OrderedGems:
 Bundler/DuplicatedGem:
   Enabled: false
 
+RSpec/Be:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
