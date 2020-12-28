@@ -14,7 +14,7 @@ env:
     - CC_TEST_REPORTER_ID=fe5c8a8b1b951a54707c08b6fb2a9a5edf9e0522d28bccc648454f774c9ccab1
   jobs:
     - ACTIVE_RECORD_BRANCH="master"
-    - ACTIVE_RECORD_VERSION="~> 6.1.0.rc1"
+    - ACTIVE_RECORD_VERSION="~> 6.1.0"
     - ACTIVE_RECORD_VERSION="~> 6.0.0"
     - ACTIVE_RECORD_VERSION="~> 5.2.0"
 
@@ -22,14 +22,13 @@ jobs:
   fast_finish: true
   allow_failures:
     - env: ACTIVE_RECORD_BRANCH="master"
-    - env: ACTIVE_RECORD_VERSION="~> 6.1.0.rc1"
   exclude:
     - rvm: 2.4.10
       env: ACTIVE_RECORD_BRANCH="master"
     - rvm: 2.4.10
       env: ACTIVE_RECORD_VERSION="~> 6.0.0"
     - rvm: 2.4.10
-      env: ACTIVE_RECORD_VERSION="~> 6.1.0.rc1"
+      env: ACTIVE_RECORD_VERSION="~> 6.1.0"
     - rvm: jruby-9.2.13.0
       env: ACTIVE_RECORD_VERSION="~> 6.0.0"
     - rvm: 3.0.0
