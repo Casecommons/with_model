@@ -181,5 +181,5 @@ In general, `with_model` is not guaranteed to be thread-safe, but is, in certain
 
 ## License
 
-Copyright © 2010–2020 [Casebook PBC](https://www.casebook.net).
+Copyright © 2010–2021 [Casebook PBC](https://www.casebook.net).
 Licensed under the MIT license, see [LICENSE](/LICENSE) file.
