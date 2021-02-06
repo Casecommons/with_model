@@ -28,10 +28,12 @@ end
 
 ### minitest/spec
 
-Extend `WithModel` into minitest/spec:
+Extend `WithModel` into minitest/spec and set the test runner explicitly:
 
 ```ruby
 require 'with_model'
+
+WithModel.runner = :minitest
 
 class Minitest::Spec
   extend WithModel
