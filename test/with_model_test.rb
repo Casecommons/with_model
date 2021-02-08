@@ -17,7 +17,7 @@ class WithModelTest < MiniTest::Test
     end
   end
 
-  def test_it_should_act_like_a_normal_ActiveRecord_model
+  def test_it_should_act_like_a_normal_active_record_model # rubocop:disable Minitest/MultipleAssertions
     record = BlogPost.create!(title: 'New blog post', content: 'Hello, world!')
 
     record.reload

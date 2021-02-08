@@ -42,7 +42,7 @@ module WithModel
 
   # @param [Object] object The new model object instance to create
   # @param scope Passed to `before`/`after` in the test context. Rspec only.
-  def setup_object(object, scope: nil, runner: nil)
+  def setup_object(object, scope: nil, runner: nil) # rubocop:disable Metrics/MethodLength
     case runner || WithModel.runner
     when :rspec
       before(*scope) do
@@ -59,7 +59,7 @@ module WithModel
         object.destroy
       end
     else
-      raise ArgumentError, "Unsupported test runner set, expected :rspec or :minitest"
+      raise ArgumentError, 'Unsupported test runner set, expected :rspec or :minitest'
     end
   end
 end

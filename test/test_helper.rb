@@ -7,8 +7,10 @@ require 'minitest/autorun'
 
 WithModel.runner = :minitest
 
-class MiniTest::Test
-  extend WithModel
+module MiniTest
+  class Test
+    extend WithModel
+  end
 end
 
 is_jruby = RUBY_PLATFORM == 'java'
