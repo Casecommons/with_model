@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 
+# Workaround for JRuby CI failure https://github.com/jruby/jruby/issues/6547#issuecomment-774104996
+if RUBY_ENGINE == 'jruby'
+  require 'i18n/backend'
+  require 'i18n/backend/simple'
+end
+
 require 'simplecov'
 SimpleCov.start
 
