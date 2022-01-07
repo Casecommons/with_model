@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary     = 'Dynamically build a model within an RSpec context'
   spec.description = spec.summary
   spec.license     = 'MIT'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 
   spec.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
