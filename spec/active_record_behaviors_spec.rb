@@ -7,7 +7,7 @@ describe 'ActiveRecord behaviors' do
     context 'that has a named scope' do
       before do
         @regular_model = Class.new ActiveRecord::Base do
-          self.table_name = "regular_models"
+          self.table_name = 'regular_models'
           scope :title_is_foo, -> { where(title: 'foo') }
         end
 
