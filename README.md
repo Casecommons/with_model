@@ -12,7 +12,7 @@
 
 ## Installation
 
-Install as usual: `gem install with_model` or add `gem 'with_model'` to your Gemfile. See `.travis.yml` for supported (tested) Ruby versions.
+Install as usual: `gem install with_model` or add `gem 'with_model'` to your Gemfile. See [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) for supported (tested) Ruby versions.
 
 ### RSpec
 
