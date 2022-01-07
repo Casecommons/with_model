@@ -1,7 +1,7 @@
 # [with_model](https://github.com/Casecommons/with_model)
 
 [![Gem Version](https://img.shields.io/gem/v/with_model.svg?style=flat)](https://rubygems.org/gems/with_model)
-[![Build Status](https://secure.travis-ci.org/Casecommons/with_model.svg?branch=master)](https://travis-ci.org/Casecommons/with_model)
+[![Build Status](https://github.com/Casecommons/with_model/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/Casecommons/with_model/actions/workflows/ci.yml)
 [![API Documentation](https://img.shields.io/badge/yard-api%20docs-lightgrey.svg)](https://www.rubydoc.info/gems/with_model)
 
 `with_model` dynamically builds an Active Record model (with table) before each test in a group and destroys it afterwards.
