@@ -55,7 +55,11 @@ module WithModel
 
     def cleanup_descendants_tracking
       if defined?(ActiveSupport::DescendantsTracker)
-        ActiveSupport::DescendantsTracker.class_variable_get(:@@direct_descendants).delete(ActiveRecord::Base)
+        if ActiveSupport::DescendantsTracker.respond_to?(:clear)
+          ActiveSupport::DescendantsTracker.clear([ActiveRecord::Base])
+        else
+          ActiveSupport::DescendantsTracker.class_variable_get(:@@direct_descendants).delete(ActiveRecord::Base)
+        end
       elsif @model.superclass.respond_to?(:direct_descendants)
         @model.superclass.direct_descendants.delete(@model)
       end
