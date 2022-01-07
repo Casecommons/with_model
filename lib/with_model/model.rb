@@ -55,7 +55,7 @@ module WithModel
 
     def cleanup_descendants_tracking
       if defined?(ActiveSupport::DescendantsTracker)
-        if ActiveSupport::DescendantsTracker.respond_to?(:clear)
+        if ActiveSupport::VERSION::MAJOR >= 7
           ActiveSupport::DescendantsTracker.clear([ActiveRecord::Base])
         else
           ActiveSupport::DescendantsTracker.class_variable_get(:@@direct_descendants).delete(ActiveRecord::Base)
