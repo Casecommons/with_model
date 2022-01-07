@@ -1,3 +1,9 @@
+### 2.1.6
+- Require Ruby 2.6 or later
+- Add Ruby 3.0 and 3.1 support
+- Add Active Record 6.1 and 7.0 support
+- Add minitest support (Miks Miķelsons)
+
 ### 2.1.5
 
 - Add support for Active Record 6.1
