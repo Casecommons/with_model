@@ -6,7 +6,6 @@ rvm:
   - 2.7.1
   - 2.6.6
   - 2.5.8
-  - 2.4.10
   - jruby-9.2.13.0
 
 env:
@@ -23,12 +22,6 @@ jobs:
   allow_failures:
     - env: ACTIVE_RECORD_BRANCH="master"
   exclude:
-    - rvm: 2.4.10
-      env: ACTIVE_RECORD_BRANCH="master"
-    - rvm: 2.4.10
-      env: ACTIVE_RECORD_VERSION="~> 6.0.0"
-    - rvm: 2.4.10
-      env: ACTIVE_RECORD_VERSION="~> 6.1.0"
     - rvm: jruby-9.2.13.0
       env: ACTIVE_RECORD_VERSION="~> 6.0.0"
     - rvm: 3.0.0
