@@ -58,4 +58,4 @@ jobs:
     - name: Update bundle
       run: ${{ matrix.active-record-version-env }} bundle update
     - name: Run tests
-      run: ${{ matrix.active-record-version-env }} bundle exec rake
+      run: ${{ matrix.active-record-version-env }} bin/rake
