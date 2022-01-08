@@ -20,11 +20,4 @@ end
 desc 'Run lint'
 RuboCop::RakeTask.new
 
-namespace 'doc' do
-  desc 'Generate README and preview in browser'
-  task 'readme' do
-    sh 'markdown README.md > README.html && open README.html'
-  end
-end
-
 task default: %i[spec test rubocop]
