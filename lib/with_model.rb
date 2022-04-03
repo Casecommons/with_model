@@ -42,6 +42,7 @@ module WithModel
 
   # @param [Object] object The new model object instance to create
   # @param scope Passed to `before`/`after` in the test context. Rspec only.
+  # @param [Symbol] runner The test running, either :rspec or :minitest, defaults to :rspec
   def setup_object(object, scope: nil, runner: nil) # rubocop:disable Metrics/MethodLength
     case runner || WithModel.runner
     when :rspec
@@ -53,10 +54,22 @@ module WithModel
         object.destroy
       end
     when :minitest
-      object.create
+      class_eval do
+        cattr_accessor :with_model_object
 
-      Minitest.after_run do
-        object.destroy
+        prepend(Module.new do
+          def setup
+            with_model_object.create
+            super
+          end
+
+          def teardown
+            with_model_object.destroy
+            super
+          end
+        end)
+
+        self.with_model_object = object
       end
     else
       raise ArgumentError, 'Unsupported test runner set, expected :rspec or :minitest'
