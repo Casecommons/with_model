@@ -48,7 +48,7 @@ describe 'A blog post' do
   end
 
   it 'has the module' do
-    expect(BlogPost.include?(MyModule)).to eq true
+    expect(BlogPost.include?(MyModule)).to be true
   end
 
   it 'has the class method' do
@@ -64,7 +64,7 @@ describe 'A blog post' do
     expect(record).not_to be_valid
     record.title = 'foo'
     expect(record).to be_valid
-    expect(record.save).to eq true
+    expect(record.save).to be true
     expect(record.reload).to eq record
     record.comments.create!(text: 'Lorem ipsum')
     expect(record.comments.count).to eq 1
@@ -78,7 +78,7 @@ describe 'A blog post' do
   with_model :Ford, superclass: Car
 
   it 'has a specified superclass' do
-    expect(Ford < Car).to eq true
+    expect(Ford < Car).to be true
   end
 end
 
