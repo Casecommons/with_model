@@ -4,8 +4,8 @@ source 'https://rubygems.org'
 
 gemspec
 
-ar_branch = ENV['ACTIVE_RECORD_BRANCH']
-ar_version = ENV['ACTIVE_RECORD_VERSION']
+ar_branch = ENV.fetch('ACTIVE_RECORD_BRANCH', nil)
+ar_version = ENV.fetch('ACTIVE_RECORD_VERSION', nil)
 is_jruby = RUBY_PLATFORM == 'java'
 
 if ar_branch
