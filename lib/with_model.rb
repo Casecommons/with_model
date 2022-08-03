@@ -57,13 +57,13 @@ module WithModel
       class_eval do
         cattr_accessor :with_model_object
 
-        prepend(Module.new do
-          def setup
+        include(Module.new do
+          def before_setup
             with_model_object.create
             super
           end
 
-          def teardown
+          def before_teardown
             with_model_object.destroy
             super
           end
