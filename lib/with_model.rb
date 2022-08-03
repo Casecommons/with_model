@@ -6,6 +6,24 @@ require 'with_model/table'
 require 'with_model/version'
 
 module WithModel
+  class MiniTestLifeCycle < Module
+    def initialize(object)
+      define_method :before_setup do
+        object.create
+        super() if defined?(super)
+      end
+
+      define_method :after_teardown do
+        object.destroy
+        super() if defined?(super)
+      end
+    end
+
+    def self.call(object)
+      new(object)
+    end
+  end
+
   class << self
     attr_writer :runner
   end
@@ -55,21 +73,7 @@ module WithModel
       end
     when :minitest
       class_eval do
-        cattr_accessor :with_model_object
-
-        include(Module.new do
-          def before_setup
-            with_model_object.create
-            super
-          end
-
-          def before_teardown
-            with_model_object.destroy
-            super
-          end
-        end)
-
-        self.with_model_object = object
+        include MiniTestLifeCycle.call(object)
       end
     else
       raise ArgumentError, 'Unsupported test runner set, expected :rspec or :minitest'
