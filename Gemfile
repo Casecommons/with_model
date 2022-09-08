@@ -21,4 +21,4 @@ elsif ar_version
   end
 end
 
-gem 'sqlite3', '~> 1.4.1' unless is_jruby
+gem 'sqlite3', '~> 1.5.0' unless is_jruby
