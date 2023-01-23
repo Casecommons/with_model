@@ -23,6 +23,9 @@ Bundler/OrderedGems:
 Bundler/DuplicatedGem:
   Enabled: false
 
+Gemspec/DevelopmentDependencies:
+  Enabled: false
+
 RSpec/Be:
   Enabled: false
 
