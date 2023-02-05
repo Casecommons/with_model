@@ -30,4 +30,4 @@ gem 'rubocop-minitest'
 gem 'rubocop-rake'
 gem 'rubocop-rspec'
 gem 'simplecov'
-gem 'sqlite3', '~> 1.5.0' unless is_jruby
+gem 'sqlite3', '~> 1.6.0' unless is_jruby
