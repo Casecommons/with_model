@@ -151,8 +151,8 @@ describe 'a temporary ActiveRecord model created with with_model' do
     with_model :'Stuff::BlogPost'
 
     it 'creates the model in the namespace' do
-      expect(defined?(::BlogPost)).to be_falsey
-      expect(defined?(::Stuff::BlogPost)).to be_truthy
+      expect(defined?(BlogPost)).to be_falsey
+      expect(defined?(Stuff::BlogPost)).to be_truthy
     end
   end
 
@@ -182,8 +182,8 @@ describe 'a temporary ActiveRecord model created with with_model' do
     end
 
     it 'has the mixin' do
-      expect(-> { ::WithAMixin.new.foo }).not_to raise_error
-      expect(::WithAMixin.include?(AMixin)).to be true
+      expect(-> { WithAMixin.new.foo }).not_to raise_error
+      expect(WithAMixin.include?(AMixin)).to be true
     end
   end
 
