@@ -105,7 +105,7 @@ describe 'ActiveRecord behaviors' do
 
     context 'in earlier examples' do
       it 'works as normal' do
-        Province.create!(country: Country.create!)
+        expect { Province.create!(country: Country.create!) }.not_to raise_error
       end
     end
 
