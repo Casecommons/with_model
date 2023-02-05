@@ -13,9 +13,12 @@ shared_examples_for 'ActiveModel' do
 
   active_model_lint_tests.each do |method_name|
     friendly_name = method_name.tr('_', ' ')
+
+    # rubocop:disable RSpec/NoExpectationExample
     example friendly_name do
       public_send method_name.to_sym
     end
+    # rubocop:enable RSpec/NoExpectationExample
   end
 
   before { @model = subject }
