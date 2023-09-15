@@ -1,3 +1,10 @@
+### 2.1.7
+- Require Ruby 2.7 or later
+- Add Ruby 3.2 support
+- Require Active Record 6.0 or later
+- Improve minitest support (Mark Edmondson)
+- Limit scope when clearing descendants tracker (idea from Jean-Baptiste Jacquinot)
+
 ### 2.1.6
 - Require Ruby 2.6 or later
 - Add Ruby 3.0 and 3.1 support
