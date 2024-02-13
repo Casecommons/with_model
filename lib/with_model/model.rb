@@ -76,7 +76,7 @@ module WithModel
     end
 
     def table
-      @table ||= Table.new table_name, @table_options, &@table_block
+      @table ||= Table.new table_name, @table_options, connection: @superclass.connection, &@table_block
     end
 
     def table_name
