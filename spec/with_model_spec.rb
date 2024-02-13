@@ -387,4 +387,25 @@ describe 'a temporary ActiveRecord model created with with_model' do
       expect(BlogPost.with_model?).to be true
     end
   end
+
+  context "with 'superclass' that connects to a different database" do
+    class ApplicationRecordInDifferentDatabase < ActiveRecord::Base
+      self.abstract_class = true
+      establish_connection(ActiveRecord::Base.connection_pool.db_config.configuration_hash)
+    end
+
+    after(:all) do
+      Object.__send__(:remove_const, 'ApplicationRecordInDifferentDatabase')
+    end
+
+    with_model :BlogPost, superclass: ApplicationRecordInDifferentDatabase do
+      table do |t|
+        t.string 'title'
+      end
+    end
+
+    it 'uses the superclass connection' do
+      expect(BlogPost.connection.tables).to include(BlogPost.table_name)
+    end
+  end
 end
