@@ -363,10 +363,6 @@ describe 'a temporary ActiveRecord model created with with_model' do
       self.abstract_class = true
     end
 
-    after(:all) do
-      Object.__send__(:remove_const, 'BlogPostParent')
-    end
-
     with_model :BlogPost, superclass: BlogPostParent do
       table do |t|
         t.string 'title'

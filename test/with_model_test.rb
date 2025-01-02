@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class WithModelTest < MiniTest::Test
+class WithModelTest < Minitest::Test
   with_model :BlogPost do
     table do |t|
       t.string 'title'

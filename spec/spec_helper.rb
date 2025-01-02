@@ -1,14 +1,5 @@
 # frozen_string_literal: true
 
-# Workaround for JRuby CI failure https://github.com/jruby/jruby/issues/6547#issuecomment-774104996
-if RUBY_ENGINE == 'jruby'
-  require 'i18n/backend'
-  require 'i18n/backend/simple'
-end
-
-require 'simplecov'
-SimpleCov.start
-
 require 'bundler/setup'
 require 'with_model'
 
@@ -26,13 +17,10 @@ RSpec.configure do |config|
   end
 end
 
-is_jruby = RUBY_PLATFORM == 'java'
-adapter = is_jruby ? 'jdbcsqlite3' : 'sqlite3'
-
 # WithModel requires ActiveRecord::Base.connection to be established.
 # If ActiveRecord already has a connection, as in a Rails app, this is unnecessary.
 require 'active_record'
-ActiveRecord::Base.establish_connection(adapter: adapter, database: ':memory:')
+ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
 
 I18n.enforce_available_locales = true if defined?(I18n) && I18n.respond_to?(:enforce_available_locales=)
 
