@@ -6,8 +6,6 @@ on:
       - master
       - github-actions
   pull_request:
-    branches:
-      - master
 
 jobs:
   test:
