@@ -54,15 +54,9 @@ module WithModel
     end
 
     def cleanup_descendants_tracking
-      if defined?(ActiveSupport::DescendantsTracker)
-        if ActiveSupport::VERSION::MAJOR >= 7
-          ActiveSupport::DescendantsTracker.clear([@model])
-        else
-          ActiveSupport::DescendantsTracker.class_variable_get(:@@direct_descendants).delete(ActiveRecord::Base)
-        end
-      elsif @model.superclass.respond_to?(:direct_descendants)
-        @model.superclass.direct_descendants.delete(@model)
-      end
+      ActiveSupport::DescendantsTracker.clear([@model])
+    rescue RuntimeError
+      GC.start
     end
 
     def reset_dependencies_cache
