@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-$LOAD_PATH.unshift File.expand_path('../lib', __dir__)
+$LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 
-require 'with_model'
-require 'minitest/autorun'
+require "with_model"
+require "minitest/autorun"
 
 WithModel.runner = :minitest
 
@@ -13,5 +13,5 @@ end
 
 # WithModel requires ActiveRecord::Base.connection to be established.
 # If ActiveRecord already has a connection, as in a Rails app, this is unnecessary.
-require 'active_record'
-ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
+require "active_record"
+ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: ":memory:")

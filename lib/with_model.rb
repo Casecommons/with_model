@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'with_model/model'
-require 'with_model/model/dsl'
-require 'with_model/table'
-require 'with_model/version'
+require "with_model/model"
+require "with_model/model/dsl"
+require "with_model/table"
+require "with_model/version"
 
 module WithModel
   class MiniTestLifeCycle < Module
@@ -61,7 +61,7 @@ module WithModel
   # @param [Object] object The new model object instance to create
   # @param scope Passed to `before`/`after` in the test context. Rspec only.
   # @param [Symbol] runner The test running, either :rspec or :minitest, defaults to :rspec
-  def setup_object(object, scope: nil, runner: nil) # rubocop:disable Metrics/MethodLength
+  def setup_object(object, scope: nil, runner: nil)
     case runner || WithModel.runner
     when :rspec
       before(*scope) do
@@ -76,7 +76,7 @@ module WithModel
         include MiniTestLifeCycle.call(object)
       end
     else
-      raise ArgumentError, 'Unsupported test runner set, expected :rspec or :minitest'
+      raise ArgumentError, "Unsupported test runner set, expected :rspec or :minitest"
     end
   end
 end

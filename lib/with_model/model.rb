@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require 'active_record'
-require 'active_support/core_ext/string/inflections'
-require 'English'
-require 'with_model/constant_stubber'
-require 'with_model/methods'
-require 'with_model/table'
+require "active_record"
+require "active_support/core_ext/string/inflections"
+require "English"
+require "with_model/constant_stubber"
+require "with_model/methods"
+require "with_model/table"
 
 module WithModel
   # In general, direct use of this class should be avoided. Instead use
