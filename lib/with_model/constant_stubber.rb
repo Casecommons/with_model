@@ -37,7 +37,7 @@ module WithModel
     end
 
     def lookup_list
-      @const_name.to_s.split('::')
+      @const_name.to_s.split("::")
     end
 
     def basename

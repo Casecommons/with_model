@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'active_record'
+require "active_record"
 
 module WithModel
   # In general, direct use of this class should be avoided. Instead use
