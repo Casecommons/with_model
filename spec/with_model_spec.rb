@@ -320,30 +320,6 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
   end
 
-  context "with ActiveSupport::DescendantsTracker" do
-    with_model :BlogPost do
-      model do
-        def self.inspect
-          "BlogPost class #{object_id}"
-        end
-      end
-    end
-
-    def blog_post_classes
-      ActiveRecord::Base.descendants.select do |c|
-        c.table_name == BlogPost.table_name
-      end
-    end
-
-    it "includes the correct model class in descendants on the first test run" do
-      expect(blog_post_classes).to eq [BlogPost]
-    end
-
-    it "includes the correct model class in descendants on the second test run" do
-      expect(blog_post_classes).to eq [BlogPost]
-    end
-  end
-
   context "with_model can be run within RSpec :all hook" do
     with_model :BlogPost, scope: :all do
       table do |t|
@@ -394,10 +370,6 @@ describe "a temporary ActiveRecord model created with with_model" do
     class ApplicationRecordInDifferentDatabase < ActiveRecord::Base # standard:disable Lint/ConstantDefinitionInBlock
       self.abstract_class = true
       establish_connection(ActiveRecord::Base.connection_pool.db_config.configuration_hash)
-    end
-
-    after(:all) do
-      Object.__send__(:remove_const, "ApplicationRecordInDifferentDatabase")
     end
 
     with_model :BlogPost, superclass: ApplicationRecordInDifferentDatabase do

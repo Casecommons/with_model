@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
+require "logger"
 require "active_record"
 require "active_support/core_ext/string/inflections"
 require "English"
 require "with_model/constant_stubber"
+require "with_model/descendants_tracker"
 require "with_model/methods"
 require "with_model/table"
 
@@ -38,6 +40,7 @@ module WithModel
       cleanup_descendants_tracking
       reset_dependencies_cache
       table.destroy
+      WithModel::DescendantsTracker.clear([@model])
       @model = nil
     end
 
@@ -54,15 +57,8 @@ module WithModel
     end
 
     def cleanup_descendants_tracking
-      if defined?(ActiveSupport::DescendantsTracker)
-        if ActiveSupport::VERSION::MAJOR >= 7
-          ActiveSupport::DescendantsTracker.clear([@model])
-        else
-          ActiveSupport::DescendantsTracker.class_variable_get(:@@direct_descendants).delete(ActiveRecord::Base)
-        end
-      elsif @model.superclass.respond_to?(:direct_descendants)
-        @model.superclass.direct_descendants.delete(@model)
-      end
+      ActiveSupport::DescendantsTracker.clear([@model]) \
+        unless ActiveSupport::DescendantsTracker.clear_disabled
     end
 
     def reset_dependencies_cache

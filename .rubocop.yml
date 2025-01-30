@@ -29,5 +29,8 @@ RSpec/Be:
 RSpec/BeforeAfterAll:
   Enabled: false
 
+RSpec/ExpectInHook:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false

@@ -17,6 +17,7 @@ end
 gem "bigdecimal"
 gem "bundler"
 gem "debug"
+gem "logger"
 gem "minitest"
 gem "mutex_m"
 gem "rake"
