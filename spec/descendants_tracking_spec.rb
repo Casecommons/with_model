@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Descendants tracking" do # rubocop:disable RSpec/DescribeClass
+describe "Descendants tracking" do
   with_model :BlogPost do
     model do
       def self.inspect

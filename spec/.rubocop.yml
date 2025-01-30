@@ -1,5 +1,0 @@
-inherit_from:
-  - ../.rubocop.yml
-
-Lint/ConstantDefinitionInBlock:
-  Enabled: false
