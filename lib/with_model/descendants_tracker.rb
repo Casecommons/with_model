@@ -62,7 +62,7 @@ module WithModel
       end
     end
 
-    module ReloadedClassesFiltering # :nodoc:
+    module DestroyedClassesFiltering
       def subclasses
         WithModel::DescendantsTracker.reject!(super)
       end
@@ -74,8 +74,8 @@ module WithModel
   end
 end
 
-class Class
-  prepend WithModel::DescendantsTracker::ReloadedClassesFiltering
+class ActiveRecord::Base
+  extend WithModel::DescendantsTracker::DestroyedClassesFiltering
 end
 
 module ActiveSupport
