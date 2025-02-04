@@ -1,3 +1,13 @@
+### 2.2.0
+
+- Fix dependency tracking issue when `cache_classes: true` is set in Rails 7+.
+- Create table in same database as `superclass` (Joe Lind)
+- Switch to standard instead of rubocop for linting.
+- Add support for Active Record 7 and 8.
+- Require Active Record 7 or later.
+- Add support for Ruby 3.3.
+- Require Ruby 3.1 or later.
+
 ### 2.1.7
 - Require Ruby 2.7 or later
 - Add Ruby 3.2 support
