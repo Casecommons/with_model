@@ -25,6 +25,18 @@ module WithModel
       connection.create_table(@name, **@options, &@block)
     end
 
+    # Points the model at this table.
+    def configure(klass)
+      klass.table_name = @name
+    end
+
+    # Removes everything this table holds by dropping it. The model is not
+    # needed, but is accepted so that {WithModel::NullTable} - which does need
+    # it - can stand in here.
+    def teardown(_klass)
+      destroy
+    end
+
     def destroy
       connection.drop_table(@name)
     end

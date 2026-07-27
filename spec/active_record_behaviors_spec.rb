@@ -69,6 +69,7 @@ describe "ActiveRecord behaviors" do
       with_table :animals
 
       with_model :StuffedAnimal do
+        table
         model do
           has_many :tea_cups, as: :pet
         end
@@ -101,7 +102,9 @@ describe "ActiveRecord behaviors" do
       end
     end
 
-    with_model :Country
+    with_model :Country do
+      table
+    end
 
     context "in earlier examples" do
       it "works as normal" do

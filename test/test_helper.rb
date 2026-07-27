@@ -7,6 +7,8 @@ require "minitest/autorun"
 
 WithModel.runner = :minitest
 
+WithModel.deprecator.behavior = :raise
+
 Minitest::Test.class_eval do
   extend WithModel
 end

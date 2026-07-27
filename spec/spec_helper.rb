@@ -3,6 +3,8 @@
 require "bundler/setup"
 require "with_model"
 
+WithModel.deprecator.behavior = :raise
+
 RSpec.configure do |config|
   config.extend WithModel
 

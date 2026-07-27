@@ -119,6 +119,7 @@ describe "A blog post" do
   end
 
   with_model :Ford, superclass: Car do
+    table
   end
 
   it "has a specified superclass" do

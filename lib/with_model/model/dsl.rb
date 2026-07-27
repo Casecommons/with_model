@@ -11,10 +11,13 @@ module WithModel
       # Provide a schema definition for the table, passed to ActiveRecord's `create_table`.
       # The table name will be auto-generated.
       #
+      # Pass `false` instead of options to create no table at all, so that the
+      # model inherits its superclass's table as Rails Single Table Inheritance
+      # requires. `table(false)` takes no block.
+      #
       # @see https://api.rubyonrails.org/classes/ActiveRecord/ConnectionAdapters/SchemaStatements.html#method-i-create_table
       def table(options = {}, &block)
-        @model.table_options = options
-        @model.table_block = block
+        @model.specify_table(options, block)
       end
 
       # Provide a class body for the ActiveRecord model.

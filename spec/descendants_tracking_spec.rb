@@ -4,6 +4,7 @@ require "spec_helper"
 
 describe "Descendants tracking" do
   with_model :BlogPost do
+    table
     model do
       def self.inspect
         "BlogPost class #{object_id}"

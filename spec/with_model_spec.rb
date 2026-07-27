@@ -96,7 +96,9 @@ describe "a temporary ActiveRecord model created with with_model" do
     shadowing_example_ran = false
 
     context "with the with_model block" do
-      with_model :MyConst
+      with_model :MyConst do
+        table
+      end
 
       after do
         shadowing_example_ran = true
@@ -116,7 +118,9 @@ describe "a temporary ActiveRecord model created with with_model" do
   end
 
   describe "with a plural name" do
-    with_model :BlogPosts
+    with_model :BlogPosts do
+      table
+    end
 
     it "does not singularize the constant name" do
       expect(BlogPosts).to be
@@ -125,7 +129,9 @@ describe "a temporary ActiveRecord model created with with_model" do
   end
 
   describe "with a name containing capital letters" do
-    with_model :BlogPost
+    with_model :BlogPost do
+      table
+    end
 
     it "tableizes the table name" do
       expect(BlogPost.table_name).to match(/_blog_posts_/)
@@ -134,7 +140,9 @@ describe "a temporary ActiveRecord model created with with_model" do
   end
 
   describe "with a name with underscores" do
-    with_model :blog_post
+    with_model :blog_post do
+      table
+    end
 
     it "constantizes the name" do
       expect(BlogPost).to be
@@ -149,7 +157,9 @@ describe "a temporary ActiveRecord model created with with_model" do
   describe "with a name which is namespaced" do
     before { stub_const("Stuff", Module.new) }
 
-    with_model :"Stuff::BlogPost"
+    with_model :"Stuff::BlogPost" do
+      table
+    end
 
     it "creates the model in the namespace" do
       expect(defined?(BlogPost)).to be_falsey
@@ -159,6 +169,7 @@ describe "a temporary ActiveRecord model created with with_model" do
 
   describe "using the constant in the model block" do
     with_model :BlogPost do
+      table
       model do
         raise "I am not myself!" unless self == BlogPost
       end
@@ -180,6 +191,7 @@ describe "a temporary ActiveRecord model created with with_model" do
     before { stub_const("AMixin", mixin) }
 
     with_model :WithAMixin do
+      table
       model do
         include AMixin
       end
@@ -207,6 +219,7 @@ describe "a temporary ActiveRecord model created with with_model" do
     before { stub_const("AMixin", mixin) }
 
     with_model :WithAClassEval do
+      table
       model do
         include AMixin
 
@@ -239,8 +252,13 @@ describe "a temporary ActiveRecord model created with with_model" do
     end
   end
 
+  # Omitting `table` is deprecated, but still supported for the rest of 2.x.
+  # These three contexts are its only coverage, so they keep omitting it and
+  # silence the warning rather than adopting the replacement spelling.
   context "without a block" do
-    with_model :BlogPost
+    WithModel.deprecator.silence do
+      with_model :BlogPost
+    end
 
     it "acts like a normal ActiveRecord model" do
       record = BlogPost.create!
@@ -257,7 +275,9 @@ describe "a temporary ActiveRecord model created with with_model" do
   end
 
   context "with an empty block" do
-    with_model(:BlogPost) {}
+    WithModel.deprecator.silence do
+      with_model(:BlogPost) {}
+    end
 
     it "acts like a normal ActiveRecord model" do
       record = BlogPost.create!
@@ -304,7 +324,9 @@ describe "a temporary ActiveRecord model created with with_model" do
   end
 
   context "without a table or model block" do
-    with_model :BlogPost
+    WithModel.deprecator.silence do
+      with_model :BlogPost
+    end
 
     it "acts like a normal ActiveRecord model" do
       expect(BlogPost.columns.map(&:name)).to eq ["id"]
