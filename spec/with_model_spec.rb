@@ -209,6 +209,7 @@ describe "a temporary ActiveRecord model created with with_model" do
     with_model :WithAClassEval do
       model do
         include AMixin
+
         def my_method
         end
       end

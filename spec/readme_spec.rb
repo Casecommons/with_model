@@ -17,6 +17,7 @@ describe "A blog post" do
     # The model block works just like the class definition.
     model do
       include MyModule
+
       has_many :comments
       validates_presence_of :title
 
