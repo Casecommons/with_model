@@ -10,46 +10,82 @@ on:
     - cron: "0 18 * * 6" # Saturdays at 12pm CST
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   test:
+    name: Ruby ${{ matrix.ruby-version }} / ${{ matrix.active-record.label }}
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     env:
       CI: true
     strategy:
       fail-fast: false
       matrix:
-        ruby-version: ['3.2', '3.3', '3.4']
-        active-record-version-env:
-          - ACTIVE_RECORD_VERSION="~> 7.0.0"
-          - ACTIVE_RECORD_VERSION="~> 7.1.0"
-          - ACTIVE_RECORD_VERSION="~> 7.2.0"
-          - ACTIVE_RECORD_VERSION="~> 8.0.0"
+        ruby-version: ["3.2", "3.3", "3.4"]
+        active-record:
+          - label: AR 7.0
+            env: ACTIVE_RECORD_VERSION=~> 7.0.0
+          - label: AR 7.1
+            env: ACTIVE_RECORD_VERSION=~> 7.1.0
+          - label: AR 7.2
+            env: ACTIVE_RECORD_VERSION=~> 7.2.0
+          - label: AR 8.0
+            env: ACTIVE_RECORD_VERSION=~> 8.0.0
         allow-failure: [false]
         include:
-          - ruby-version: '3.4'
-            active-record-version-env: ACTIVE_RECORD_BRANCH="main"
+          - ruby-version: "3.4"
+            active-record:
+              label: AR main
+              env: ACTIVE_RECORD_BRANCH=main
             allow-failure: true
-          - ruby-version: '3.4'
-            active-record-version-env: ACTIVE_RECORD_BRANCH="8-0-stable"
+          - ruby-version: "3.4"
+            active-record:
+              label: AR 8-0-stable
+              env: ACTIVE_RECORD_BRANCH=8-0-stable
             allow-failure: true
-          - ruby-version: '3.4'
-            active-record-version-env: ACTIVE_RECORD_BRANCH="7-2-stable"
+          - ruby-version: "3.4"
+            active-record:
+              label: AR 7-2-stable
+              env: ACTIVE_RECORD_BRANCH=7-2-stable
             allow-failure: true
-          - ruby-version: '3.4'
-            active-record-version-env: ACTIVE_RECORD_BRANCH="7-1-stable"
+          - ruby-version: "3.4"
+            active-record:
+              label: AR 7-1-stable
+              env: ACTIVE_RECORD_BRANCH=7-1-stable
             allow-failure: true
-          - ruby-version: '3.4'
-            active-record-version-env: ACTIVE_RECORD_BRANCH="7-0-stable"
+          - ruby-version: "3.4"
+            active-record:
+              label: AR 7-0-stable
+              env: ACTIVE_RECORD_BRANCH=7-0-stable
             allow-failure: true
     continue-on-error: ${{ matrix.allow-failure }}
     steps:
       - uses: actions/checkout@v7
+      # Set the version here rather than prefixing each command, so the matrix
+      # value reaches the environment without being interpolated into a script.
+      - name: Select Active Record version
+        env:
+          ACTIVE_RECORD_ENV: ${{ matrix.active-record.env }}
+        run: echo "$ACTIVE_RECORD_ENV" >> "$GITHUB_ENV"
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
+          cache-version: ${{ matrix.active-record.env }}
+      # Gemfile.lock is not checked in, so this resolves the newest gems that
+      # satisfy the Gemfile on each run rather than a recorded set. `--all` is
+      # what Bundler 4, shipped with Ruby 4.0, wants for that.
       - name: Update bundle
-        run: ${{ matrix.active-record-version-env }} bundle update
+        run: bundle update --all
+      # Not bin/rake: bin/ holds generated binstubs and is not checked in, and
+      # whether bundling writes them there varies by Bundler version - Bundler 4
+      # does not, which left Ruby 4.0 with no binstub to run.
       - name: Run tests
-        run: ${{ matrix.active-record-version-env }} bin/rake
+        run: bundle exec rake
