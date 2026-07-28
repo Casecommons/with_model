@@ -1,3 +1,19 @@
+### Unreleased
+
+- Add `table(false)` to create no table, so that a model whose superclass is a
+  concrete Active Record class uses single table inheritance.
+- Accept a String, a Symbol, or a callable for `superclass:`, resolved for each
+  example, so that another `with_model` model can be the superclass.
+- Raise `WithModel::InvalidSuperclass` for a `superclass:` that cannot be used,
+  and `WithModel::MissingSuperclass` for a name that resolves to nothing. Both
+  are `ArgumentError`s, and the latter is an `InvalidSuperclass`, so either can
+  be rescued as narrowly as needed.
+- Deprecate omitting `table`, which currently creates a table with only an id
+  column. In 3.0 it will create no table.
+- Create minitest models in the order they are declared, so that a model can
+  refer to another model declared above it.
+- Require Ruby 3.2 or later.
+
 ### 2.2.0
 
 - Fix dependency tracking issue when `cache_classes: true` is set in Rails 7+.

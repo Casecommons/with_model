@@ -81,7 +81,7 @@ describe "A blog post" do
   end
 
   it "has a specified superclass" do
-    expect(Ford < Car).to be true
+    expect(Ford.new).to be_a(Car)
   end
 end
 
@@ -117,5 +117,50 @@ describe "with table options" do
 
   it "respects the additional options" do
     expect(WithOptions.columns.map(&:name)).not_to include("id")
+  end
+end
+
+describe "with_model supports Single Table Inheritance" do
+  with_model :Sandwich do
+    table do |t|
+      t.string "type"
+      t.string "bread"
+    end
+  end
+
+  with_model :ChunkyBacon, superclass: :Sandwich do
+    table(false)
+  end
+
+  it "shares the superclass's table" do
+    expect(ChunkyBacon.table_name).to eq Sandwich.table_name
+  end
+
+  it "stores its own type" do
+    sandwich = ChunkyBacon.create!(bread: "rye")
+
+    expect(sandwich.reload.type).to eq "ChunkyBacon"
+    expect(Sandwich.first).to be_a ChunkyBacon
+  end
+end
+
+describe "with_model supports foreign keys" do
+  with_model :Author do
+    table
+  end
+
+  with_model :Book do
+    table do |t|
+      t.references :author, foreign_key: {to_table: Author.table_name}
+    end
+
+    model do
+      belongs_to :author
+    end
+  end
+
+  it "has a foreign key" do
+    expect { Book.create!(author_id: 0) }
+      .to raise_error ActiveRecord::InvalidForeignKey
   end
 end

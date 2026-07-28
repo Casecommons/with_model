@@ -123,7 +123,7 @@ describe "A blog post" do
   end
 
   it "has a specified superclass" do
-    expect(Ford < Car).to eq true
+    expect(Ford.new).to be_a(Car)
   end
 end
 
@@ -162,6 +162,89 @@ describe "with table options" do
   end
 end
 ```
+
+## Single table inheritance
+
+Pass `table(false)` to create no table at all. Active Record's own inheritance
+then supplies the superclass's table, which is what single table inheritance
+needs.
+
+The superclass can be another `with_model` model. Its constant does not exist yet
+when the `superclass:` argument is read, so name it with a String or a Symbol, or
+pass a callable returning it, and it will be resolved once per example.
+
+```ruby
+describe "with_model supports Single Table Inheritance" do
+  with_model :Sandwich do
+    table do |t|
+      t.string "type"
+      t.string "bread"
+    end
+  end
+
+  with_model :ChunkyBacon, superclass: :Sandwich do
+    table(false)
+  end
+
+  it "shares the superclass's table" do
+    expect(ChunkyBacon.table_name).to eq Sandwich.table_name
+  end
+
+  it "stores its own type" do
+    sandwich = ChunkyBacon.create!(bread: "rye")
+
+    expect(sandwich.reload.type).to eq "ChunkyBacon"
+    expect(Sandwich.first).to be_a ChunkyBacon
+  end
+end
+```
+
+A `superclass:` that cannot be used raises `WithModel::InvalidSuperclass`: one
+that is not an Active Record class, one with no table of its own
+(`ActiveRecord::Base`, or an abstract class such as a Rails app's
+`ApplicationRecord`), or one whose table has no inheritance column to tell a
+subclass's rows apart. A name that resolves to nothing raises
+`WithModel::MissingSuperclass`, a kind of `InvalidSuperclass`, quoting the
+constant Ruby could not find — for a namespaced name, that is the segment which
+is actually missing. Both are `ArgumentError`s.
+
+A superclass whose table does not exist *yet* is allowed, since the table may be
+created later in the example, and Active Record reports its absence clearly
+enough on its own. Rows the model wrote are deleted when it goes away, since they
+name a class that is about to stop existing and would make the superclass
+unloadable.
+
+## Foreign keys
+
+`foreign_key: true` asks Active Record to infer the table a foreign key points
+at, and it infers `authors` from `author_id`. Generated table names are unique
+rather than conventional, so name the table instead:
+
+```ruby
+describe "with_model supports foreign keys" do
+  with_model :Author do
+    table
+  end
+
+  with_model :Book do
+    table do |t|
+      t.references :author, foreign_key: {to_table: Author.table_name}
+    end
+
+    model do
+      belongs_to :author
+    end
+  end
+
+  it "has a foreign key" do
+    expect { Book.create!(author_id: 0) }
+      .to raise_error ActiveRecord::InvalidForeignKey
+  end
+end
+```
+
+This reads `Author.table_name`, so declare `Author` first: models are created in
+the order they are declared, and destroyed in the reverse order.
 
 ## Requirements
 
