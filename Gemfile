@@ -22,6 +22,7 @@ gem "minitest"
 gem "mutex_m"
 gem "rake"
 gem "rspec"
+gem "ruby-lsp"
 gem "standard"
 
 if ar_branch == "7-0-stable" || ar_version == "~> 7.0.0"
