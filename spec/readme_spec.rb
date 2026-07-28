@@ -2,19 +2,22 @@
 
 require "spec_helper"
 
-describe "A blog post" do
-  before do
-    stub_const("MyModule", Module.new)
-  end
+module MyModule; end
 
+# A pre-existing model
+class Car < ActiveRecord::Base
+  self.abstract_class = true
+end
+
+describe "A blog post" do
   with_model :BlogPost do
-    # The table block works just like a migration.
+    # The table block (and an options hash) is passed to Active Record migration’s `create_table`.
     table do |t|
       t.string :title
       t.timestamps null: false
     end
 
-    # The model block works just like the class definition.
+    # The model block is the Active Record model’s class body.
     model do
       include MyModule
 
@@ -71,11 +74,9 @@ describe "A blog post" do
     expect(record.comments.count).to eq 1
   end
 
-  # with_model classes can have inheritance.
-  class Car < ActiveRecord::Base # standard:disable Lint/ConstantDefinitionInBlock
-    self.abstract_class = true
-  end
-
+  # with_model classes can have inheritance. Car is abstract, so it has no table
+  # and Ford gets one of its own. To inherit a concrete superclass's table
+  # instead, see "Single table inheritance" below.
   with_model :Ford, superclass: Car do
     table
   end

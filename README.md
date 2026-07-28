@@ -19,7 +19,7 @@ Install as usual: `gem install with_model` or add `gem 'with_model'` to your Gem
 Extend `WithModel` into RSpec:
 
 ```ruby
-require 'with_model'
+require "with_model"
 
 RSpec.configure do |config|
   config.extend WithModel
@@ -31,7 +31,7 @@ end
 Extend `WithModel` into minitest/spec and set the test runner explicitly:
 
 ```ruby
-require 'with_model'
+require "with_model"
 
 WithModel.runner = :minitest
 
@@ -45,11 +45,16 @@ end
 After setting up as above, call `with_model` and inside its block pass it a `table` block and a `model` block.
 
 ```ruby
-require 'spec_helper'
+require "spec_helper"
+
+module MyModule; end
+
+# A pre-existing model
+class Car < ActiveRecord::Base
+  self.abstract_class = true
+end
 
 describe "A blog post" do
-  module MyModule; end
-
   with_model :BlogPost do
     # The table block (and an options hash) is passed to Active Record migration’s `create_table`.
     table do |t|
@@ -60,15 +65,16 @@ describe "A blog post" do
     # The model block is the Active Record model’s class body.
     model do
       include MyModule
+
       has_many :comments
       validates_presence_of :title
 
       def self.some_class_method
-        'chunky'
+        "chunky"
       end
 
       def some_instance_method
-        'bacon'
+        "bacon"
       end
     end
   end
@@ -91,15 +97,15 @@ describe "A blog post" do
   end
 
   it "has the module" do
-    expect(BlogPost.include?(MyModule)).to eq true
+    expect(BlogPost.include?(MyModule)).to be true
   end
 
   it "has the class method" do
-    expect(BlogPost.some_class_method).to eq 'chunky'
+    expect(BlogPost.some_class_method).to eq "chunky"
   end
 
   it "has the instance method" do
-    expect(BlogPost.new.some_instance_method).to eq 'bacon'
+    expect(BlogPost.new.some_instance_method).to eq "bacon"
   end
 
   it "can do all the things a regular model can" do
@@ -107,17 +113,15 @@ describe "A blog post" do
     expect(record).not_to be_valid
     record.title = "foo"
     expect(record).to be_valid
-    expect(record.save).to eq true
+    expect(record.save).to be true
     expect(record.reload).to eq record
-    record.comments.create!(:text => "Lorem ipsum")
+    record.comments.create!(text: "Lorem ipsum")
     expect(record.comments.count).to eq 1
   end
 
-  # with_model classes can have inheritance.
-  class Car < ActiveRecord::Base
-    self.abstract_class = true
-  end
-
+  # with_model classes can have inheritance. Car is abstract, so it has no table
+  # and Ford gets one of its own. To inherit a concrete superclass's table
+  # instead, see "Single table inheritance" below.
   with_model :Ford, superclass: Car do
     table
   end
@@ -151,8 +155,8 @@ end
 
 describe "with table options" do
   with_model :WithOptions do
-    table :id => false do |t|
-      t.string 'foo'
+    table id: false do |t|
+      t.string "foo"
       t.timestamps null: false
     end
   end
