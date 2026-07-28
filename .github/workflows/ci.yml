@@ -27,42 +27,41 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby-version: ["3.2", "3.3", "3.4"]
+        ruby-version: ["3.3", "3.4", "4.0"]
         active-record:
-          - label: AR 7.0
-            env: ACTIVE_RECORD_VERSION=~> 7.0.0
-          - label: AR 7.1
-            env: ACTIVE_RECORD_VERSION=~> 7.1.0
           - label: AR 7.2
             env: ACTIVE_RECORD_VERSION=~> 7.2.0
           - label: AR 8.0
             env: ACTIVE_RECORD_VERSION=~> 8.0.0
+          - label: AR 8.1
+            env: ACTIVE_RECORD_VERSION=~> 8.1.0
         allow-failure: [false]
         include:
-          - ruby-version: "3.4"
+          - ruby-version: "4.0"
             active-record:
               label: AR main
               env: ACTIVE_RECORD_BRANCH=main
             allow-failure: true
-          - ruby-version: "3.4"
+          - ruby-version: "4.0"
+            active-record:
+              label: AR 8-1-stable
+              env: ACTIVE_RECORD_BRANCH=8-1-stable
+            allow-failure: true
+          - ruby-version: "4.0"
             active-record:
               label: AR 8-0-stable
               env: ACTIVE_RECORD_BRANCH=8-0-stable
             allow-failure: true
-          - ruby-version: "3.4"
+          - ruby-version: "4.0"
             active-record:
               label: AR 7-2-stable
               env: ACTIVE_RECORD_BRANCH=7-2-stable
             allow-failure: true
-          - ruby-version: "3.4"
+          # A canary for the next Ruby, which cannot fail the build.
+          - ruby-version: ruby-head
             active-record:
-              label: AR 7-1-stable
-              env: ACTIVE_RECORD_BRANCH=7-1-stable
-            allow-failure: true
-          - ruby-version: "3.4"
-            active-record:
-              label: AR 7-0-stable
-              env: ACTIVE_RECORD_BRANCH=7-0-stable
+              label: AR 8.1
+              env: ACTIVE_RECORD_VERSION=~> 8.1.0
             allow-failure: true
     continue-on-error: ${{ matrix.allow-failure }}
     steps:

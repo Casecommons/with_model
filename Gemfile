@@ -9,7 +9,6 @@ ar_version = ENV.fetch("ACTIVE_RECORD_VERSION", nil)
 
 if ar_branch
   gem "activerecord", git: "https://github.com/rails/rails.git", branch: ar_branch
-  gem "arel", git: "https://github.com/rails/arel.git" if ar_branch == "master"
 elsif ar_version
   gem "activerecord", ar_version
 end
@@ -23,10 +22,5 @@ gem "mutex_m"
 gem "rake"
 gem "rspec"
 gem "ruby-lsp"
+gem "sqlite3"
 gem "standard"
-
-if ar_branch == "7-0-stable" || ar_version == "~> 7.0.0"
-  gem "sqlite3", "< 2"
-else
-  gem "sqlite3"
-end

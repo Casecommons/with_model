@@ -12,7 +12,8 @@
   column. In 3.0 it will create no table.
 - Create minitest models in the order they are declared, so that a model can
   refer to another model declared above it.
-- Require Ruby 3.2 or later.
+- Require Ruby 3.3 or later.
+- Require Active Record 7.2 or later.
 
 ### 2.2.0
 
