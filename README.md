@@ -265,6 +265,12 @@ See the [gemspec metadata](https://rubygems.org/gems/with_model) for dependency 
 
 In general, `with_model` is not guaranteed to be thread-safe, but is, in certain usages, safe to use concurrently across multiple processes with a single database schema.
 
+## Contributing
+
+Bug reports and pull requests are welcome. See the
+[CONTRIBUTING guide](/CONTRIBUTING.md) for how to run the tests against a
+particular Ruby or Active Record.
+
 ## Versioning
 
 `with_model` uses [Semantic Versioning 2.0.0](http://semver.org/spec/v2.0.0.html).
