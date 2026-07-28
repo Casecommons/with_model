@@ -8,9 +8,13 @@ require "with_model/version"
 module WithModel
   class MiniTestLifeCycle < Module
     def initialize(object)
+      # Each with_model includes a fresh module, so the last one declared sits
+      # earliest in the ancestor chain. Calling super() first means setup runs
+      # in declaration order while teardown unwinds in reverse, which is what
+      # lets one with_model refer to another declared above it.
       define_method :before_setup do
-        object.create
         super() if defined?(super)
+        object.create
       end
 
       define_method :after_teardown do
