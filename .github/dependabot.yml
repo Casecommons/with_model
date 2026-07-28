@@ -1,8 +1,24 @@
 version: 2
 updates:
-- package-ecosystem: bundler
-  directory: "/"
-  schedule:
-    interval: daily
-    time: "10:00"
-  open-pull-requests-limit: 10
+  # Gemfile.lock is not checked in and the Gemfile deliberately leaves versions
+  # to Bundler, so there is nothing here for Dependabot to bump routinely. It is
+  # listed to receive security advisories for the constraints that do exist.
+  - package-ecosystem: bundler
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: saturday
+    open-pull-requests-limit: 10
+
+  # The workflow pins actions by major version, which does not float across
+  # majors: actions/checkout sat four majors behind until someone noticed by
+  # hand. One grouped pull request keeps them current without a PR per action.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: saturday
+    groups:
+      actions:
+        patterns:
+          - "*"

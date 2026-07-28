@@ -43,13 +43,13 @@ jobs:
             allow-failure: true
     continue-on-error: ${{ matrix.allow-failure }}
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true
-    - name: Update bundle
-      run: ${{ matrix.active-record-version-env }} bundle update
-    - name: Run tests
-      run: ${{ matrix.active-record-version-env }} bin/rake
+      - uses: actions/checkout@v7
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
+      - name: Update bundle
+        run: ${{ matrix.active-record-version-env }} bundle update
+      - name: Run tests
+        run: ${{ matrix.active-record-version-env }} bin/rake
