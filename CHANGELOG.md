@@ -1,4 +1,4 @@
-### Unreleased
+### 2.3.0
 
 - Add `table(false)` to create no table, so that a model whose superclass is a
   concrete Active Record class uses single table inheritance.
@@ -12,8 +12,10 @@
   column. In 3.0 it will create no table.
 - Create minitest models in the order they are declared, so that a model can
   refer to another model declared above it.
-- Require Ruby 3.3 or later.
+- Add support for Active Record 8.1.
 - Require Active Record 7.2 or later.
+- Add support for Ruby 4.0.
+- Require Ruby 3.3 or later.
 
 ### 2.2.0
 
