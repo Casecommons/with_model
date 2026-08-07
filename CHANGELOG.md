@@ -1,3 +1,8 @@
+### Unreleased
+
+- Honor Active Record destruction callbacks and dependent associations when
+  cleaning up rows for a `table(false)` model.
+
 ### 2.3.0
 
 - Add `table(false)` to create no table, so that a model whose superclass is a

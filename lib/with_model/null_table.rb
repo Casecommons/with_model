@@ -13,17 +13,17 @@ module WithModel
   class NullTable
     # @param [Class] superclass The resolved superclass whose table will be
     #   inherited.
-    # @param [Symbol, String] name The model's name, so that a refusal can say
+    # @param [Symbol, String] name The model's name, so that an error can say
     #   which model it is talking about.
     def initialize(superclass, name)
       @superclass = superclass
       @name = name
     end
 
-    # Creates nothing, but refuses a superclass that cannot support single
-    # table inheritance.
+    # Creates nothing, but raises {WithModel::InvalidSuperclass} when the
+    # superclass cannot support single table inheritance.
     #
-    # Refusals describe the model's situation rather than the call that produced
+    # Errors describe the model's situation rather than the call that produced
     # it. Any expression that evaluates to false selects a NullTable, so there
     # is no call spelling to quote - and in with_model 3.0, omitting `table`
     # will arrive here too.
@@ -31,20 +31,20 @@ module WithModel
     # A superclass whose table does not exist *yet* is deliberately allowed: the
     # table may be created later in the example, and a test may legitimately
     # want a model whose table is missing. Active Record raises a clear
-    # `StatementInvalid` naming the table if it never appears, so refusing here
+    # `StatementInvalid` naming the table if it never appears, so raising here
     # would only forbid working setups.
     #
-    # What is left is {WithModel::InvalidSuperclass}: both refusals are permanent
+    # What is left is {WithModel::InvalidSuperclass}: both errors are permanent
     # facts about the superclass passed in, not about when it was looked at, so no
     # amount of waiting makes them work.
     def create
-      refuse "#{@superclass} has none to inherit" unless table_name?
+      raise_invalid_superclass "#{@superclass} has none to inherit" unless table_name?
 
       # Nothing more can be checked until there is a table to look at.
       return unless table_exists?
       return if inheritance_column?
 
-      refuse "#{@superclass}'s table #{@superclass.table_name.inspect} has no " \
+      raise_invalid_superclass "#{@superclass}'s table #{@superclass.table_name.inspect} has no " \
              "#{inheritance_column.inspect} column, so Active Record cannot tell its rows " \
              "apart from a subclass's"
     end
@@ -59,7 +59,7 @@ module WithModel
     # (`ActiveRecord::SubclassNotFound`).
     #
     # `unscoped` is required because a `default_scope` on the superclass would
-    # otherwise hide rows from the delete; the inheritance-column condition is
+    # otherwise hide rows from cleanup; the inheritance-column condition is
     # then reapplied explicitly, since `unscoped` also discards the type
     # condition that keeps this from touching the superclass's own rows.
     #
@@ -68,7 +68,7 @@ module WithModel
     def teardown(klass)
       return unless klass.table_exists?
 
-      klass.unscoped.where(klass.inheritance_column => klass.sti_name).delete_all
+      klass.unscoped.where(klass.inheritance_column => klass.sti_name).each(&:destroy!)
     end
 
     # Drops nothing; there is no table of our own to drop.
@@ -90,7 +90,7 @@ module WithModel
       inheritance_column.present? && @superclass.columns_hash.key?(inheritance_column)
     end
 
-    def refuse(problem)
+    def raise_invalid_superclass(problem)
       raise InvalidSuperclass,
         "with_model #{@name.inspect} has no table of its own, but #{problem}"
     end
