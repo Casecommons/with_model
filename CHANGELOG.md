@@ -1,5 +1,7 @@
 ### Unreleased
 
+### 2.3.1
+
 - Honor Active Record destruction callbacks and dependent associations when
   cleaning up rows for a `table(false)` model.
 
