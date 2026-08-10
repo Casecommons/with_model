@@ -21,10 +21,6 @@ RSpec.describe "table(false)" do
     classes = @stubbed_active_record_classes
     next unless classes
 
-    ActiveSupport::DescendantsTracker.clear(classes) \
-      unless ActiveSupport::DescendantsTracker.clear_disabled
-    ActiveSupport::Dependencies::Reference.clear! \
-      if defined?(ActiveSupport::Dependencies::Reference)
     WithModel::DescendantsTracker.clear(classes)
   end
 

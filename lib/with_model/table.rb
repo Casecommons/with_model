@@ -45,12 +45,6 @@ module WithModel
 
     attr_reader :connection
 
-    def exists?
-      if connection.respond_to?(:data_source_exists?)
-        connection.data_source_exists?(@name)
-      else
-        connection.table_exists?(@name)
-      end
-    end
+    def exists? = connection.data_source_exists?(@name)
   end
 end

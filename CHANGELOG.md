@@ -1,5 +1,7 @@
 ### Unreleased
 
+- Require Active Record 8.0 or later.
+
 ### 2.3.1
 
 - Honor Active Record destruction callbacks and dependent associations when

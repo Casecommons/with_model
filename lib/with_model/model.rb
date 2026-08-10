@@ -74,8 +74,6 @@ module WithModel
       # can only do so while the class still has its name.
       table.teardown(@model)
       stubber.unstub_const
-      cleanup_descendants_tracking
-      reset_dependencies_cache
       WithModel::DescendantsTracker.clear([@model])
       @model = nil
     end
@@ -130,17 +128,6 @@ module WithModel
       table.configure(@model)
       @model.class_eval(&@model_block) if @model_block
       @model.reset_column_information
-    end
-
-    def cleanup_descendants_tracking
-      ActiveSupport::DescendantsTracker.clear([@model]) \
-        unless ActiveSupport::DescendantsTracker.clear_disabled
-    end
-
-    def reset_dependencies_cache
-      return unless defined?(ActiveSupport::Dependencies::Reference)
-
-      ActiveSupport::Dependencies::Reference.clear!
     end
 
     def stubber

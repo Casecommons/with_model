@@ -30,7 +30,6 @@ describe "Descendants tracking" do
 
   context "with ActiveSupport::DescendantsTracker (cache_classes: true)" do
     before do
-      expect(ActiveSupport::DescendantsTracker.clear_disabled).to be_falsey
       expect { ActiveSupport::DescendantsTracker.clear([]) }.not_to raise_exception
     end
 
@@ -40,10 +39,29 @@ describe "Descendants tracking" do
   context "without ActiveSupport::DescendantsTracker (cache_classes: false)" do
     before do
       ActiveSupport::DescendantsTracker.disable_clear!
-      expect(ActiveSupport::DescendantsTracker.clear_disabled).to be_truthy
       expect { ActiveSupport::DescendantsTracker.clear([]) }.to raise_exception(RuntimeError)
     end
 
     include_examples "clearing descendants between test runs"
+  end
+
+  it "keeps filtering ahead of later class method extensions" do
+    raw_subclasses = Class.instance_method(:subclasses).super_method
+    raw_descendants = Class.instance_method(:descendants).super_method
+    override = Module.new do
+      define_method(:subclasses) { raw_subclasses.bind_call(self) }
+      define_method(:descendants) { raw_descendants.bind_call(self) }
+    end
+    destroyed_model = stub_const("DestroyedModel", Class.new(ActiveRecord::Base))
+    WithModel::DescendantsTracker.clear([destroyed_model])
+
+    ActiveRecord::Base.extend override
+
+    expect(ActiveRecord::Base.descendants).not_to include(destroyed_model)
+  ensure
+    override&.module_eval do
+      remove_method :subclasses
+      remove_method :descendants
+    end
   end
 end

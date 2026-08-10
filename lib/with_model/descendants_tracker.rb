@@ -74,14 +74,6 @@ module WithModel
   end
 end
 
-class ActiveRecord::Base
-  extend WithModel::DescendantsTracker::DestroyedClassesFiltering
-end
-
-module ActiveSupport
-  module DescendantsTracker
-    class << self
-      attr_reader :clear_disabled
-    end
-  end
-end
+ActiveRecord::Base.singleton_class.prepend(
+  WithModel::DescendantsTracker::DestroyedClassesFiltering
+)
