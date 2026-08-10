@@ -71,11 +71,6 @@ jobs:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
           cache-version: ${{ matrix.active-record.env }}
-      # Gemfile.lock is not checked in, so this resolves the newest gems that
-      # satisfy the Gemfile on each run rather than a recorded set. `--all` is
-      # what Bundler 4, shipped with Ruby 4.0, wants for that.
-      - name: Update bundle
-        run: bundle update --all
       # Not bin/rake: bin/ holds generated binstubs and is not checked in, and
       # whether bundling writes them there varies by Bundler version - Bundler 4
       # does not, which left Ruby 4.0 with no binstub to run.
