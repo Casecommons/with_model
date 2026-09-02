@@ -113,8 +113,13 @@ module WithModel
       class_eval do
         include MiniTestLifeCycle.call(object)
       end
+    when :test_unit
+      # These options place creation before and destruction after user callbacks,
+      # preserving declaration and reverse order across inheritance.
+      setup(before: :append) { object.create }
+      teardown(after: :prepend) { object.destroy }
     else
-      raise ArgumentError, "Unsupported test runner set, expected :rspec or :minitest"
+      raise ArgumentError, "Unsupported test runner set, expected :rspec, :minitest, or :test_unit"
     end
   end
 end
