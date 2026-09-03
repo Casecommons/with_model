@@ -1,5 +1,11 @@
 ### Unreleased
 
+- Add Test::Unit support, including lifecycle integration for dynamic models and
+  tables.
+- Add `with_model/rspec`, `with_model/minitest`, and `with_model/test_unit`
+  convenience entrypoints.
+- Add runner integration guides for RSpec, Minitest, and Test::Unit.
+- Skip temporary-table teardown when the table has already disappeared.
 - Require Active Record 8.0 or later.
 
 ### 2.3.1

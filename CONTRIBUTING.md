@@ -24,17 +24,34 @@ avoid anything that only works on the newest of either.
 
 ## Running the tests
 
-The suite runs against both supported test harnesses, so `with_model` has to work
-under each:
+The suite runs against all three supported test harnesses, so `with_model` has
+to work under each:
 
 - `spec/` covers behavior under RSpec.
-- `test/` covers the minitest life cycle — the setup and teardown hooks, and
+- `test/` covers the Minitest life cycle — the setup and teardown hooks, and
   their ordering — rather than repeating the specs.
+- `test_unit/` covers Test::Unit integration in a dedicated process, including
+  native fixture callback ordering.
+
+Run one harness with its scoped Rake task:
+
+```sh
+bundle exec rake spec
+bundle exec rake test
+bundle exec rake test_unit
+```
 
 Run everything, including the linter, with:
 
 ```sh
 bundle exec rake
+```
+
+Validate the README and runner guides with RDoc before submitting documentation
+changes:
+
+```sh
+rm -rf tmp/rdoc && bundle exec rdoc --markup markdown --op tmp/rdoc README.md docs/rspec.md docs/minitest.md docs/test-unit.md lib/**/*.rb
 ```
 
 `bin/` holds generated binstubs and is not checked in. Whether bundling writes

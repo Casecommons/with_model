@@ -14,31 +14,62 @@
 
 Install as usual: `gem install with_model` or add `gem 'with_model'` to your Gemfile. See [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) for supported (tested) Ruby versions.
 
+## Test runner setup
+
+Choose the entrypoint for the test runner that owns the declarations. Each
+performs complete global setup for one runner; see its guide for lifecycle and
+manual-setup details.
+
 ### RSpec
 
-Extend `WithModel` into RSpec:
-
 ```ruby
-require "with_model"
-
-RSpec.configure do |config|
-  config.extend WithModel
-end
+require "with_model/rspec"
 ```
 
-### minitest/spec
+See the [RSpec guide](docs/rspec.md).
 
-Extend `WithModel` into minitest/spec and set the test runner explicitly:
+### Minitest
 
 ```ruby
+require "with_model/minitest"
+```
+
+See the [Minitest guide](docs/minitest.md).
+
+### Test::Unit
+
+```ruby
+require "with_model/test_unit"
+```
+
+See the [Test::Unit guide](docs/test-unit.md).
+
+### Advanced and mixed-runner setup
+
+Plain `require "with_model"` remains framework-neutral. For manual setup,
+select a runner and extend its test context directly:
+
+```ruby
+require "minitest"
 require "with_model"
 
 WithModel.runner = :minitest
+Minitest::Test.extend WithModel
+```
 
-class Minitest::Spec
-  extend WithModel
+RSpec uses `RSpec.configure { |config| config.extend WithModel }`; Test::Unit
+uses `Test::Unit::TestCase.extend WithModel`. A declaration can override the
+global runner when needed:
+
+```ruby
+with_model :Post, runner: :test_unit do
+  table
 end
 ```
+
+Loading multiple convenience entrypoints in one process is unsupported because
+the last one changes the global runner. For mixed runners, use plain
+`with_model`, direct extension, and explicit `runner:` options.
 
 ## Usage
 
@@ -252,7 +283,13 @@ the order they are declared, and destroyed in the reverse order.
 
 ## Requirements
 
-See the [gemspec metadata](https://rubygems.org/gems/with_model) for dependency requirements. RSpec and minitest are indirect dependencies, and `with_model` should support any maintained version of both.
+See the [gemspec metadata](https://rubygems.org/gems/with_model) for Ruby and
+Active Record requirements. RSpec, Minitest, and Test::Unit are optional
+consumer framework dependencies; install the framework used by its selected
+entrypoint. Requiring a selected entrypoint without its framework installed
+raises the framework's ordinary `LoadError`.
+
+`scope:` is RSpec-only and is silently ignored by Minitest and Test::Unit.
 
 ## Thread-safety
 

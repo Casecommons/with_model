@@ -9,7 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Case Commons, LLC", "Grant Hutchins", "Andrew Marshall"]
   spec.email = %w[casecommons-dev@googlegroups.com gems@nertzy.com andrew@johnandrewmarshall.com]
   spec.homepage = "https://github.com/Casecommons/with_model"
-  spec.summary = "Dynamically build a model within an RSpec context"
+  spec.summary = "Dynamically build an Active Record model for " \
+    "RSpec, Minitest, and Test::Unit tests"
   spec.description = spec.summary
   spec.license = "MIT"
   spec.metadata["rubygems_mfa_required"] = "true"
