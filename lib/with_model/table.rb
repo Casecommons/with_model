@@ -38,7 +38,7 @@ module WithModel
     end
 
     def destroy
-      connection.drop_table(@name)
+      connection.drop_table(@name) if exists?
     end
 
     private
