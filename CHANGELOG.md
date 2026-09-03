@@ -1,5 +1,7 @@
 ### Unreleased
 
+### 2.4.0
+
 - Add Test::Unit support, including lifecycle integration for dynamic models and
   tables.
 - Add `with_model/rspec`, `with_model/minitest`, and `with_model/test_unit`
