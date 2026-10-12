@@ -73,9 +73,7 @@ module WithModel
       # Before `unstub_const`: a teardown that identifies this model's own rows
       # can only do so while the class still has its name.
       table.teardown(@model)
-      stubber.unstub_const
-      WithModel::DescendantsTracker.clear([@model])
-      @model = nil
+      discard_model
     end
 
     private
@@ -127,7 +125,24 @@ module WithModel
     def setup_model
       table.configure(@model)
       @model.class_eval(&@model_block) if @model_block
+      verify_model
       @model.reset_column_information
+    end
+
+    # A model rejected here was never usable, so it is discarded at once rather
+    # than left for teardown: there are no rows to clean up, and a caller that
+    # does not tear down would otherwise be left with its constant.
+    def verify_model
+      table.verify(@model)
+    rescue InvalidSuperclass
+      discard_model
+      raise
+    end
+
+    def discard_model
+      stubber.unstub_const
+      WithModel::DescendantsTracker.clear([@model])
+      @model = nil
     end
 
     def stubber

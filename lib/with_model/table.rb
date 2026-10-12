@@ -30,6 +30,12 @@ module WithModel
       klass.table_name = @name
     end
 
+    # Accepts any model block: the table is the model's own. Present so that
+    # {WithModel::NullTable} - which checks the model once its block has run -
+    # can stand in here.
+    def verify(_klass)
+    end
+
     # Removes everything this table holds by dropping it. The model is not
     # needed, but is accepted so that {WithModel::NullTable} - which does need
     # it - can stand in here.
