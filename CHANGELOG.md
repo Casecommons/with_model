@@ -1,5 +1,7 @@
 ### Unreleased
 
+### 2.5.0
+
 - Allow `table(false)` for an abstract model, and for a model whose superclass
   is `ActiveRecord::Base` or abstract when the model has an existing table: the
   one its model block names with `self.table_name`, or else the one Active
