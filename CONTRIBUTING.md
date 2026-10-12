@@ -92,9 +92,27 @@ bundle exec standardrb --fix
 
 ## Changes and releases
 
-Please add a line to `CHANGELOG.md` under `### Unreleased` describing your change
-from the point of view of someone using the gem. Leave `lib/with_model/version.rb`
-alone: version bumps and releases are cut separately by a maintainer, so a bump
-in a pull request only creates a conflict.
+Please add an entry to `CHANGELOG.md` under `### Unreleased` for each change
+someone using the gem would notice. Leave `lib/with_model/version.rb` alone:
+version bumps and releases are cut separately by a maintainer, so a bump in a
+pull request only creates a conflict.
+
+### Changelog format
+
+- Each release has a `### X.Y.Z` heading, newest first, with unreleased changes
+  under `### Unreleased` at the top. Leave a blank line after each heading.
+- Write one bullet per change, from the point of view of someone using the gem:
+  what they can now do or what behaves differently, not how the code changed.
+- Start with a verb in the imperative mood (Add, Allow, Fix, Deprecate, Remove,
+  Require), and write a full sentence ending in a period.
+- Put code, such as method names, options, and constants, in backticks.
+- Wrap lines at 80 columns, indenting continuation lines by two spaces.
+- List dependency changes last, Active Record before Ruby, with added support
+  before a raised minimum: "Add support for Ruby 4.0." then "Require Ruby 3.3
+  or later."
+- Don't cite issue or pull request numbers. The pull request links the issue.
+- Credit contributors from outside the maintainers by name, in parentheses at
+  the end of the entry, as in "Create table in same database as `superclass`
+  (John Doe)."
 
 Last, but not least, have fun.
