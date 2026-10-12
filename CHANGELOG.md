@@ -1,5 +1,10 @@
 ### Unreleased
 
+- Allow `table(false)` for an abstract model, and for a model whose superclass
+  is `ActiveRecord::Base` or abstract when the model has an existing table: the
+  one its model block names with `self.table_name`, or else the one Active
+  Record names after the model. Its rows are left for the suite to clean up.
+
 ### 2.4.0
 
 - Add Test::Unit support, including lifecycle integration for dynamic models and

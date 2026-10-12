@@ -13,7 +13,9 @@ module WithModel
       #
       # Pass `false` instead of options to create no table at all, so that the
       # model inherits its superclass's table as Rails Single Table Inheritance
-      # requires. `table(false)` takes no block.
+      # requires, or uses an existing table: the one its model block names with
+      # `self.table_name`, or else the one Active Record names after the model.
+      # An abstract model needs no table at all. `table(false)` takes no block.
       #
       # @see https://api.rubyonrails.org/classes/ActiveRecord/ConnectionAdapters/SchemaStatements.html#method-i-create_table
       def table(options = {}, &block)

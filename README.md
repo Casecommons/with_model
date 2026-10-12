@@ -237,8 +237,9 @@ end
 A `superclass:` that cannot be used raises `WithModel::InvalidSuperclass`: one
 that is not an Active Record class, one with no table of its own
 (`ActiveRecord::Base`, or an abstract class such as a Rails app's
-`ApplicationRecord`), or one whose table has no inheritance column to tell a
-subclass's rows apart. A name that resolves to nothing raises
+`ApplicationRecord`) when the model has no existing table of its own either (see
+[Existing tables](#existing-tables)), or a concrete one whose table has no
+inheritance column to tell a subclass's rows apart. A name that resolves to nothing raises
 `WithModel::MissingSuperclass`, a kind of `InvalidSuperclass`, quoting the
 constant Ruby could not find — for a namespaced name, that is the segment which
 is actually missing. Both are `ArgumentError`s.
@@ -248,6 +249,64 @@ created later in the example, and Active Record reports its absence clearly
 enough on its own. Rows the model wrote are deleted when it goes away, since they
 name a class that is about to stop existing and would make the superclass
 unloadable.
+
+### Existing tables
+
+`table(false)` also suits a model that maps to a table the suite already has,
+such as a legacy table or one that several models share. Set `self.table_name`
+in the model block, or leave it out to use the table Active Record names after
+the model (`phoenixes` for `Phoenix`):
+
+```ruby
+describe "with_model supports existing tables" do
+  with_table :legendary_creatures do |t|
+    t.string "name"
+  end
+
+  with_model :Phoenix do
+    table(false)
+
+    model do
+      self.table_name = "legendary_creatures"
+    end
+  end
+
+  it "uses the table it names" do
+    Phoenix.create!(name: "Fawkes")
+
+    expect(Phoenix.table_name).to eq "legendary_creatures"
+  end
+end
+```
+
+The table must exist before the model is set up, so declare `with_table` (or
+whatever creates it) first. It belongs to the suite, not the model, so its rows
+are left in place when the model goes away. Clean them up as you would the rest of that table, with
+transactional tests or otherwise.
+
+The superclass can be abstract, as a Rails app's `ApplicationRecord` is. An
+abstract model needs no table, so declare it with `table(false)` as well:
+
+```ruby
+with_model :LegendaryCreature do
+  table(false)
+
+  model do
+    self.abstract_class = true
+  end
+end
+
+with_model :Phoenix, superclass: :LegendaryCreature do
+  table(false)
+
+  model do
+    self.table_name = "legendary_creatures"
+  end
+end
+```
+
+Active Record never applies single table inheritance below an abstract class, so
+an abstract superclass's table, if it has one, needs no inheritance column.
 
 ## Foreign keys
 

@@ -145,6 +145,26 @@ describe "with_model supports Single Table Inheritance" do
   end
 end
 
+describe "with_model supports existing tables" do
+  with_table :legendary_creatures do |t|
+    t.string "name"
+  end
+
+  with_model :Phoenix do
+    table(false)
+
+    model do
+      self.table_name = "legendary_creatures"
+    end
+  end
+
+  it "uses the table it names" do
+    Phoenix.create!(name: "Fawkes")
+
+    expect(Phoenix.table_name).to eq "legendary_creatures"
+  end
+end
+
 describe "with_model supports foreign keys" do
   with_model :Author do
     table
